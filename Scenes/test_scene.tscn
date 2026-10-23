@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bpq23qr58akpv"]
+
+[ext_resource type="Script" uid="uid://biy6ke73a0nav" path="res://Scripts/Entities/instruments/grid_displayer.gd" id="1_3dogw"]
+[ext_resource type="Script" uid="uid://l4sx0duq733s" path="res://Scripts/arca/contextes/battle_context.gd" id="1_50ct6"]
+[ext_resource type="Script" uid="uid://r6858dxustxw" path="res://Scripts/Scenes/test_scene.gd" id="1_ak5v8"]
+[ext_resource type="Resource" uid="uid://bd3pmtayc82u5" path="res://Resources/characters/test_character.tres" id="2_ak5v8"]
+[ext_resource type="Script" uid="uid://dv6qcg5b38evj" path="res://Scripts/arca/services/battlescene_services/battle_scene_pathes.gd" id="2_hb2xm"]
+
+[sub_resource type="TileSet" id="TileSet_lxrbl"]
+tile_shape = 1
+tile_layout = 5
+tile_size = Vector2i(32, 16)
+
+[node name="test_scene" type="Node2D" unique_id=778120956 node_paths=PackedStringArray("battle_context")]
+script = ExtResource("1_ak5v8")
+battle_context = NodePath("BattleContext")
+test_character = ExtResource("2_ak5v8")
+
+[node name="BattleContext" type="Node" parent="." unique_id=1886788445 node_paths=PackedStringArray("scene_pathes", "displayer")]
+script = ExtResource("1_50ct6")
+scene_pathes = NodePath("../BattleScenePathes")
+displayer = NodePath("../TileMapLayer/grid_displayer")
+installers_path = Array[String](["uid://l8b0aaa0ml1i"])
+metadata/_custom_type_script = "uid://l4sx0duq733s"
+
+[node name="BattleScenePathes" type="Node" parent="." unique_id=559637497 node_paths=PackedStringArray("main_map", "characters_node")]
+script = ExtResource("2_hb2xm")
+main_map = NodePath("../TileMapLayer")
+characters_node = NodePath("../characters")
+metadata/_custom_type_script = "uid://dv6qcg5b38evj"
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=977545984]
+tile_set = SubResource("TileSet_lxrbl")
+
+[node name="grid_displayer" type="Node2D" parent="TileMapLayer" unique_id=400164686]
+script = ExtResource("1_3dogw")
+field_size = Vector2i(3, 6)
+
+[node name="characters" type="Node2D" parent="." unique_id=1717323850]
+y_sort_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1409351287]
+position = Vector2(-2, 31)
+zoom = Vector2(3.47, 3.47)

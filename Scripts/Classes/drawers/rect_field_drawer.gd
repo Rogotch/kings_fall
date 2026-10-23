@@ -1,0 +1,16 @@
+class_name RectFieldDrawer
+extends FieldDrawer
+
+static func get_inject_dependencies() -> Array:
+	return 	[
+				BattleScenePathes,
+				MapDisplayer
+			]
+
+func get_line_points(start_cell_position : Vector2, end_cell_position : Vector2) -> Array[Vector2]:
+	var half_size : Vector2  = Vector2(cell_size) / 2.0
+	return [
+			start_cell_position - half_size,
+			  end_cell_position - half_size
+		]
+	pass

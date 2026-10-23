@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c15p4go1jkf5u"]
+
+[ext_resource type="Script" uid="uid://i50at6mn3sei" path="res://Scripts/Entities/characters/base_character.gd" id="1_moal7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lxrbl"]
+size = Vector2(16, 25)
+
+[node name="character" type="CharacterBody2D" unique_id=12710483]
+input_pickable = true
+script = ExtResource("1_moal7")
+
+[node name="collision" type="CollisionShape2D" parent="." unique_id=679585299]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_lxrbl")
+
+[node name="visual_point" type="Node2D" parent="." unique_id=520820045]
+
+[connection signal="input_event" from="." to="." method="_on_input_event"]

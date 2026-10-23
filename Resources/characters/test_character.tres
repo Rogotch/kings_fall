@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterData" format=3 uid="uid://bd3pmtayc82u5"]
+
+[ext_resource type="Script" uid="uid://doabrw0qfs24h" path="res://Scripts/Resources/data/character_data.gd" id="1_s75ai"]
+
+[resource]
+script = ExtResource("1_s75ai")
+character_scene = "res://Entities/Characters/base_character.tscn"
+character_visual = "res://Entities/Characters/visual/base_8_sided.tscn"
+metadata/_custom_type_script = "uid://doabrw0qfs24h"
