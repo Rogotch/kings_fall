@@ -1,4 +1,4 @@
-@tool
+@tool # tool нужен для того, чтобы сетку было видно в редакторе. При запуске игры, зависимости и отображение идут не напрямую, а через DI
 extends Node2D
 class_name MapDisplayer
 
@@ -25,14 +25,14 @@ func inject_dependencies(
 	tile_layer       = pathes.main_map
 	pass
 
-func _ready() -> void:
+func tool_set_up() -> void:
 	if  Engine.is_editor_hint() && get_parent() is TileMapLayer:
 		tile_layer = get_parent()
 		field_displayer  = IsometricFieldDrawer.new()
 		field_displayer.set_up(tile_layer, self, field_size, field_start_cell)
 		cursor_displayer = IsometricCellDrawer.new()
 		cursor_displayer.set_up(tile_layer, self)
-	pass # Replace with function body.
+	pass
 
 func set_field_size(new_size : Vector2i) -> void:
 	field_size = new_size

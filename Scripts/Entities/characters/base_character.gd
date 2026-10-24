@@ -9,20 +9,23 @@ var controller          : BaseCharacterController
 var move_service        : BattleCharacterMoveService
 var visual              : BaseCharacterVisual
 var visual_factory      : VisualFactory
+var parameters          : CharacterParameters
 
 static func get_inject_dependencies() -> Array:
-	return [BattleMovementFactory, VisualFactory, BattleControllersFactory]
+	return [BattleMovementFactory, VisualFactory, BattleControllersFactory, CharacterParametersFactory]
 	pass
 
 func inject_dependencies(
 		movement_factory    : BattleMovementFactory, 
 		new_visual_factory  : VisualFactory, 
 		controllers_factory : BattleControllersFactory,
+		params_factory      : CharacterParametersFactory,
 		player              : bool
 		) -> void:
 	visual_factory = new_visual_factory
 	movement_factory.create(self)
 	controllers_factory.create(self, player)
+	params_factory.create(self)
 	pass
 
 #static func get_dependencies() -> Array:

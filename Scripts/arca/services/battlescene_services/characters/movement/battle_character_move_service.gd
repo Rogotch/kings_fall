@@ -42,6 +42,17 @@ func move_to_cell(to_cell : Vector2i, speed_override : float = speed) -> void:
 func move_to_neighbor_cell(from_cell : Vector2i, to_cell : Vector2i, speed_override : float = speed) -> void:
 	pass
 
-func build_path(from_cell : Vector2i, to_cell : Vector2i) -> Array[Vector2i]:
-	return []
+func move_alongside_path(to_cell : Vector2i, cells_speed : int, speed_override : float = speed) -> void:
+	var path : Array[Vector2i] = build_path(map_position, to_cell, cells_speed)
+	
+	pass
+
+func build_path(from_cell : Vector2i, to_cell : Vector2i, cells_speed : int) -> Array[Vector2i]:
+	return MoveSystem.get_path_by_speed(from_cell, to_cell, cells_speed)
+	pass
+
+func step_on_cell(cell : Vector2i) -> void:
+	steped_on_cell.emit(cell)
+	MoveSystem.change_character_cell(map_position, cell)
+	map_position = cell
 	pass

@@ -11,8 +11,8 @@ func _init(arca_container: ArcaContainer) -> void:
 
 func spawn(data : CharacterData, map_position : Vector2i, player : bool) -> BaseCharacter:
 	var character : BaseCharacter = container.resolve(BaseCharacter)
-	container.inject(character, [player])
 	character.data = data
+	container.inject(character, [player])
 	parent_node.add_child(character)
 	character.configure_character(map_position)
 	return character

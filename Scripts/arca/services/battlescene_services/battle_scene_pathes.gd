@@ -1,3 +1,4 @@
+@icon("uid://65jtsolsecsd")
 extends Node
 class_name BattleScenePathes
 

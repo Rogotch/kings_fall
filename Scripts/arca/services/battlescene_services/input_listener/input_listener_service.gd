@@ -7,9 +7,10 @@ var BATTLE_SERVICE  : BattleService
 #var scene_drawer    : MapDisplayer
 var battle_map      : TileMapLayer
 #var field_displayer : FieldDrawer
-var cells_displayer : CellDrawer
+var cells_displayer   : CellDrawer
 
 var focused_cell      : Vector2i
+var input_enabled     : bool = true
 #var focused_character : BaseCharacter
 
 static func get_dependencies() -> Array:
@@ -44,7 +45,8 @@ func focus_cell(cell : Vector2i) -> void:
 	pass
 
 func select_cell() -> void:
-	print("select %s cell" % focused_cell)
+	if !input_enabled:
+		return
 	cell_selected.emit(focused_cell)
 	pass
 

@@ -4,7 +4,7 @@ extends Node
 @onready var eight_sided: BaseCharacterVisual = $".."
 @onready var main_sprite: Sprite2D = $"../main_sprite"
 
-@export var current_state : BaseCharacterVisual.STATE: 
+@export var current_state : BaseCharacterVisual.ANIMATION_STATE: 
 	set = set_current_state
 
 var enabled : bool = true
@@ -14,7 +14,7 @@ func _ready() -> void:
 		enabled = false
 	pass
 
-func set_current_state(new_state : BaseCharacterVisual.STATE) -> void:
+func set_current_state(new_state : BaseCharacterVisual.ANIMATION_STATE) -> void:
 	if !enabled || eight_sided == null:
 		return
 	current_state = new_state
@@ -22,7 +22,7 @@ func set_current_state(new_state : BaseCharacterVisual.STATE) -> void:
 	pass
 
 #region anims_starters
-func start_animation(key : BaseCharacterVisual.STATE) -> void:
+func start_animation(key : BaseCharacterVisual.ANIMATION_STATE) -> void:
 	if eight_sided.spritelists.has(key):
 		main_sprite.texture = eight_sided.spritelists[key]
 	pass

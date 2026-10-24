@@ -35,8 +35,30 @@ func move_to_neighbor_cell(from_cell : Vector2i, to_cell : Vector2i, speed_overr
 	tween.play()
 	pass
 
-func step_on_cell(cell : Vector2i) -> void:
-	steped_on_cell.emit(cell)
-	MoveSystem.change_character_cell(map_position, cell)
-	map_position = cell
+func move_alongside_path(to_cell : Vector2i, cells_speed : int, speed_override : float = speed) -> void:
+	var path : Array[Vector2i] = build_path(map_position, to_cell, cells_speed)
+	
+	if tween != null:
+		tween.stop()
+		tween.kill()
+	
+	tween = body.create_tween().set_trans(Tween.TRANS_LINEAR)
+	
+	for i in path.size():
+		if path.size() == i + 1:
+			return
+		var point      : Vector2i = path[i]
+		var next_point : Vector2i = path[i + 1]
+		set_tween_move_to_cell(tween, point, next_point, speed_override)
+	tween.play()
+	pass
+
+func set_tween_move_to_cell(set_tween : Tween, from_cell : Vector2i, to_cell : Vector2i, speed_override : float = speed) -> void:
+	var start_point  : Vector2 = MoveSystem.get_position_by_map(from_cell)
+	var target_point : Vector2 = MoveSystem.get_position_by_map(to_cell)
+	var time         : float   = get_time_to_move(from_cell, to_cell, speed_override)
+	
+	set_tween.tween_callback(set_body_on_cell.bind(from_cell))
+	set_tween.tween_property(body, "position", target_point, time)
+	set_tween.tween_callback(step_on_cell.bind(to_cell))
 	pass

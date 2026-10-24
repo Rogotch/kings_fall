@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://r6858dxustxw" path="res://Scripts/Scenes/test_scene.gd" id="1_ak5v8"]
 [ext_resource type="Resource" uid="uid://bd3pmtayc82u5" path="res://Resources/characters/test_character.tres" id="2_ak5v8"]
 [ext_resource type="Script" uid="uid://dv6qcg5b38evj" path="res://Scripts/arca/services/battlescene_services/battle_scene_pathes.gd" id="2_hb2xm"]
+[ext_resource type="Script" uid="uid://cxtohpgxebqib" path="res://Scripts/arca/services/battlescene_services/battle_scene_parameters.gd" id="5_x033f"]
 
 [sub_resource type="TileSet" id="TileSet_lxrbl"]
 tile_shape = 1
@@ -13,21 +14,28 @@ tile_size = Vector2i(32, 16)
 
 [node name="test_scene" type="Node2D" unique_id=778120956 node_paths=PackedStringArray("battle_context")]
 script = ExtResource("1_ak5v8")
-battle_context = NodePath("BattleContext")
+battle_context = NodePath("Context")
 test_character = ExtResource("2_ak5v8")
 
-[node name="BattleContext" type="Node" parent="." unique_id=1886788445 node_paths=PackedStringArray("scene_pathes", "displayer")]
+[node name="Context" type="Node" parent="." unique_id=1886788445 node_paths=PackedStringArray("scene_pathes", "displayer", "scene_parameters")]
 script = ExtResource("1_50ct6")
-scene_pathes = NodePath("../BattleScenePathes")
+scene_pathes = NodePath("../Pathes")
 displayer = NodePath("../TileMapLayer/grid_displayer")
+scene_parameters = NodePath("../Parameters")
 installers_path = Array[String](["uid://l8b0aaa0ml1i"])
 metadata/_custom_type_script = "uid://l4sx0duq733s"
 
-[node name="BattleScenePathes" type="Node" parent="." unique_id=559637497 node_paths=PackedStringArray("main_map", "characters_node")]
+[node name="Pathes" type="Node" parent="." unique_id=559637497 node_paths=PackedStringArray("main_map", "characters_node")]
 script = ExtResource("2_hb2xm")
 main_map = NodePath("../TileMapLayer")
 characters_node = NodePath("../characters")
 metadata/_custom_type_script = "uid://dv6qcg5b38evj"
+
+[node name="Parameters" type="Node" parent="." unique_id=475643531 node_paths=PackedStringArray("grid_displayer")]
+script = ExtResource("5_x033f")
+field_size = Vector2i(3, 6)
+grid_displayer = NodePath("../TileMapLayer/grid_displayer")
+metadata/_custom_type_script = "uid://cxtohpgxebqib"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=977545984]
 tile_set = SubResource("TileSet_lxrbl")

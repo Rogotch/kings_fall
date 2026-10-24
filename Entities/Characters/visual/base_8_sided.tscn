@@ -591,12 +591,14 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fir78"]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vj5kx"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_lxrbl"]
-states/End/position = Vector2(1242, 100)
+states/End/position = Vector2(1007, 100)
 states/attack/node = SubResource("AnimationNodeAnimation_vj5kx")
-states/attack/position = Vector2(643, 52)
+states/attack/position = Vector2(643, 50)
 states/death/node = SubResource("AnimationNodeAnimation_u2wvh")
-states/death/position = Vector2(760, 229)
+states/death/position = Vector2(750, 229)
 states/hit/node = SubResource("AnimationNodeAnimation_87bjb")
 states/hit/position = Vector2(643, 229)
 states/idle/node = SubResource("AnimationNodeAnimation_ba7xr")
@@ -605,7 +607,7 @@ states/run/node = SubResource("AnimationNodeAnimation_x6oau")
 states/run/position = Vector2(341, 269)
 states/walk/node = SubResource("AnimationNodeAnimation_j65o1")
 states/walk/position = Vector2(446, 269)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_r5py6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_5plf1"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_6rnhk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fahqu"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_yjd36"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_odqb7"), "hit", "death", SubResource("AnimationNodeStateMachineTransition_nd26i"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_lt1tt"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_o5u5u"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_eqewf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_fw1u3"), "death", "End", SubResource("AnimationNodeStateMachineTransition_fir78")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_r5py6"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_5plf1"), "walk", "run", SubResource("AnimationNodeStateMachineTransition_6rnhk"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_fahqu"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_yjd36"), "idle", "hit", SubResource("AnimationNodeStateMachineTransition_odqb7"), "hit", "death", SubResource("AnimationNodeStateMachineTransition_nd26i"), "hit", "idle", SubResource("AnimationNodeStateMachineTransition_lt1tt"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_o5u5u"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_eqewf"), "run", "walk", SubResource("AnimationNodeStateMachineTransition_fw1u3"), "death", "End", SubResource("AnimationNodeStateMachineTransition_fir78"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_vj5kx")]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_82m3h"]
 animation = &"N"
@@ -677,7 +679,7 @@ position = Vector2(0, -12)
 texture = ExtResource("2_ync8l")
 hframes = 12
 vframes = 8
-frame = 8
+frame = 6
 
 [node name="animation" type="AnimationPlayer" parent="." unique_id=706592020]
 libraries/ = SubResource("AnimationLibrary_yjd36")
