@@ -5,7 +5,8 @@ static func get_dependencies() -> Array:
 	return 	[
 				BattleService, 
 				BattleScenePathes, 
-				IsometricCellDrawer, 
+				MapDisplayer, 
+				#IsometricCellDrawer, 
 				#IsometricFieldDrawer
 			]
 

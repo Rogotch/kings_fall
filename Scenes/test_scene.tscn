@@ -6,11 +6,31 @@
 [ext_resource type="Resource" uid="uid://bd3pmtayc82u5" path="res://Resources/characters/test_character.tres" id="2_ak5v8"]
 [ext_resource type="Script" uid="uid://dv6qcg5b38evj" path="res://Scripts/arca/services/battlescene_services/battle_scene_pathes.gd" id="2_hb2xm"]
 [ext_resource type="Script" uid="uid://cxtohpgxebqib" path="res://Scripts/arca/services/battlescene_services/battle_scene_parameters.gd" id="5_x033f"]
+[ext_resource type="Script" uid="uid://u32mo4h08uhp" path="res://Scripts/Classes/drawers/parameters/cells_drawer_parameters.gd" id="6_oho3u"]
+[ext_resource type="Script" uid="uid://d13rsh4ghlbif" path="res://Scripts/Classes/drawers/parameters/field_cells_drawer_parameters.gd" id="7_d3awe"]
+
+[sub_resource type="Resource" id="Resource_bwjpn"]
+script = ExtResource("6_oho3u")
+cell_size_overrided = Vector2i(32, 16)
+cell_color = Color(0.39215687, 0.58431375, 0.92941177, 1)
+metadata/_custom_type_script = "uid://u32mo4h08uhp"
+
+[sub_resource type="Resource" id="Resource_yglu3"]
+script = ExtResource("7_d3awe")
+cells_parameters = SubResource("Resource_bwjpn")
+field_size = Vector2i(3, 6)
+metadata/_custom_type_script = "uid://d13rsh4ghlbif"
+
+[sub_resource type="Resource" id="Resource_ibmi3"]
+script = ExtResource("6_oho3u")
+cell_size_overrided = Vector2i(40, 20)
+cell_color = Color(0.8243157, 0.6566654, 0.47996098, 1)
+metadata/_custom_type_script = "uid://u32mo4h08uhp"
 
 [sub_resource type="TileSet" id="TileSet_lxrbl"]
 tile_shape = 1
 tile_layout = 5
-tile_size = Vector2i(32, 16)
+tile_size = Vector2i(64, 32)
 
 [node name="test_scene" type="Node2D" unique_id=778120956 node_paths=PackedStringArray("battle_context")]
 script = ExtResource("1_ak5v8")
@@ -33,7 +53,8 @@ metadata/_custom_type_script = "uid://dv6qcg5b38evj"
 
 [node name="Parameters" type="Node" parent="." unique_id=475643531 node_paths=PackedStringArray("grid_displayer")]
 script = ExtResource("5_x033f")
-field_size = Vector2i(3, 6)
+field_parameters = SubResource("Resource_yglu3")
+cells_parameters = SubResource("Resource_ibmi3")
 grid_displayer = NodePath("../TileMapLayer/grid_displayer")
 metadata/_custom_type_script = "uid://cxtohpgxebqib"
 
@@ -42,11 +63,10 @@ tile_set = SubResource("TileSet_lxrbl")
 
 [node name="grid_displayer" type="Node2D" parent="TileMapLayer" unique_id=400164686]
 script = ExtResource("1_3dogw")
-field_size = Vector2i(3, 6)
 
 [node name="characters" type="Node2D" parent="." unique_id=1717323850]
 y_sort_enabled = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1409351287]
-position = Vector2(-2, 31)
+position = Vector2(-18, 72)
 zoom = Vector2(3.47, 3.47)

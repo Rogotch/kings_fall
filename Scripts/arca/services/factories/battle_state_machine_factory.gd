@@ -7,12 +7,9 @@ func _init(arca_container: ArcaContainer) -> void:
 	container = arca_container
 	pass
 
-#func create(character : BaseCharacter) -> BaseCharacterController:
-	#var controller : BaseCharacterController
-	#if player:
-		#controller = container.resolve(PlayerCharacterController)
-	#else:
-		#controller = container.resolve(BaseCharacterController)
-	#container.inject(controller, [character])
-	#return controller
-	#pass
+func create(character : BaseCharacter) -> CharacterStateMachine:
+	var new_state_machine : CharacterStateMachine = container.resolve(CharacterStateMachine)
+	container.inject(new_state_machine, [character])
+	return new_state_machine
+	pass
+	

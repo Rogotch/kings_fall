@@ -679,7 +679,7 @@ position = Vector2(0, -12)
 texture = ExtResource("2_ync8l")
 hframes = 12
 vframes = 8
-frame = 6
+frame = 3
 
 [node name="animation" type="AnimationPlayer" parent="." unique_id=706592020]
 libraries/ = SubResource("AnimationLibrary_yjd36")

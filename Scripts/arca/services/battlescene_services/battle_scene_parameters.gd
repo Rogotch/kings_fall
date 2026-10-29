@@ -3,25 +3,31 @@
 extends Node
 class_name BattleSceneParameters
 
-@export var field_size       : Vector2i : set = set_field_size
-@export var field_start_cell : Vector2i : set = set_field_start_cell
+
+@export var field_parameters : FieldDrawerParameters : set = set_field_parameters
+@export var cells_parameters : CellsDrawerParameters : set = set_cells_parameters
+
 @export var grid_displayer   : MapDisplayer
 
 func _ready() -> void:
 	if Engine.is_editor_hint() && grid_displayer != null:
-		set_field_size(field_size)
-		set_field_start_cell(field_start_cell)
+		set_field_parameters(field_parameters)
+		set_cells_parameters(cells_parameters)
 		grid_displayer.tool_set_up()
 	pass
 
-func set_field_size(new_size : Vector2i) -> void:
-	field_size = new_size
-	if  grid_displayer != null:
-		grid_displayer.set_field_size(new_size)
+func set_field_parameters(params : FieldDrawerParameters) -> void:
+	#if  field_parameters != null && field_parameters != params:
+		#field_parameters.free()
+	field_parameters = params
+	if grid_displayer != null:
+		grid_displayer.field_parameters = field_parameters
 	pass
 
-func set_field_start_cell(new_cell : Vector2i) -> void:
-	field_start_cell = new_cell
-	if  grid_displayer != null:
-		grid_displayer.set_field_start_cell(new_cell)
+func set_cells_parameters(params : CellsDrawerParameters) -> void:
+	#if  cells_parameters != null && cells_parameters != params:
+		#cells_parameters.free()
+	cells_parameters = params
+	if grid_displayer != null:
+		grid_displayer.cells_parameters = cells_parameters
 	pass

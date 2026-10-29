@@ -18,3 +18,8 @@ func hurt(value : int) -> void:
 func death() -> void:
 	
 	pass
+
+
+func get_speed() -> int:
+	return speed
+	pass

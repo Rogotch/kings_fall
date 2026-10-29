@@ -15,7 +15,7 @@ func _ready() -> void:
 	pass
 
 func set_current_state(new_state : BaseCharacterVisual.ANIMATION_STATE) -> void:
-	if !enabled || eight_sided == null:
+	if eight_sided == null:
 		return
 	current_state = new_state
 	start_animation(new_state)

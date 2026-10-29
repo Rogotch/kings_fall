@@ -13,5 +13,5 @@ func _init(input: PCInputListener, new_state_machine : CharacterStateMachine) ->
 	pass
 
 func select_cell(cell : Vector2i) -> void:
-	move_service.move_alongside_path(cell, 3)
+	state_machine.select_cell(cell)
 	pass

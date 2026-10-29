@@ -20,7 +20,7 @@ func set_up_pathfinding() -> void:
 	pathfinding = AStarGrid2D.new()
 	pathfinding.cell_shape                = AStarGrid2D.CELL_SHAPE_ISOMETRIC_DOWN
 	pathfinding.cell_size                 = map.tile_set.tile_size
-	pathfinding.region                    = Rect2i(parameters.field_start_cell, parameters.field_size)
+	pathfinding.region                    = Rect2i(parameters.field_parameters.field_start_cell, parameters.field_parameters.field_size)
 	
 	pathfinding.diagonal_mode             = AStarGrid2D.DIAGONAL_MODE_NEVER
 	pathfinding.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN
@@ -41,6 +41,10 @@ func get_character_by_map(map_cell : Vector2i) -> BaseCharacterController:
 	return null
 	pass
 
+func is_cell_free(cell : Vector2i) -> bool:
+	return !cells.has(cell) || cells[cell] == null
+	pass
+
 func set_character_on_cell(character : BaseCharacter, cell : Vector2i) -> void:
 	cells[cell] = character.controller
 	pathfinding.set_point_solid(cell, true)
@@ -55,6 +59,12 @@ func change_character_cell(from_cell : Vector2i, to_cell : Vector2i) -> void:
 	var character : BaseCharacterController = cells[from_cell]
 	erase_character_from_cell(from_cell)
 	set_character_on_cell(character.body, to_cell)
+	pass
+
+func can_move_to_point(from_cell : Vector2i, to_cell : Vector2i) -> bool:
+	if !pathfinding.is_in_boundsv(from_cell) || !pathfinding.is_in_boundsv(to_cell):
+		return false
+	return get_path(from_cell, to_cell).size() > 0
 	pass
 
 func get_path(from_cell : Vector2i, to_cell : Vector2i) -> Array[Vector2i]:

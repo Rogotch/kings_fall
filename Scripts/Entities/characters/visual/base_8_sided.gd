@@ -35,7 +35,13 @@ const STATES_ANIM_NAMES : Dictionary[ANIMATION_STATE, String] = {
 
 func SetState(new_state : ANIMATION_STATE) -> void:
 	playback.travel(STATES_ANIM_NAMES[new_state])
+	#set_spritelist(new_state)
 	pass
+
+#func set_spritelist(new_state : ANIMATION_STATE) -> void:
+	#if spritelists.has(new_state):
+		#main_sprite.texture = spritelists[new_state]
+	#pass
 
 func SetDirection(direction : Vector2):
 	blend_direction = direction

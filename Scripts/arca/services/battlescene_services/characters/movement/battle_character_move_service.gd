@@ -56,3 +56,15 @@ func step_on_cell(cell : Vector2i) -> void:
 	MoveSystem.change_character_cell(map_position, cell)
 	map_position = cell
 	pass
+
+func move_start() -> void:
+	move_started.emit()
+	pass
+
+func move_end() -> void:
+	move_ended.emit()
+	pass
+
+func set_move_direction(direction : Vector2) -> void:
+	body.visual.SetDirection(direction)
+	pass

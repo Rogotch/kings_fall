@@ -6,4 +6,6 @@
 script = ExtResource("1_s75ai")
 character_scene = "res://Entities/Characters/base_character.tscn"
 character_visual = "res://Entities/Characters/visual/base_8_sided.tscn"
+max_health = 3
+speed = 3
 metadata/_custom_type_script = "uid://doabrw0qfs24h"

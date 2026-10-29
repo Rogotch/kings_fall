@@ -1,10 +1,10 @@
 class_name RectCellDrawer
-extends CellDrawer
+extends CellsDrawer
 
 static func get_inject_dependencies() -> Array:
 	return 	[
 				BattleScenePathes,
-				MapDisplayer
+				MapDisplayer,
 			]
 
 func get_vertexes(cell_position : Vector2, half_size : Vector2) -> PackedVector2Array:

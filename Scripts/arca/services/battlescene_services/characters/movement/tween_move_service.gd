@@ -43,13 +43,14 @@ func move_alongside_path(to_cell : Vector2i, cells_speed : int, speed_override :
 		tween.kill()
 	
 	tween = body.create_tween().set_trans(Tween.TRANS_LINEAR)
-	
+	tween.tween_callback(move_start)
 	for i in path.size():
 		if path.size() == i + 1:
-			return
+			break
 		var point      : Vector2i = path[i]
 		var next_point : Vector2i = path[i + 1]
 		set_tween_move_to_cell(tween, point, next_point, speed_override)
+	tween.tween_callback(move_end)
 	tween.play()
 	pass
 
@@ -58,6 +59,7 @@ func set_tween_move_to_cell(set_tween : Tween, from_cell : Vector2i, to_cell : V
 	var target_point : Vector2 = MoveSystem.get_position_by_map(to_cell)
 	var time         : float   = get_time_to_move(from_cell, to_cell, speed_override)
 	
+	set_tween.tween_callback(set_move_direction.bind(start_point.direction_to(target_point)))
 	set_tween.tween_callback(set_body_on_cell.bind(from_cell))
 	set_tween.tween_property(body, "position", target_point, time)
 	set_tween.tween_callback(step_on_cell.bind(to_cell))
