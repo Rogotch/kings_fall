@@ -8,7 +8,7 @@ signal steped_on_cell(Vector2i)
 var MoveSystem   : BattleMoveSystem
 var map_position : Vector2i
 var body         : BaseCharacter
-var speed        : float = 100
+var speed        : float = 40
 
 static func get_dependencies() -> Array:
 	return [BattleMoveSystem]

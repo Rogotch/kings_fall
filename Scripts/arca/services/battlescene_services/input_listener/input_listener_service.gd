@@ -3,36 +3,24 @@ extends RefCounted
 
 signal cell_selected(new_cell : Vector2i)
 
-var BATTLE_SERVICE  : BattleService
-#var scene_drawer    : MapDisplayer
-var battle_map      : TileMapLayer
-#var field_displayer : FieldDrawer
+var battle_map        : TileMapLayer
 var cells_displayer   : CellsDrawer
 
 var focused_cell      : Vector2i
 var input_enabled     : bool = true
-#var focused_character : BaseCharacter
 
 static func get_dependencies() -> Array:
 	return 	[
-				BattleService, 
 				BattleScenePathes, 
 				MapDisplayer,
-				#IsometricCellDrawer, 
-				#IsometricFieldDrawer
 			]
 
 func _init(
-		battle_service : BattleService,
 		pathes         : BattleScenePathes,
 		displayer      : MapDisplayer,
-		#drawer_cell    : IsometricCellDrawer,
-		#drawer_field   : IsometricFieldDrawer,
 		) -> void:
-	BATTLE_SERVICE  = battle_service
 	battle_map      = pathes.main_map
 	cells_displayer = displayer.cells_displayer
-	#field_displayer = drawer_field
 	pass
 
 func physics_tick(delta: float) -> void:
@@ -51,6 +39,3 @@ func select_cell() -> void:
 		return
 	cell_selected.emit(focused_cell)
 	pass
-
-#func cell_focused() -> void:
-	#pass

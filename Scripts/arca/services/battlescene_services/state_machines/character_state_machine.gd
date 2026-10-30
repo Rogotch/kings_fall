@@ -1,5 +1,5 @@
-extends RefCounted
 class_name CharacterStateMachine
+extends RefCounted
 
 var MoveSystem      : BattleMoveSystem
 var character_owner : BaseCharacter

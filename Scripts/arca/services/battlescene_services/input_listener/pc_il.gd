@@ -3,11 +3,8 @@ extends InputListener
 
 static func get_dependencies() -> Array:
 	return 	[
-				BattleService, 
 				BattleScenePathes, 
 				MapDisplayer, 
-				#IsometricCellDrawer, 
-				#IsometricFieldDrawer
 			]
 
 func input(event: InputEvent) -> void:

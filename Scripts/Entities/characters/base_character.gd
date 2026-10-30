@@ -12,7 +12,13 @@ var visual_factory      : VisualFactory
 var parameters          : CharacterParameters
 
 static func get_inject_dependencies() -> Array:
-	return [BattleMovementFactory, VisualFactory, BattleControllersFactory, CharacterParametersFactory, BattleStateMachineFactory]
+	return [
+		BattleMovementFactory,
+		VisualFactory,
+		BattleControllersFactory,
+		CharacterParametersFactory,
+		BattleStateMachineFactory,
+		]
 	pass
 
 func inject_dependencies(

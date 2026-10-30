@@ -4,6 +4,7 @@ class_name CharacterParameters
 var health     : int = 5
 var health_max : int = 5
 var speed      : int = 3
+var initiative : int = 0
 
 func setup_by_data(data : CharacterData) -> void:
 	health_max = data.max_health
@@ -19,7 +20,10 @@ func death() -> void:
 	
 	pass
 
-
 func get_speed() -> int:
 	return speed
+	pass
+
+func get_initiative() -> int:
+	return initiative
 	pass
