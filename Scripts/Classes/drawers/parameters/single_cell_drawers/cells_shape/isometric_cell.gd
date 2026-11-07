@@ -1,11 +1,6 @@
-class_name IsometricCellDrawer
-extends CellsDrawer
-
-static func get_inject_dependencies() -> Array:
-	return 	[
-				BattleScenePathes,
-				MapDisplayer,
-			]
+@tool
+class_name IsometricCell
+extends CellShape
 
 func get_vertexes(cell_position : Vector2, half_size : Vector2) -> PackedVector2Array:
 	return PackedVector2Array([

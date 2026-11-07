@@ -1,13 +1,25 @@
 class_name CellsDrawer
 extends Drawer
 
-var cell_parameters : CellsDrawerParameters :
+enum CELL_TYPE {
+		NONE,
+		MOVE,
+		ATTACK,
+	}
+
+var cells_drawer_parameters : CellsDrawerParameters :
 	get:
 		return parameters as CellsDrawerParameters
 	set(value):
 		return
 
-var drawing_cell      : Vector2i
+var drawing_cells     : Dictionary[CELL_TYPE, Array]
+
+static func get_inject_dependencies() -> Array:
+	return 	[
+				BattleScenePathes,
+				MapDisplayer,
+			]
 
 func inject_dependencies(
 		pathes_node      : BattleScenePathes,
@@ -17,12 +29,6 @@ func inject_dependencies(
 	set_up(pathes_node.main_map, displayer, params)
 	pass
 
-func get_cell_size() -> Vector2i:
-	return      (cell_parameters.cell_size_overrided
-			if   cell_parameters != null && cell_parameters.override_cell_size_flag 
-			else layer.tile_set.tile_size)
-	pass
-	
 func set_up(_layer : TileMapLayer, _drawer : Node2D, params : CellsDrawerParameters) -> void:
 	parameters = params
 	layer      = _layer
@@ -34,26 +40,33 @@ func update_parameters() -> void:
 	super.update_parameters()
 	pass
 
-func draw_cell() -> void:
-	draw_cell_on_position(drawing_cell)
+func SetDrawingCells(type : CELL_TYPE, cells : Array[Vector2i]) -> void:
+	drawing_cells[type] = cells
 	pass
 
-func draw_cells_arr(arr : Array[Vector2i]) -> void:
+func ClearDrawingCells() -> void:
+	drawing_cells.clear()
+	pass
+
+func ClearDrawingCellsByType(type : CELL_TYPE) -> void:
+	drawing_cells.erase(type)
+	pass
+
+func draw() -> void:
+	for type in drawing_cells:
+		draw_cells_arr(drawing_cells[type], type)
+	pass
+
+func draw_cells_arr(arr : Array[Vector2i], type : CELL_TYPE = CELL_TYPE.NONE) -> void:
 	for cell in arr:
-		draw_cell_on_position(cell)
+		draw_cell_on_position(cell, type)
 	pass
 
-func draw_cell_on_position(cell : Vector2i) -> void:
-	if !draw_flag:
+func draw_cell_on_position(cell : Vector2i, type : CELL_TYPE = CELL_TYPE.NONE) -> void:
+	if !draw_flag || cells_drawer_parameters == null || cells_drawer_parameters.get_variant(type) == null:
 		return
-	var cell_position : Vector2 = cell_position_lamda.call(cell)
-	var half_size     : Vector2 = Vector2(cell_size) / 2.0
-	
-	var vertexes = get_vertexes(cell_position, half_size)
-	
-	drawer.draw_polyline(vertexes, cell_parameters.cell_color, cell_parameters.cell_width, cell_parameters.cell_antialiased)
+	var cell_parameters : CellDisplayParameters = cells_drawer_parameters.get_variant(type)
+	var cell_position   : Vector2 = cell_position_lamda.call(cell)
+	cell_parameters.draw_cell(drawer, tile_size_lamda.call(), cell_position)
 	pass
 	
-func get_vertexes(cell_position : Vector2, half_size : Vector2) -> PackedVector2Array:
-	return []
-	pass

@@ -7,7 +7,7 @@ static func get_inject_dependencies() -> Array:
 				MapDisplayer,
 			]
 
-func get_line_points(start_cell_position : Vector2, end_cell_position : Vector2) -> Array[Vector2]:
+func get_line_points(start_cell_position : Vector2, cell_size : Vector2i, end_cell_position : Vector2) -> Array[Vector2]:
 	var half_size : Vector2  = Vector2(cell_size) / 2.0
 	return [
 			start_cell_position - Vector2(0, half_size.y),

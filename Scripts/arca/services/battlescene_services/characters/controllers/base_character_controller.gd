@@ -11,22 +11,25 @@ var move_service  : BattleCharacterMoveService:
 			return null
 		return body.move_service
 
-static func get_dependencies() -> Array:
-	return [CharacterStateMachine]
-
 static func get_inject_dependencies() -> Array:
-	return []
+	return [
+		CharactersSMF,
+	]
 
-func start_turn() -> void:
-	pass
-
-func _init(new_state_machine : CharacterStateMachine) -> void:
-	state_machine = new_state_machine
-	pass
-
-func inject_dependencies(characters_body : BaseCharacter, input : InputListener) -> void:
+func inject_dependencies(state_machines_factory : CharactersSMF, characters_body : BaseCharacter, input : InputListener) -> void:
 	body            = characters_body
 	body.controller = self
 	if input != null:
 		input_service   = input
+	create_state_machine(state_machines_factory)
+	pass
+
+func create_state_machine(state_machines_factory : CharactersSMF) -> void:
+	state_machine = state_machines_factory.create(body)
+	pass
+
+func start_turn() -> void:
+	pass
+
+func end_turn() -> void:
 	pass

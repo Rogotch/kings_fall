@@ -6,25 +6,100 @@
 [ext_resource type="Resource" uid="uid://bd3pmtayc82u5" path="res://Resources/characters/test_character.tres" id="2_ak5v8"]
 [ext_resource type="Script" uid="uid://dv6qcg5b38evj" path="res://Scripts/arca/services/battlescene_services/battle_scene_pathes.gd" id="2_hb2xm"]
 [ext_resource type="Script" uid="uid://cxtohpgxebqib" path="res://Scripts/arca/services/battlescene_services/battle_scene_parameters.gd" id="5_x033f"]
-[ext_resource type="Script" uid="uid://u32mo4h08uhp" path="res://Scripts/Classes/drawers/parameters/cells_drawer_parameters.gd" id="6_oho3u"]
-[ext_resource type="Script" uid="uid://d13rsh4ghlbif" path="res://Scripts/Classes/drawers/parameters/field_cells_drawer_parameters.gd" id="7_d3awe"]
+[ext_resource type="Script" uid="uid://donhigb155mw8" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cells_shape/isometric_cell.gd" id="6_4blnk"]
+[ext_resource type="Script" uid="uid://br2p213qnwtxc" path="res://Scripts/arca/services/battlescene_services/battle_field_parameters.gd" id="6_tnimv"]
+[ext_resource type="Script" uid="uid://cqxwgmie8rqv3" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/procedural_cell_drawer.gd" id="7_4blnk"]
+[ext_resource type="Script" uid="uid://bavhq7vw1yinw" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cell_draw_method/cell_border_draw.gd" id="7_tnimv"]
+[ext_resource type="Script" uid="uid://bc1li7dcojoh2" path="res://Scripts/Classes/drawers/parameters/cell_procedural_parameters.gd" id="8_tnimv"]
+[ext_resource type="Script" uid="uid://dga2ya6rgxx7c" path="res://Scripts/Classes/drawers/parameters/cell_parameters.gd" id="9_4qg1e"]
+[ext_resource type="Script" uid="uid://u32mo4h08uhp" path="res://Scripts/Classes/drawers/parameters/cells_drawer_parameters.gd" id="10_040rt"]
+[ext_resource type="Script" uid="uid://d13rsh4ghlbif" path="res://Scripts/Classes/drawers/parameters/field_cells_drawer_parameters.gd" id="11_dhrl2"]
+[ext_resource type="Script" uid="uid://l7hetokfme25" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cell_draw_method/cell_full_draw.gd" id="14_4qg1e"]
 
-[sub_resource type="Resource" id="Resource_bwjpn"]
-script = ExtResource("6_oho3u")
+[sub_resource type="Resource" id="Resource_tnimv"]
+script = ExtResource("6_tnimv")
+field_size = Vector2i(3, 5)
+metadata/_custom_type_script = "uid://br2p213qnwtxc"
+
+[sub_resource type="Resource" id="Resource_nb8fy"]
+script = ExtResource("6_4blnk")
+metadata/_custom_type_script = "uid://donhigb155mw8"
+
+[sub_resource type="Resource" id="Resource_w67mq"]
+script = ExtResource("7_tnimv")
+metadata/_custom_type_script = "uid://bavhq7vw1yinw"
+
+[sub_resource type="Resource" id="Resource_u2wvh"]
+script = ExtResource("7_4blnk")
+cell_shape = SubResource("Resource_nb8fy")
+draw_method = SubResource("Resource_w67mq")
+metadata/_custom_type_script = "uid://cqxwgmie8rqv3"
+
+[sub_resource type="Resource" id="Resource_vj5kx"]
+script = ExtResource("8_tnimv")
 cell_size_overrided = Vector2i(32, 16)
-cell_color = Color(0.39215687, 0.58431375, 0.92941177, 1)
+cell_color = Color(0.11679032, 0.6090385, 0.86860347, 1)
+cell_drawer = SubResource("Resource_u2wvh")
+metadata/_custom_type_script = "uid://bc1li7dcojoh2"
+
+[sub_resource type="Resource" id="Resource_fir78"]
+script = ExtResource("10_040rt")
+base_variant = SubResource("Resource_vj5kx")
 metadata/_custom_type_script = "uid://u32mo4h08uhp"
 
-[sub_resource type="Resource" id="Resource_yglu3"]
-script = ExtResource("7_d3awe")
-cells_parameters = SubResource("Resource_bwjpn")
-field_size = Vector2i(3, 6)
+[sub_resource type="Resource" id="Resource_1l8nr"]
+script = ExtResource("11_dhrl2")
+cells_parameters = SubResource("Resource_fir78")
 metadata/_custom_type_script = "uid://d13rsh4ghlbif"
 
-[sub_resource type="Resource" id="Resource_ibmi3"]
-script = ExtResource("6_oho3u")
-cell_size_overrided = Vector2i(40, 20)
-cell_color = Color(0.8243157, 0.6566654, 0.47996098, 1)
+[sub_resource type="Resource" id="Resource_clacv"]
+script = ExtResource("6_4blnk")
+metadata/_custom_type_script = "uid://donhigb155mw8"
+
+[sub_resource type="Resource" id="Resource_n1bxw"]
+script = ExtResource("7_tnimv")
+metadata/_custom_type_script = "uid://bavhq7vw1yinw"
+
+[sub_resource type="Resource" id="Resource_cjy6c"]
+script = ExtResource("7_4blnk")
+cell_shape = SubResource("Resource_clacv")
+draw_method = SubResource("Resource_n1bxw")
+metadata/_custom_type_script = "uid://cqxwgmie8rqv3"
+
+[sub_resource type="Resource" id="Resource_gkupu"]
+script = ExtResource("8_tnimv")
+cell_size_overrided = Vector2i(32, 16)
+cell_color = Color(0.7459586, 0.5077737, 0.35166553, 1)
+cell_drawer = SubResource("Resource_cjy6c")
+metadata/_custom_type_script = "uid://bc1li7dcojoh2"
+
+[sub_resource type="Resource" id="Resource_040rt"]
+script = ExtResource("6_4blnk")
+metadata/_custom_type_script = "uid://donhigb155mw8"
+
+[sub_resource type="Resource" id="Resource_dhrl2"]
+script = ExtResource("14_4qg1e")
+metadata/_custom_type_script = "uid://l7hetokfme25"
+
+[sub_resource type="Resource" id="Resource_4qg1e"]
+script = ExtResource("7_4blnk")
+cell_shape = SubResource("Resource_040rt")
+draw_method = SubResource("Resource_dhrl2")
+metadata/_custom_type_script = "uid://cqxwgmie8rqv3"
+
+[sub_resource type="Resource" id="Resource_i0miu"]
+script = ExtResource("8_tnimv")
+cell_size_overrided = Vector2i(24, 12)
+cell_color = Color(0.2907899, 0.5910344, 0.86265224, 1)
+cell_drawer = SubResource("Resource_4qg1e")
+metadata/_custom_type_script = "uid://bc1li7dcojoh2"
+
+[sub_resource type="Resource" id="Resource_ex51q"]
+script = ExtResource("10_040rt")
+base_variant = SubResource("Resource_gkupu")
+cells_variants = Dictionary[int, ExtResource("9_4qg1e")]({
+1: SubResource("Resource_i0miu")
+})
 metadata/_custom_type_script = "uid://u32mo4h08uhp"
 
 [sub_resource type="TileSet" id="TileSet_lxrbl"]
@@ -53,8 +128,9 @@ metadata/_custom_type_script = "uid://dv6qcg5b38evj"
 
 [node name="Parameters" type="Node" parent="." unique_id=475643531 node_paths=PackedStringArray("grid_displayer")]
 script = ExtResource("5_x033f")
-field_parameters = SubResource("Resource_yglu3")
-cells_parameters = SubResource("Resource_ibmi3")
+battle_field_parameters = SubResource("Resource_tnimv")
+field_drawer_parameters = SubResource("Resource_1l8nr")
+cells_drawer_parameters = SubResource("Resource_ex51q")
 grid_displayer = NodePath("../TileMapLayer/grid_displayer")
 metadata/_custom_type_script = "uid://cxtohpgxebqib"
 

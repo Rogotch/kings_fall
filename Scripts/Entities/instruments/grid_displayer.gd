@@ -2,14 +2,15 @@
 extends Node2D
 class_name MapDisplayer
 
-var field_parameters : FieldDrawerParameters : set = set_field_parameters
-var cells_parameters : CellsDrawerParameters : set = set_cells_parameters
+var battlefield_parameters : BattleFieldParameters : set = set_battle_field_parameters
+var field_parameters       : FieldDrawerParameters : set = set_field_parameters
+var cells_parameters       : CellsDrawerParameters : set = set_cells_parameters
 
-var tile_layer      : TileMapLayer
-var field_displayer : FieldDrawer
-var cells_displayer : CellsDrawer
+var tile_layer             : TileMapLayer
+var field_displayer        : FieldDrawer
+var cells_displayer        : CellsDrawer
 
-var cell_for_drawing : Vector2i
+var cell_for_drawing       : Vector2i
 
 static func get_inject_dependencies() -> Array:
 	return [
@@ -20,24 +21,29 @@ static func get_inject_dependencies() -> Array:
 	pass
 
 func inject_dependencies(
-		d_factory    : DrawersFactory,
-		pathes       : BattleScenePathes,
-		parameters   : BattleSceneParameters,
+		d_factory  : DrawersFactory,
+		pathes     : BattleScenePathes,
+		parameters : BattleSceneParameters,
 		) -> void:
-	cells_displayer  = d_factory.create(parameters.cells_parameters, DrawersFactory.TYPE_DRAWER.CELLS, DrawersFactory.CELL_TYPE.ISOMETRIC)
-	field_displayer  = d_factory.create(parameters.field_parameters, DrawersFactory.TYPE_DRAWER.FIELD, DrawersFactory.CELL_TYPE.ISOMETRIC, DrawersFactory.FIELD_TYPE.CELLS)
+	cells_displayer  = d_factory.create_cells_drawer(parameters.cells_drawer_parameters)
+	field_displayer  = d_factory.create_field_drawer(
+									parameters.field_drawer_parameters, 
+									parameters.battle_field_parameters,
+									DrawersFactory.FIELD_TYPE.CELLS)
 	tile_layer       = pathes.main_map
 	pass
 
+func set_battle_field_parameters(params : BattleFieldParameters) -> void:
+	battlefield_parameters = params
+	if  field_displayer != null:
+		field_displayer.battlefield_parameters = params
+	pass
+
 func set_field_parameters(params : FieldDrawerParameters) -> void:
-	#if  field_parameters != null && field_parameters != params:
-		#field_parameters.free()
 	field_parameters = params
 	pass
 
 func set_cells_parameters(params : CellsDrawerParameters) -> void:
-	#if  cells_parameters != null && cells_parameters != params:
-		#cells_parameters.free()
 	cells_parameters = params
 	pass
 
@@ -47,9 +53,9 @@ func tool_set_up() -> void:
 		#field_displayer  = IsometricFieldDrawer.new()
 		#field_displayer.set_up(tile_layer, self, field_size, field_start_cell)
 		field_displayer  = FieldCellsDrawer.new()
-		field_displayer.set_up(tile_layer, self, field_parameters)
-		field_displayer.set_up_cells_drawer(IsometricCellDrawer.new())
-		cells_displayer = IsometricCellDrawer.new()
+		field_displayer.set_up(tile_layer, self, field_parameters, battlefield_parameters)
+		field_displayer.set_up_cells_drawer(CellsDrawer.new())
+		cells_displayer = CellsDrawer.new()
 		cells_displayer.set_up(tile_layer, self, cells_parameters)
 	pass
 
@@ -64,7 +70,14 @@ func _draw() -> void:
 		field_displayer.draw()
 	if  cells_displayer != null:
 		if  Engine.is_editor_hint():
-			cells_displayer.drawing_cell = tile_layer.local_to_map(get_local_mouse_position())
-		cells_displayer.draw_cell()
+			var focused_cell : Vector2i = tile_layer.local_to_map(get_local_mouse_position())
+			if (battlefield_parameters != null
+				&& battlefield_parameters.get_filled_rect().has_point(focused_cell)):
+				# TODO Сюда куда-то надо добавить фокус клеток и персов вне хода игрока
+				#cells_displayer.drawing_cell = focused_cell
+				cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE, Array([focused_cell], TYPE_VECTOR2I, "", null))
+				cells_displayer.draw()
+		else:
+			cells_displayer.draw()
 		
 	pass

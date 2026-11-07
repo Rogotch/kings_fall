@@ -3,13 +3,12 @@ extends RefCounted
 
 var layer               : TileMapLayer
 var drawer              : Node2D
-var cell_size           : Vector2i
 var draw_flag           : bool            = true
 var parameters          : DrawerParameters : set = set_parameters
 
 var cell_position_lamda : Callable = func (cell : Vector2i) -> Vector2:
 	return layer.map_to_local.call(cell) - drawer.position
-var cell_size_lamda : Callable = func () -> Vector2i:
+var tile_size_lamda     : Callable = func () -> Vector2i:
 	return get_cell_size()
 
 func get_cell_size() -> Vector2i:
@@ -27,5 +26,4 @@ func set_parameters(new_parameters : DrawerParameters) -> void:
 	pass
 
 func update_parameters() -> void:
-	cell_size = cell_size_lamda.call()
 	pass

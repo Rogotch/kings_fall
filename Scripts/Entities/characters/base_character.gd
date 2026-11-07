@@ -17,7 +17,6 @@ static func get_inject_dependencies() -> Array:
 		VisualFactory,
 		BattleControllersFactory,
 		CharacterParametersFactory,
-		BattleStateMachineFactory,
 		]
 	pass
 
@@ -26,14 +25,12 @@ func inject_dependencies(
 		new_visual_factory      : VisualFactory, 
 		controllers_factory     : BattleControllersFactory,
 		params_factory          : CharacterParametersFactory,
-		states_machine_factory  : BattleStateMachineFactory,
 		player                  : bool
 		) -> void:
 	visual_factory = new_visual_factory
-	movement_factory       .create(self)
-	controllers_factory    .create(self, player)
-	params_factory         .create(self)
-	states_machine_factory .create(self)
+	movement_factory          .create(self)
+	controllers_factory       .create(self, player)
+	params_factory            .create(self)
 	pass
 
 #static func get_dependencies() -> Array:
@@ -51,7 +48,7 @@ func _process(delta: float) -> void:
 func configure_character(on_position : Vector2i) -> void:
 	move_service.place_on_position(on_position)
 	visual_factory.load_visual_node(self)
-	controller.state_machine.idle()
+	controller.state_machine.Idle()
 	pass
 
 

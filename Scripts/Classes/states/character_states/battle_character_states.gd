@@ -48,13 +48,9 @@ class Idle   extends BaseCharacterState:
 	
 	func update() -> void:	pass
 	
-	func select_cell(cell : Vector2i) -> void:
-		if MoveSystem.is_cell_free(cell) && MoveSystem.can_move_to_point(character.move_service.map_position, cell):
-			state_machine.move(cell)
-		pass
-	pass 
+	pass
 
-class Attack extends BaseCharacterState:
+class Attack                 extends BaseCharacterState:
 	var target : Vector2i
 	
 	func _init(
@@ -67,7 +63,7 @@ class Attack extends BaseCharacterState:
 	
 	func enter()  -> void:
 		visual.SetState(BaseCharacterVisual.ANIMATION_STATE.ATTACK)
-		state_machine.idle()
+		state_machine.Idle()
 		pass
 	
 	func exit()   -> void:	pass
@@ -75,7 +71,7 @@ class Attack extends BaseCharacterState:
 	func update() -> void:	pass
 	pass
 
-class Move   extends BaseCharacterState:
+class Move                   extends BaseCharacterState:
 	var target : Vector2i
 	var run_flag : bool
 	var move_service     : BattleCharacterMoveService   : 
@@ -97,13 +93,13 @@ class Move   extends BaseCharacterState:
 			BaseCharacterVisual.ANIMATION_STATE.RUN
 			if run_flag else 
 			BaseCharacterVisual.ANIMATION_STATE.WALK)
-		move_service.move_ended.connect(state_machine.idle, CONNECT_ONE_SHOT)
+		move_service.move_ended.connect(state_machine.Idle, CONNECT_ONE_SHOT)
 		move_service.move_alongside_path(target, parameters.get_speed())
 		pass
 	
 	func exit()   -> void:
-		if  move_service.move_ended.is_connected(state_machine.idle):
-			move_service.move_ended.disconnect(  state_machine.idle)
+		if  move_service.move_ended.is_connected(state_machine.Idle):
+			move_service.move_ended.disconnect(  state_machine.Idle)
 		pass
 	
 	func update() -> void:	pass

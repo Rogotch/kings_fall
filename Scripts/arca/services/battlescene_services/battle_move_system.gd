@@ -20,7 +20,7 @@ func set_up_pathfinding() -> void:
 	pathfinding = AStarGrid2D.new()
 	pathfinding.cell_shape                = AStarGrid2D.CELL_SHAPE_ISOMETRIC_DOWN
 	pathfinding.cell_size                 = map.tile_set.tile_size
-	pathfinding.region                    = Rect2i(parameters.field_parameters.field_start_cell, parameters.field_parameters.field_size)
+	pathfinding.region                    = parameters.battle_field_parameters.get_filled_rect()
 	
 	pathfinding.diagonal_mode             = AStarGrid2D.DIAGONAL_MODE_NEVER
 	pathfinding.default_compute_heuristic = AStarGrid2D.HEURISTIC_MANHATTAN

@@ -3,8 +3,9 @@ extends InputListener
 
 static func get_dependencies() -> Array:
 	return 	[
-				BattleScenePathes, 
-				MapDisplayer, 
+				BattleScenePathes,
+				BattleSceneParameters,
+				MapDisplayer,
 			]
 
 func input(event: InputEvent) -> void:

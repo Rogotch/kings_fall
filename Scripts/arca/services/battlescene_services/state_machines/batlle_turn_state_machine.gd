@@ -1,4 +1,4 @@
-class_name BattleStateMachine
+class_name BattleTurnsSM
 extends RefCounted
 
 var input         : InputListener
@@ -20,5 +20,28 @@ func _init(
 	pass
 
 func change_state(new_state : BattleTurnState) -> void:
-	
+	if  current_state != null:
+		current_state.exit()
+	current_state = new_state
+	current_state.enter()
 	pass 
+
+func StartTurn(character : BaseCharacter) -> void:
+	var new_turn_state : BattleTurnState.StartTurn = BattleTurnState.StartTurn.new(self, character)
+	change_state(new_turn_state)
+	pass
+
+func Turn(character : BaseCharacter) -> void:
+	var new_turn_state : BattleTurnState.Turn = BattleTurnState.Turn.new(self, character)
+	change_state(new_turn_state)
+	pass
+
+func EndTurn(character : BaseCharacter) -> void:
+	var new_turn_state : BattleTurnState.EndTurn = BattleTurnState.EndTurn.new(self, character)
+	change_state(new_turn_state)
+	pass
+
+func NewRound() -> void:
+	var new_turn_state : BattleTurnState.NewRound = BattleTurnState.NewRound.new(self)
+	change_state(new_turn_state)
+	pass

@@ -3,25 +3,26 @@ extends BaseCharacterController
 
 var active : bool = false
 
-static func get_dependencies() -> Array:
-	return [CharacterStateMachine]
-
 static func get_inject_dependencies() -> Array:
-	return []
+	return [
+		CharactersSMF,
+	]
 
-func _init(new_state_machine : CharacterStateMachine) -> void:
-	super._init(new_state_machine)
-	pass
-
-func inject_dependencies(characters_body : BaseCharacter, input : InputListener) -> void:
-	body            = characters_body
-	body.controller = self
-	if input != null:
-		input_service   = input
-		input_service.cell_selected.connect(select_cell)
+func create_state_machine(state_machines_factory : CharactersSMF) -> void:
+	state_machine = state_machines_factory.create_player_sm(body)
 	pass
 
 func start_turn() -> void:
+	active = true
+	pass
+
+func end_turn() -> void:
+	active = false
+	pass
+
+func recive_input(input_action : InputAction) -> void:
+	if !active:
+		return
 	pass
 
 func select_cell(cell : Vector2i) -> void:

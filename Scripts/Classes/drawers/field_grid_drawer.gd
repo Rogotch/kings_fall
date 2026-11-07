@@ -16,7 +16,7 @@ func update_parameters() -> void:
 	pass
 
 func draw() -> void:
-	if !draw_flag || parameters == null:
+	if !draw_flag || parameters == null || battlefield_parameters == null:
 		return
 	draw_lines(vertical_points)
 	draw_lines(horizontal_points)
@@ -27,20 +27,20 @@ func calculate_lines(points_arr : Array, vertical : bool) -> void:
 	points_arr.clear()
 	var main_axis_vector        : Vector2i = Vector2i.RIGHT if vertical else Vector2i.DOWN
 	var secondary_axis_vector   : Vector2i = Vector2i.ONE - main_axis_vector
-	var size                    : int = int((field_params.field_size * main_axis_vector).length() + 1)
+	var size                    : int = int((battlefield_parameters.field_size * main_axis_vector).length() + 1)
 	for i in size:
 		var start_cell_position : Vector2  = cell_position_lamda.call(
 			i * main_axis_vector
-			+ field_params.field_start_cell)
+			+ battlefield_parameters.field_start_cell)
 		var end_cell_position   : Vector2  = cell_position_lamda.call(
-			field_params.field_size * secondary_axis_vector
+			battlefield_parameters.field_size * secondary_axis_vector
 			+ i * main_axis_vector
-			+ field_params.field_start_cell)
+			+ battlefield_parameters.field_start_cell)
 		
-		points_arr.append(get_line_points(start_cell_position, end_cell_position))
+		points_arr.append(get_line_points(start_cell_position, field_params.get_cell_size(tile_size_lamda.call()), end_cell_position))
 	pass
 
-func get_line_points(start_cell_position : Vector2, end_cell_position : Vector2) -> Array[Vector2]:
+func get_line_points(start_cell_position : Vector2, cell_size : Vector2i, end_cell_position : Vector2) -> Array[Vector2]:
 	return []
 	pass
 

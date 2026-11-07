@@ -21,18 +21,18 @@ const   PLAYER_CHARACTER_CONTROLLER := preload("uid://dy3j3w1apaj2o")
 
 # State Machines
 const       CHARACTER_STATE_MACHINE := preload("uid://t8fayspk5rf1")
+const          PLAYER_STATE_MACHINE := preload("uid://bd5w7h11jnwje")
 const     BATLLE_TURN_STATE_MACHINE := preload("uid://c228xvjtjevc")
 
 # Drawers
-const        ISOMETRIC_CELLS_DRAWER := preload("uid://donhigb155mw8")
-const        ISOMETRIC_FIELD_DRAWER := preload("uid://cv10vi6cx1xs")
+const                  CELLS_DRAWER := preload("uid://cnktn0e0plssk")
+const             FIELD_GRID_DRAWER := preload("uid://dbpp5inmko2p8")
 const            FIELD_CELLS_DRAWER := preload("uid://dhnlydoop31i4")
-const             RECT_CELLS_DRAWER := preload("uid://oiy5byrqecoa")
-const             RECT_FIELD_DRAWER := preload("uid://dn2f6w4qeigbq")
 
 # Factories
 const CHARACTERS_SPAWNER            := preload("uid://bckc2k4qgnnrm")
-const  BATTLE_STATE_MACHINE_FACTORY := preload("uid://dmrjyiexoe8y")
+#const  BATTLE_STATE_MACHINE_FACTORY := preload("uid://dmrjyiexoe8y")
+const  BATTLE_CHARACTERS_SM_FACTORY := preload("uid://dv6vcjdv8bdaa")
 const                VISUAL_FACTORY := preload("uid://dco8vt4w63en6")
 const    BATTLE_CONTROLLERS_FACTORY := preload("uid://yi5udytckulu")
 const       BATTLE_MOVEMENT_FACTORY := preload("uid://bbrr5al44ne6p")
@@ -51,13 +51,12 @@ func install(container: ArcaContainer, ctx) -> void:
 	
 	container.bind(PC_INPUT_LISTENER)            .as_single()
 	
-	container.bind(ISOMETRIC_CELLS_DRAWER)       .as_transient()
-	container.bind(ISOMETRIC_FIELD_DRAWER)       .as_transient()
-	container.bind(RECT_CELLS_DRAWER)            .as_transient()
-	container.bind(RECT_FIELD_DRAWER)            .as_transient()
+	container.bind(CELLS_DRAWER)                 .as_transient()
+	container.bind(FIELD_GRID_DRAWER)            .as_transient()
 	container.bind(FIELD_CELLS_DRAWER)           .as_transient()
 	
 	container.bind(CHARACTER_STATE_MACHINE)      .as_transient()
+	container.bind(PLAYER_STATE_MACHINE)         .as_transient()
 	container.bind(CHARACTER_PARAMETERS)         .as_transient()
 	container.bind(BASE_CHARACTER_CONTROLLER)    .as_transient()
 	container.bind(PLAYER_CHARACTER_CONTROLLER)  .as_transient()
@@ -73,7 +72,8 @@ func install(container: ArcaContainer, ctx) -> void:
 	container.bind(CHARACTERS_PARAMETERS_FACTORY).as_single(func(c: ArcaContainer): return CHARACTERS_PARAMETERS_FACTORY .new(c))
 	container.bind(BATTLE_CONTROLLERS_FACTORY)   .as_single(func(c: ArcaContainer): return BATTLE_CONTROLLERS_FACTORY    .new(c))
 	container.bind(BATTLE_MOVEMENT_FACTORY)      .as_single(func(c: ArcaContainer): return BATTLE_MOVEMENT_FACTORY       .new(c))
-	container.bind(BATTLE_STATE_MACHINE_FACTORY) .as_single(func(c: ArcaContainer): return BATTLE_STATE_MACHINE_FACTORY  .new(c))
+	container.bind(BATTLE_CHARACTERS_SM_FACTORY) .as_single(func(c: ArcaContainer): return BATTLE_CHARACTERS_SM_FACTORY  .new(c))
+	#container.bind(BATTLE_STATE_MACHINE_FACTORY) .as_single(func(c: ArcaContainer): return BATTLE_STATE_MACHINE_FACTORY  .new(c))
 	container.bind(DRAWERS_FACTORY)              .as_single(func(c: ArcaContainer): return DRAWERS_FACTORY               .new(c))
 	
 	container.bind(INPUT_LISTENER)               .as_single(func(c: ArcaContainer):

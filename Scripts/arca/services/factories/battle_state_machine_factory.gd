@@ -1,4 +1,4 @@
-class_name BattleStateMachineFactory
+class_name BattleTurnsSMF
 extends RefCounted
 
 var container   : ArcaContainer
