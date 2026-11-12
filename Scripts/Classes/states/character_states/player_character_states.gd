@@ -1,9 +1,9 @@
 @abstract
 class_name PlayerCharacterStates
-extends RefCounted
+extends BaseCharacterState
 
 @abstract
-class IdlePlayerInput        extends BaseCharacterState.Idle:
+class IdlePlayerInput        extends Idle:
 	var input_service   : InputListener
 	var input_action    : InputAction
 	var displayer       : MapDisplayer
@@ -23,10 +23,9 @@ class IdlePlayerInput        extends BaseCharacterState.Idle:
 	func _init(
 			_state_machine  : CharacterStateMachine,
 			owner_character : BaseCharacter,
-			move_system     : BattleMoveSystem,
 			map_displayer   : MapDisplayer,
 		) -> void:
-		super._init(_state_machine, owner_character, move_system)
+		super._init(_state_machine, owner_character)
 		displayer = map_displayer
 		pass
 	
@@ -67,11 +66,11 @@ class IdlePlayerInput        extends BaseCharacterState.Idle:
 
 @abstract
 class IdleSelectSingleCell   extends IdlePlayerInput:
-	var select_cell_action : InputAction.IASingleSelectCell:
+	var select_cell_action : InputAction.IASelectCell:
 		set(value):
 			return
 		get:
-			return input_action as InputAction.IASingleSelectCell
+			return input_action as InputAction.IASelectCell
 	
 	func exit()   -> void:
 		super.exit()
@@ -95,9 +94,9 @@ class IdleSelectSingleCell   extends IdlePlayerInput:
 		pass
 	
 	func focus_cell(cell : Vector2i) -> void:
-		if MoveSystem.is_cell_free(cell) && MoveSystem.can_move_to_point(character.move_service.map_position, cell):
-			cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE, Array([cell], TYPE_VECTOR2I, "", null))
-			pass
+		#if MoveSystem.is_cell_free(cell) && MoveSystem.can_move_to_point(character.move_service.map_position, cell):
+			#cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE, Array([cell], TYPE_VECTOR2I, "", null))
+			#pass
 		pass
 	
 	func unfocus_cell(cell : Vector2i) -> void:
@@ -112,8 +111,8 @@ class IdleBaseSelect         extends IdleSelectSingleCell:
 		pass
 	
 	func select_cell(cell : Vector2i) -> void:
-		if MoveSystem.is_cell_free(cell) && MoveSystem.can_move_to_point(character.move_service.map_position, cell):
-			state_machine.Move(cell)
+		#if MoveSystem.is_cell_free(cell) && MoveSystem.can_move_to_point(character.move_service.map_position, cell):
+			#state_machine.Move(cell)
 		pass
 	pass
 

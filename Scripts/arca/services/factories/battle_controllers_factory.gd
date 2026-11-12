@@ -10,12 +10,14 @@ func _init(arca_container: ArcaContainer) -> void:
 func create(character : BaseCharacter, player : bool) -> BaseCharacterController:
 	var controller : BaseCharacterController
 	
-	var listener   : InputListener = container.resolve(InputListener)
+	#var listener   : InputListener = container.resolve(InputListener)
 	
-	if player:
-		controller = container.resolve(PlayerCharacterController)
-	else:
-		controller = container.resolve(BaseCharacterController)
-	container.inject(controller, [character, listener])
+	#if player:
+		#controller = container.resolve(PlayerCharacterController)
+	#else:
+		#controller = container.resolve(BaseCharacterController)
+	controller = container.resolve(BaseCharacterController)
+	controller.is_player = player
+	container.inject(controller, [character])
 	return controller
 	pass

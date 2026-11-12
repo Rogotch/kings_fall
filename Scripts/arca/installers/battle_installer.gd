@@ -18,11 +18,14 @@ const TWEEN_MOVE_SERVICE            := preload("uid://8ireh7u52n2u")
 # Controllers
 const     BASE_CHARACTER_CONTROLLER := preload("uid://dwoy6jyylt0tp")
 const   PLAYER_CHARACTER_CONTROLLER := preload("uid://dy3j3w1apaj2o")
+const     ALL_CHARACTERS_CONTROLLER := preload("uid://cjhlw8ty5mp2b")
 
 # State Machines
-const       CHARACTER_STATE_MACHINE := preload("uid://t8fayspk5rf1")
-const          PLAYER_STATE_MACHINE := preload("uid://bd5w7h11jnwje")
-const     BATLLE_TURN_STATE_MACHINE := preload("uid://c228xvjtjevc")
+const STATE_MACHINE_CHARACTER       := preload("uid://t8fayspk5rf1")
+const STATE_MACHINE_PLAYER          := preload("uid://bd5w7h11jnwje")
+const STATE_MACHINE_BATLLE_TURN     := preload("uid://c228xvjtjevc")
+const STATE_MACHINE_BATTLE_INPUT    := preload("uid://uet6oj2w0ibm")
+const STATE_MACHINE_BATLLE          := preload("uid://6t1om25c2bj7")
 
 # Drawers
 const                  CELLS_DRAWER := preload("uid://cnktn0e0plssk")
@@ -39,6 +42,9 @@ const       BATTLE_MOVEMENT_FACTORY := preload("uid://bbrr5al44ne6p")
 const CHARACTERS_PARAMETERS_FACTORY := preload("uid://x0r15bxhsww1")
 const               DRAWERS_FACTORY := preload("uid://bavpfv3y5jmf6")
 
+const BATTLE_INTERFACE              := preload("uid://cx262tev6qwf0")
+
+
 func install(container: ArcaContainer, ctx) -> void:
 	var battle = ctx as BattleContext
 	container.bind(BattleScenePathes)            .from_instance(battle.scene_pathes)
@@ -48,15 +54,21 @@ func install(container: ArcaContainer, ctx) -> void:
 	container.bind(MOVE_SERVICE)                 .as_single()
 	container.bind(BATTLE_SERVICE)               .as_single()
 	container.bind(BATTLE_INITIATIVE_SERVICE)    .as_single()
+	container.bind(ALL_CHARACTERS_CONTROLLER)    .as_single()
 	
 	container.bind(PC_INPUT_LISTENER)            .as_single()
+	
+	container.bind(STATE_MACHINE_BATTLE_INPUT)   .as_single()
+	container.bind(STATE_MACHINE_BATLLE_TURN)    .as_single()
+	container.bind(STATE_MACHINE_BATLLE)         .as_single()
 	
 	container.bind(CELLS_DRAWER)                 .as_transient()
 	container.bind(FIELD_GRID_DRAWER)            .as_transient()
 	container.bind(FIELD_CELLS_DRAWER)           .as_transient()
 	
-	container.bind(CHARACTER_STATE_MACHINE)      .as_transient()
-	container.bind(PLAYER_STATE_MACHINE)         .as_transient()
+	container.bind(STATE_MACHINE_CHARACTER)      .as_transient()
+	container.bind(STATE_MACHINE_PLAYER)         .as_transient()
+	
 	container.bind(CHARACTER_PARAMETERS)         .as_transient()
 	container.bind(BASE_CHARACTER_CONTROLLER)    .as_transient()
 	container.bind(PLAYER_CHARACTER_CONTROLLER)  .as_transient()

@@ -73,9 +73,8 @@ func _draw() -> void:
 			var focused_cell : Vector2i = tile_layer.local_to_map(get_local_mouse_position())
 			if (battlefield_parameters != null
 				&& battlefield_parameters.get_filled_rect().has_point(focused_cell)):
-				# TODO Сюда куда-то надо добавить фокус клеток и персов вне хода игрока
-				#cells_displayer.drawing_cell = focused_cell
-				cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE, Array([focused_cell], TYPE_VECTOR2I, "", null))
+				cells_displayer.ClearDrawingCells()
+				cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.NONE, Array([focused_cell], TYPE_VECTOR2I, "", null))
 				cells_displayer.draw()
 		else:
 			cells_displayer.draw()

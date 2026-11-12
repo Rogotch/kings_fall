@@ -7,14 +7,26 @@
 [ext_resource type="Script" uid="uid://dv6qcg5b38evj" path="res://Scripts/arca/services/battlescene_services/battle_scene_pathes.gd" id="2_hb2xm"]
 [ext_resource type="Script" uid="uid://cxtohpgxebqib" path="res://Scripts/arca/services/battlescene_services/battle_scene_parameters.gd" id="5_x033f"]
 [ext_resource type="Script" uid="uid://donhigb155mw8" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cells_shape/isometric_cell.gd" id="6_4blnk"]
+[ext_resource type="Script" uid="uid://b08oh02spmr2w" path="res://Scripts/Resources/data/squad_data.gd" id="6_dhrl2"]
 [ext_resource type="Script" uid="uid://br2p213qnwtxc" path="res://Scripts/arca/services/battlescene_services/battle_field_parameters.gd" id="6_tnimv"]
 [ext_resource type="Script" uid="uid://cqxwgmie8rqv3" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/procedural_cell_drawer.gd" id="7_4blnk"]
+[ext_resource type="Script" uid="uid://doabrw0qfs24h" path="res://Scripts/Resources/data/character_data.gd" id="7_i0miu"]
 [ext_resource type="Script" uid="uid://bavhq7vw1yinw" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cell_draw_method/cell_border_draw.gd" id="7_tnimv"]
 [ext_resource type="Script" uid="uid://bc1li7dcojoh2" path="res://Scripts/Classes/drawers/parameters/cell_procedural_parameters.gd" id="8_tnimv"]
 [ext_resource type="Script" uid="uid://dga2ya6rgxx7c" path="res://Scripts/Classes/drawers/parameters/cell_parameters.gd" id="9_4qg1e"]
 [ext_resource type="Script" uid="uid://u32mo4h08uhp" path="res://Scripts/Classes/drawers/parameters/cells_drawer_parameters.gd" id="10_040rt"]
 [ext_resource type="Script" uid="uid://d13rsh4ghlbif" path="res://Scripts/Classes/drawers/parameters/field_cells_drawer_parameters.gd" id="11_dhrl2"]
 [ext_resource type="Script" uid="uid://l7hetokfme25" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cell_draw_method/cell_full_draw.gd" id="14_4qg1e"]
+
+[sub_resource type="Resource" id="Resource_6bfml"]
+script = ExtResource("6_dhrl2")
+squad_members = Array[ExtResource("7_i0miu")]([ExtResource("2_ak5v8")])
+metadata/_custom_type_script = "uid://b08oh02spmr2w"
+
+[sub_resource type="Resource" id="Resource_0g4ye"]
+script = ExtResource("6_dhrl2")
+squad_members = Array[ExtResource("7_i0miu")]([ExtResource("2_ak5v8")])
+metadata/_custom_type_script = "uid://b08oh02spmr2w"
 
 [sub_resource type="Resource" id="Resource_tnimv"]
 script = ExtResource("6_tnimv")
@@ -110,7 +122,6 @@ tile_size = Vector2i(64, 32)
 [node name="test_scene" type="Node2D" unique_id=778120956 node_paths=PackedStringArray("battle_context")]
 script = ExtResource("1_ak5v8")
 battle_context = NodePath("Context")
-test_character = ExtResource("2_ak5v8")
 
 [node name="Context" type="Node" parent="." unique_id=1886788445 node_paths=PackedStringArray("scene_pathes", "displayer", "scene_parameters")]
 script = ExtResource("1_50ct6")
@@ -128,6 +139,8 @@ metadata/_custom_type_script = "uid://dv6qcg5b38evj"
 
 [node name="Parameters" type="Node" parent="." unique_id=475643531 node_paths=PackedStringArray("grid_displayer")]
 script = ExtResource("5_x033f")
+squad_player = SubResource("Resource_6bfml")
+squad_enemy = SubResource("Resource_0g4ye")
 battle_field_parameters = SubResource("Resource_tnimv")
 field_drawer_parameters = SubResource("Resource_1l8nr")
 cells_drawer_parameters = SubResource("Resource_ex51q")

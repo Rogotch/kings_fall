@@ -3,6 +3,8 @@
 extends Node
 class_name BattleSceneParameters
 
+@export var squad_player            : SquadData
+@export var squad_enemy             : SquadData
 @export var battle_field_parameters : BattleFieldParameters : set = set_battle_field_parameters
 @export var field_drawer_parameters : FieldDrawerParameters : set = set_field_parameters
 @export var cells_drawer_parameters : CellsDrawerParameters : set = set_cells_parameters

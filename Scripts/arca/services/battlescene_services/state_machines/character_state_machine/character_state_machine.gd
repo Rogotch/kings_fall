@@ -36,7 +36,7 @@ func select_cell(cell : Vector2i) -> void:
 	pass
 
 func Idle() -> void:
-	var state : BaseCharacterState.Idle = BaseCharacterState.Idle.new(self, character_owner, MoveSystem)
+	var state : BaseCharacterState.Idle   = BaseCharacterState.Idle  .new(self, character_owner)
 	set_state(state)
 	pass
 
@@ -46,16 +46,16 @@ func Attack(to_cell : Vector2i) -> void:
 	pass
 
 func Move(to_cell : Vector2i) -> void:
-	var state : BaseCharacterState.Move = BaseCharacterState.Move.new(self, character_owner, to_cell)
+	var state : BaseCharacterState.Move   = BaseCharacterState.Move  .new(self, character_owner, to_cell)
 	set_state(state)
 	pass
 
 func Hit(value : int) -> void:
-	var state : BaseCharacterState.Hurt = BaseCharacterState.Hurt.new(self, character_owner, value)
+	var state : BaseCharacterState.Hurt   = BaseCharacterState.Hurt  .new(self, character_owner, value)
 	set_state(state)
 	pass
 
 func Death() -> void:
-	var state : BaseCharacterState.Death = BaseCharacterState.Death.new(self, character_owner)
+	var state : BaseCharacterState.Death  = BaseCharacterState.Death .new(self, character_owner)
 	set_state(state)
 	pass

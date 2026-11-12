@@ -44,15 +44,9 @@ class IAFocusCell  extends  InputAction:
 	pass
 
 class IASelectCell extends  IAFocusCell:
-	func _init() -> void:
-		pass
-	pass
-
-class IASingleSelectCell extends  IASelectCell:
-	var selected_cell : Vector2i
-	
+	signal cell_selected(cell : Vector2i)
 	func Activate() -> void:
-		selected_cell = focused_cell
 		super.Activate()
+		cell_selected.emit(focused_cell)
 		pass
 	pass

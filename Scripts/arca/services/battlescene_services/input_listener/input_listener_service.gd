@@ -48,12 +48,12 @@ func unfocus_cell() -> void:
 		(current_input as InputAction.IAFocusCell).UnfocusCell()
 	pass
 
-func FocusCell() -> InputAction.IASingleSelectCell:
+func FocusCell() -> InputAction.IAFocusCell:
 	return change_action(InputAction.IAFocusCell.new())
 	pass
 
-func SelectCell() -> InputAction.IASingleSelectCell:
-	return change_action(InputAction.IASingleSelectCell.new())
+func SelectCell() -> InputAction.IASelectCell:
+	return change_action(InputAction.IASelectCell.new())
 	pass
 
 func change_action(new_action : InputAction) -> InputAction:

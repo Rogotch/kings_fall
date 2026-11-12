@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ChangeRoundResource" format=3 uid="uid://drrxmcgw8d1hm"]
+
+[ext_resource type="Script" uid="uid://bmwrgu6fb22i8" path="res://Scripts/UI/entities/round_change_resource.gd" id="1_fphud"]
+
+[resource]
+script = ExtResource("1_fphud")
+position_ratio_target = Vector2(0, 3)
+scale_target = Vector2(1.5, 1.5)
+scale_change_target = Vector2(1.8, 1.8)
+tw_time_position_ratio_in = 1.0
+tw_time_scale_in = 0.5
+tw_time_scale_change_mid_additional_delay = 0.1
+tw_time_scale_change_mid = 0.4
+tw_time_change_round_num_delay = 0.7
+tw_time_position_ratio_out = 0.5
+tw_time_scale_out = 0.5
+tw_time_before_out_delay = 0.4
+tw_ease_in = 1
+tw_ease_out = 1
+tw_ease_scale_change_mid = 2
+tw_ease_rotation = 1
+tw_trans_in = 10
+tw_trans_out = 1
+tw_trans_scale_change_mid = 5
+tw_trans_rotation = 5
+metadata/_custom_type_script = "uid://bmwrgu6fb22i8"

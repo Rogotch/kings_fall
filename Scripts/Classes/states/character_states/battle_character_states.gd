@@ -11,20 +11,15 @@ var parameters     : CharacterParameters   :
 	get: 
 		return null if character == null else character.parameters
 
-signal entered
-signal exited
-
 func _init(_state_machine : CharacterStateMachine, owner_character : BaseCharacter) -> void:
 	state_machine = _state_machine
 	character = owner_character
 	pass
 
 func enter() -> void:
-	entered.emit()
 	pass
 
 func exit() -> void:
-	exited.emit()
 	pass
 
 func update() -> void: pass
@@ -32,11 +27,8 @@ func update() -> void: pass
 
 
 class Idle   extends BaseCharacterState:
-	var MoveSystem : BattleMoveSystem
-	
-	func _init(_state_machine : CharacterStateMachine, owner_character : BaseCharacter, move_system : BattleMoveSystem) -> void:
+	func _init(_state_machine : CharacterStateMachine, owner_character : BaseCharacter) -> void:
 		super._init(_state_machine, owner_character)
-		MoveSystem = move_system
 		pass
 	
 	func enter()  -> void:
