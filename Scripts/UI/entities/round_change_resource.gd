@@ -1,3 +1,4 @@
+@icon("uid://cidc4b02qc6ej")
 @tool
 class_name ChangeRoundResource
 extends Resource

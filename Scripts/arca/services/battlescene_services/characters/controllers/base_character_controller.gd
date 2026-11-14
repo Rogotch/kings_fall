@@ -1,6 +1,9 @@
 class_name BaseCharacterController
 extends RefCounted
 
+#enum CHARACTER_TEAM     {NONE, OBSTACLE, PLAYER, ALLY, ENEMY}
+#enum CHARACTER_RELATION {ANY, OBSTACLE, ALLY, ENEMY}
+
 var body          : BaseCharacter
 #var MoveSystem   : BattleMoveSystem
 var state_machine : CharacterStateMachine

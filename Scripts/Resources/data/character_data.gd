@@ -1,3 +1,4 @@
+@icon("uid://b2q857gtvrjlu")
 class_name CharacterData
 extends Resource
 

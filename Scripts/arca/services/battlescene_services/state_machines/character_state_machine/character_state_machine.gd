@@ -50,8 +50,8 @@ func Move(to_cell : Vector2i) -> void:
 	set_state(state)
 	pass
 
-func Hit(value : int) -> void:
-	var state : BaseCharacterState.Hurt   = BaseCharacterState.Hurt  .new(self, character_owner, value)
+func Hurt(damage : DamageContext) -> void:
+	var state : BaseCharacterState.Hurt   = BaseCharacterState.Hurt  .new(self, character_owner, damage)
 	set_state(state)
 	pass
 

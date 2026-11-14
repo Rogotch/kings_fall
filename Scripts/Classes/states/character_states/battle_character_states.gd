@@ -24,8 +24,6 @@ func exit() -> void:
 
 func update() -> void: pass
 
-
-
 class Idle   extends BaseCharacterState:
 	func _init(_state_machine : CharacterStateMachine, owner_character : BaseCharacter) -> void:
 		super._init(_state_machine, owner_character)
@@ -86,7 +84,7 @@ class Move                   extends BaseCharacterState:
 			if run_flag else 
 			BaseCharacterVisual.ANIMATION_STATE.WALK)
 		move_service.move_ended.connect(state_machine.Idle, CONNECT_ONE_SHOT)
-		move_service.move_alongside_path(target, parameters.get_speed())
+		move_service.move_alongside_path(target, parameters.GetSpeed())
 		pass
 	
 	func exit()   -> void:
@@ -110,16 +108,24 @@ class Move                   extends BaseCharacterState:
 	#pass
 
 class Hurt    extends BaseCharacterState:
-	
+	var damage : DamageContext
 	func _init(
 			_state_machine  : CharacterStateMachine, 
 			owner_character : BaseCharacter, 
-			damage          : int) -> void:
+			incoming_damage : DamageContext
+		) -> void:
 		super._init(_state_machine, owner_character)
+		damage = incoming_damage
 		pass
 	
 	func enter()  -> void:
 		visual.SetState(BaseCharacterVisual.ANIMATION_STATE.HURT)
+		parameters.Hurt(damage)
+		# TODO Добавить реакцию?
+		if parameters.IsAlive():
+			state_machine.Idle()
+		else:
+			state_machine.Death()
 		pass
 	
 	func exit()   -> void:	pass

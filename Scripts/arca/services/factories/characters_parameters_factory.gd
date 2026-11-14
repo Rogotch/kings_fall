@@ -9,7 +9,7 @@ func _init(arca_container: ArcaContainer) -> void:
 
 func create(character : BaseCharacter) -> CharacterParameters:
 	var params : CharacterParameters = container.resolve(CharacterParameters)
-	params.setup_by_data(character.data)
+	params.SetUpByData(character.data)
 	character.parameters = params
 	#var movement : BattleCharacterMoveService = container.resolve(BattleCharacterMoveService)
 	#container.inject(movement, [character])

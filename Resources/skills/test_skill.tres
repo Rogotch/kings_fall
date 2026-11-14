@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="BaseSkill" format=3 uid="uid://dux6o0i5iyo75"]
+
+[ext_resource type="Script" uid="uid://byfq1peo832la" path="res://Scripts/Resources/skills/mechanics/_base_mechanic.gd" id="1_pdang"]
+[ext_resource type="Script" uid="uid://of26tspsi3f3" path="res://Scripts/Resources/skills/_base_skill.gd" id="2_iux44"]
+[ext_resource type="Script" uid="uid://c2sj3noml4raw" path="res://Scripts/Resources/skills/mechanics/damage_mechanics.gd" id="2_ls6hx"]
+[ext_resource type="Script" uid="uid://b6jw2lxuuyly8" path="res://Scripts/Resources/skills/target_type/character.gd" id="3_ehrb4"]
+[ext_resource type="Script" uid="uid://dl3r6xhlctlm" path="res://Scripts/Resources/skills/range/distance.gd" id="3_mrj86"]
+[ext_resource type="Script" uid="uid://hrybwmexixjm" path="res://Scripts/Resources/skills/targeting/targeting_single_cell.gd" id="6_m8seu"]
+
+[sub_resource type="Resource" id="Resource_udqac"]
+script = ExtResource("2_ls6hx")
+damage = 1
+metadata/_custom_type_script = "uid://c2sj3noml4raw"
+
+[sub_resource type="Resource" id="Resource_i0miu"]
+script = ExtResource("3_ehrb4")
+metadata/_custom_type_script = "uid://b6jw2lxuuyly8"
+
+[sub_resource type="Resource" id="Resource_iux44"]
+script = ExtResource("3_mrj86")
+target_type = SubResource("Resource_i0miu")
+metadata/_custom_type_script = "uid://dl3r6xhlctlm"
+
+[sub_resource type="Resource" id="Resource_pdang"]
+script = ExtResource("3_ehrb4")
+metadata/_custom_type_script = "uid://b6jw2lxuuyly8"
+
+[sub_resource type="Resource" id="Resource_frlyp"]
+script = ExtResource("6_m8seu")
+target_type = SubResource("Resource_pdang")
+metadata/_custom_type_script = "uid://hrybwmexixjm"
+
+[resource]
+script = ExtResource("2_iux44")
+skill_name = "test_skill"
+skill_range = SubResource("Resource_iux44")
+targeting = SubResource("Resource_frlyp")
+mechanics = Array[ExtResource("1_pdang")]([SubResource("Resource_udqac")])
+metadata/_custom_type_script = "uid://of26tspsi3f3"

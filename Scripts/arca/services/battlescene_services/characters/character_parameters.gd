@@ -5,25 +5,41 @@ var health     : int = 5
 var health_max : int = 5
 var speed      : int = 3
 var initiative : int = 0
+var died       : bool
 
-func setup_by_data(data : CharacterData) -> void:
+func SetUpByData(data : CharacterData) -> void:
 	health_max = data.max_health
 	speed      = data.speed
 	health     = health_max
 	pass
 
-func hurt(value : int) -> void:
-	health -= value
+func Hurt(damage : DamageContext) -> void:
+	change_health(-damage.value)
 	pass
 
-func death() -> void:
-	
+func Death() -> void:
+	health = 0
+	died   = true
 	pass
 
-func get_speed() -> int:
+func GetSpeed() -> int:
 	return speed
 	pass
 
-func get_initiative() -> int:
+func GetInitiative() -> int:
 	return initiative
+	pass
+
+func IsAlive() -> bool:
+	return health > 0
+	pass
+
+func change_health(value : int) -> void:
+	health += value
+	check_death()
+	pass
+
+func check_death() -> void:
+	if health <= 0:
+		Death()
 	pass
