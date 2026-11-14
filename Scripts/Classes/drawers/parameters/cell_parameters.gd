@@ -8,9 +8,6 @@ enum CELL_DRAWERS {NONE, PROCEDURAL_CELLS_DRAWER}
 @export var cell_color  : Color = Color.CADET_BLUE : set = set_cell_color
 @export var cell_drawer : SingleCellDrawer
 
-@export_storage
-var properties_data : AllPropertiesStorage
-
 func set_cell_color(value : Color) -> void:
 	cell_color = value
 	parameters_changed.emit()
