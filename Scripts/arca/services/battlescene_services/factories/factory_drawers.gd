@@ -1,4 +1,4 @@
-class_name DrawersFactory
+class_name FactoryDrawers
 extends RefCounted
 
 var container   : ArcaContainer

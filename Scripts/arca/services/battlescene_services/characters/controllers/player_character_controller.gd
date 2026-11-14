@@ -6,10 +6,10 @@ extends BaseCharacterController
 
 static func get_inject_dependencies() -> Array:
 	return [
-		CharactersSMF,
+		FactoryCharactersSM,
 	]
 
-#func create_state_machine(state_machines_factory : CharactersSMF) -> void:
+#func create_state_machine(state_machines_factory : FactoryCharactersSM) -> void:
 	#state_machine = state_machines_factory.create_player_sm(body)
 	#pass
 

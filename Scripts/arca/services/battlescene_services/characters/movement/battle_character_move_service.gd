@@ -1,6 +1,9 @@
 class_name BattleCharacterMoveService
 extends RefCounted
 
+# TODO Tests:
+	# Set on cell
+
 signal move_started
 signal move_ended
 signal steped_on_cell(Vector2i)

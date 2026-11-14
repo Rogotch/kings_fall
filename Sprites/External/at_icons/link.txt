@@ -1,0 +1,3 @@
+"Icons by Voxy, in-editor picker by SuperDuperSword and Voxy"
+MIT
+https://voxybuns.itch.io/at-icons

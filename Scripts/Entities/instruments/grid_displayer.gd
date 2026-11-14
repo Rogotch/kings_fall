@@ -14,14 +14,14 @@ var cell_for_drawing       : Vector2i
 
 static func get_inject_dependencies() -> Array:
 	return [
-		DrawersFactory, 
+		FactoryDrawers, 
 		BattleScenePathes,
 		BattleSceneParameters,
 		]
 	pass
 
 func inject_dependencies(
-		d_factory  : DrawersFactory,
+		d_factory  : FactoryDrawers,
 		pathes     : BattleScenePathes,
 		parameters : BattleSceneParameters,
 		) -> void:
@@ -29,7 +29,7 @@ func inject_dependencies(
 	field_displayer  = d_factory.create_field_drawer(
 									parameters.field_drawer_parameters, 
 									parameters.battle_field_parameters,
-									DrawersFactory.FIELD_TYPE.CELLS)
+									FactoryDrawers.FIELD_TYPE.CELLS)
 	tile_layer       = pathes.main_map
 	pass
 

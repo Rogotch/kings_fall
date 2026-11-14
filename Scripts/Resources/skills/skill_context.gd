@@ -21,6 +21,14 @@ func _init(
 	move_system = battle_move_system
 	pass
 
+static func get_inject_dependencies() -> Array:
+	return []
+
+func inject_dependencies(character : BaseCharacter) -> void:
+	owner          = character
+	owner_position = character.move_service.map_position
+	pass
+
 func FilterAffectedCells(filter_method : Callable) -> void:
 	affected_cells = affected_cells.filter(filter_method)
 	pass

@@ -58,7 +58,7 @@ func erase_character_from_cell(cell : Vector2i) -> void:
 func change_character_cell(from_cell : Vector2i, to_cell : Vector2i) -> void:
 	var character : BaseCharacter = cells[from_cell]
 	erase_character_from_cell(from_cell)
-	set_character_on_cell(character.body, to_cell)
+	set_character_on_cell(character, to_cell)
 	pass
 
 func can_move_to_point(from_cell : Vector2i, to_cell : Vector2i) -> bool:

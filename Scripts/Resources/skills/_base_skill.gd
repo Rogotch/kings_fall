@@ -10,6 +10,7 @@ extends Resource
 # TODO mechanics - когда получили все клетки, по которым должна пройти активация, активируем механику неа неё
 
 @export var skill_name  : String
+@export var cooldown    : int
 @export var skill_range : SkillRangeBase
 @export var targeting   : TargetingBaseSkill
 @export var mechanics   : Array[BaseSkillMechanic]

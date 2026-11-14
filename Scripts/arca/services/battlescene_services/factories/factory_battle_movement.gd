@@ -1,4 +1,4 @@
-class_name BattleMovementFactory
+class_name FactoryBattleMovement
 extends RefCounted
 
 var container   : ArcaContainer
@@ -7,7 +7,7 @@ func _init(arca_container: ArcaContainer) -> void:
 	container = arca_container
 	pass
 
-func create(character : BaseCharacter) -> BattleCharacterMoveService:
+func Create(character : BaseCharacter) -> BattleCharacterMoveService:
 	var movement : TweenMoveService = container.resolve(TweenMoveService)
 	#var movement : BattleCharacterMoveService = container.resolve(BattleCharacterMoveService)
 	container.inject(movement, [character])

@@ -1,4 +1,4 @@
-class_name CharacterParametersFactory
+class_name FactoryCharacterParameters
 extends RefCounted
 
 var container   : ArcaContainer
@@ -7,7 +7,7 @@ func _init(arca_container: ArcaContainer) -> void:
 	container = arca_container
 	pass
 
-func create(character : BaseCharacter) -> CharacterParameters:
+func Create(character : BaseCharacter) -> CharacterParameters:
 	var params : CharacterParameters = container.resolve(CharacterParameters)
 	params.SetUpByData(character.data)
 	character.parameters = params

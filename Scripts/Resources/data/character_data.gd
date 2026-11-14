@@ -8,3 +8,5 @@ extends Resource
 @export var max_health     : int
 @export var speed          : int
 @export var start_position : Vector2i
+
+@export var base_skill     : BaseSkill

@@ -77,13 +77,12 @@ mouse_filter = 2
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "ROUND [color=fb5655]10[/color]"
+text = "СХВАТКА!"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
 script = ExtResource("4_oop0j")
 change_num_res = ExtResource("3_oop0j")
-round_num = 10
 special_color = Color(0.98565537, 0.33642283, 0.33230275, 1)
 
 [node name="particles" type="Node2D" parent="MarginContainer/round_label" unique_id=1518279126]

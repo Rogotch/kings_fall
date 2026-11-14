@@ -1,4 +1,4 @@
-class_name VisualFactory
+class_name FactoryVisual
 extends RefCounted
 
 func load_visual_node(character : BaseCharacter) -> BaseCharacterVisual:

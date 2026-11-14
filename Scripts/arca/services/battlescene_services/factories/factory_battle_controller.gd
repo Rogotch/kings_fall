@@ -1,4 +1,4 @@
-class_name BattleControllersFactory
+class_name FactoryBattleControllers
 extends RefCounted
 
 var container   : ArcaContainer
@@ -7,7 +7,7 @@ func _init(arca_container: ArcaContainer) -> void:
 	container = arca_container
 	pass
 
-func create(character : BaseCharacter, player : bool) -> BaseCharacterController:
+func Create(character : BaseCharacter, player : bool) -> BaseCharacterController:
 	var controller : BaseCharacterController
 	
 	#var listener   : InputListener = container.resolve(InputListener)
