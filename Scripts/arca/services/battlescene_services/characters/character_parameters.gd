@@ -1,6 +1,8 @@
 extends RefCounted
 class_name CharacterParameters
 
+signal character_died
+
 var health     : int = 5
 var health_max : int = 5
 var speed      : int = 3
@@ -20,6 +22,7 @@ func Hurt(damage : DamageContext) -> void:
 func Death() -> void:
 	health = 0
 	died   = true
+	character_died.emit()
 	pass
 
 func GetSpeed() -> int:

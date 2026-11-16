@@ -6,6 +6,7 @@ signal parameters_changed
 
 @export var field_size         : Vector2i                       : set = set_field_size
 @export var field_start_cell   : Vector2i = Vector2i.ZERO       : set = set_field_start_cell
+@export var draw_order         : Array[CellsDrawer.CELL_TYPE] 
 
 func field_has_point(point : Vector2i) -> bool:
 	return get_filled_rect().has_point(point)

@@ -7,6 +7,7 @@ var owner               : BaseCharacter
 var owner_position      : Vector2i
 
 var selected_cell       : Vector2i
+var focused_cells       : Array[Vector2i]
 var affected_cells      : Array[Vector2i]
 var affected_characters : Array[BaseCharacter]
 

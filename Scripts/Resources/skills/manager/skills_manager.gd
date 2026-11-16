@@ -4,7 +4,7 @@ extends RefCounted
 var factory    : FactoryWarpedSkills
 var character  : BaseCharacter
 
-var base_skill : BaseSkill
+var base_skill : WarpedCharacterSkill
 
 static func get_dependencies() -> Array:
 	return 	[
@@ -24,6 +24,11 @@ func inject_dependencies(owner_character : BaseCharacter) -> void:
 	character = owner_character
 	pass
 
+func SetBaseSkill(skill : BaseSkill) -> void:
+	if skill == null:
+		return
+	base_skill = factory.Create(skill, character)
+	pass
+
 func AddSkill(skill : BaseSkill) -> void:
-	
 	pass

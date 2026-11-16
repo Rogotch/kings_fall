@@ -4,8 +4,13 @@ extends Drawer
 enum CELL_TYPE {
 		NONE,
 		MOVE,
+		MOVE_ZONE,
 		ATTACK,
+		ATTACK_FOCUS,
+		ATTACK_ZONE,
 	}
+
+var battlefield_parameters : BattleFieldParameters
 
 var cells_drawer_parameters : CellsDrawerParameters :
 	get:
@@ -19,20 +24,28 @@ static func get_inject_dependencies() -> Array:
 	return 	[
 				BattleScenePathes,
 				MapDisplayer,
+				BattleFieldParameters,
 			]
 
 func inject_dependencies(
-		pathes_node      : BattleScenePathes,
-		displayer        : MapDisplayer,
-		params           : CellsDrawerParameters,
+		pathes_node        : BattleScenePathes,
+		displayer          : MapDisplayer,
+		battlefield_params : BattleFieldParameters,
+		params             : CellsDrawerParameters,
 		) -> void:
-	set_up(pathes_node.main_map, displayer, params)
+	set_up(pathes_node.main_map, displayer, params, battlefield_params)
 	pass
 
-func set_up(_layer : TileMapLayer, _drawer : Node2D, params : CellsDrawerParameters) -> void:
-	parameters = params
-	layer      = _layer
-	drawer     = _drawer
+func set_up(
+		_layer             : TileMapLayer, 
+		_drawer            : Node2D, 
+		params             : CellsDrawerParameters, 
+		battlefield_params : BattleFieldParameters,
+	) -> void:
+	parameters             = params
+	layer                  = _layer
+	drawer                 = _drawer
+	battlefield_parameters = battlefield_params
 	update_parameters()
 	pass
 
@@ -53,7 +66,9 @@ func ClearDrawingCellsByType(type : CELL_TYPE) -> void:
 	pass
 
 func draw() -> void:
-	for type in drawing_cells:
+	for type in battlefield_parameters.draw_order:
+		if !drawing_cells.has(type):
+			continue
 		draw_cells_arr(drawing_cells[type], type)
 	pass
 

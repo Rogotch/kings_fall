@@ -6,17 +6,18 @@
 [ext_resource type="Resource" uid="uid://bd3pmtayc82u5" path="res://Resources/characters/test_character.tres" id="2_ak5v8"]
 [ext_resource type="Script" uid="uid://dv6qcg5b38evj" path="res://Scripts/arca/services/battlescene_services/battle_scene_pathes.gd" id="2_hb2xm"]
 [ext_resource type="Script" uid="uid://cxtohpgxebqib" path="res://Scripts/arca/services/battlescene_services/battle_scene_parameters.gd" id="5_x033f"]
-[ext_resource type="Script" uid="uid://donhigb155mw8" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cells_shape/isometric_cell.gd" id="6_4blnk"]
+[ext_resource type="Script" uid="uid://donhigb155mw8" path="res://Scripts/Classes/drawers/single_cell_drawers/cells_shape/isometric_cell.gd" id="6_4blnk"]
 [ext_resource type="Script" uid="uid://b08oh02spmr2w" path="res://Scripts/Resources/data/squad_data.gd" id="6_dhrl2"]
 [ext_resource type="Script" uid="uid://br2p213qnwtxc" path="res://Scripts/arca/services/battlescene_services/battle_field_parameters.gd" id="6_tnimv"]
-[ext_resource type="Script" uid="uid://cqxwgmie8rqv3" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/procedural_cell_drawer.gd" id="7_4blnk"]
+[ext_resource type="Script" uid="uid://cqxwgmie8rqv3" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_drawer_procedural.gd" id="7_4blnk"]
 [ext_resource type="Script" uid="uid://doabrw0qfs24h" path="res://Scripts/Resources/data/character_data.gd" id="7_i0miu"]
-[ext_resource type="Script" uid="uid://bavhq7vw1yinw" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cell_draw_method/cell_border_draw.gd" id="7_tnimv"]
+[ext_resource type="Script" uid="uid://bavhq7vw1yinw" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_draw_method/cell_border_draw.gd" id="7_tnimv"]
 [ext_resource type="Script" uid="uid://bc1li7dcojoh2" path="res://Scripts/Classes/drawers/parameters/cell_procedural_parameters.gd" id="8_tnimv"]
 [ext_resource type="Script" uid="uid://dga2ya6rgxx7c" path="res://Scripts/Classes/drawers/parameters/cell_parameters.gd" id="9_4qg1e"]
 [ext_resource type="Script" uid="uid://u32mo4h08uhp" path="res://Scripts/Classes/drawers/parameters/cells_drawer_parameters.gd" id="10_040rt"]
 [ext_resource type="Script" uid="uid://d13rsh4ghlbif" path="res://Scripts/Classes/drawers/parameters/field_cells_drawer_parameters.gd" id="11_dhrl2"]
-[ext_resource type="Script" uid="uid://l7hetokfme25" path="res://Scripts/Classes/drawers/parameters/single_cell_drawers/cell_draw_method/cell_full_draw.gd" id="14_4qg1e"]
+[ext_resource type="Script" uid="uid://l7hetokfme25" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_draw_method/cell_full_draw.gd" id="14_4qg1e"]
+[ext_resource type="Texture2D" uid="uid://cr7p6ia0acwlr" path="res://Sprites/mine/64_32_isometric_cells.png" id="18_i0miu"]
 
 [sub_resource type="Resource" id="Resource_6bfml"]
 script = ExtResource("6_dhrl2")
@@ -31,6 +32,7 @@ metadata/_custom_type_script = "uid://b08oh02spmr2w"
 [sub_resource type="Resource" id="Resource_tnimv"]
 script = ExtResource("6_tnimv")
 field_size = Vector2i(3, 5)
+draw_order = Array[int]([3, 2, 1, 0])
 metadata/_custom_type_script = "uid://br2p213qnwtxc"
 
 [sub_resource type="Resource" id="Resource_nb8fy"]
@@ -106,18 +108,242 @@ cell_color = Color(0.2907899, 0.5910344, 0.86265224, 1)
 cell_drawer = SubResource("Resource_4qg1e")
 metadata/_custom_type_script = "uid://bc1li7dcojoh2"
 
+[sub_resource type="Resource" id="Resource_rxwj1"]
+script = ExtResource("6_4blnk")
+metadata/_custom_type_script = "uid://donhigb155mw8"
+
+[sub_resource type="Resource" id="Resource_p6hch"]
+script = ExtResource("14_4qg1e")
+metadata/_custom_type_script = "uid://l7hetokfme25"
+
+[sub_resource type="Resource" id="Resource_moal7"]
+script = ExtResource("7_4blnk")
+cell_shape = SubResource("Resource_rxwj1")
+draw_method = SubResource("Resource_p6hch")
+metadata/_custom_type_script = "uid://cqxwgmie8rqv3"
+
+[sub_resource type="Resource" id="Resource_0xgx2"]
+script = ExtResource("8_tnimv")
+cell_size_overrided = Vector2i(30, 15)
+cell_color = Color(0.67173636, 0.20251638, 0.2260246, 1)
+cell_drawer = SubResource("Resource_moal7")
+metadata/_custom_type_script = "uid://bc1li7dcojoh2"
+
+[sub_resource type="Resource" id="Resource_soh27"]
+script = ExtResource("6_4blnk")
+metadata/_custom_type_script = "uid://donhigb155mw8"
+
+[sub_resource type="Resource" id="Resource_733rx"]
+script = ExtResource("14_4qg1e")
+metadata/_custom_type_script = "uid://l7hetokfme25"
+
+[sub_resource type="Resource" id="Resource_kmsc6"]
+script = ExtResource("7_4blnk")
+cell_shape = SubResource("Resource_soh27")
+draw_method = SubResource("Resource_733rx")
+metadata/_custom_type_script = "uid://cqxwgmie8rqv3"
+
+[sub_resource type="Resource" id="Resource_ajhoy"]
+script = ExtResource("8_tnimv")
+cell_size_overrided = Vector2i(32, 16)
+cell_color = Color(0.6293016, 0.26806036, 0.11900783, 1)
+cell_drawer = SubResource("Resource_kmsc6")
+metadata/_custom_type_script = "uid://bc1li7dcojoh2"
+
 [sub_resource type="Resource" id="Resource_ex51q"]
 script = ExtResource("10_040rt")
 base_variant = SubResource("Resource_gkupu")
 cells_variants = Dictionary[int, ExtResource("9_4qg1e")]({
-1: SubResource("Resource_i0miu")
+1: SubResource("Resource_i0miu"),
+2: SubResource("Resource_0xgx2"),
+3: SubResource("Resource_ajhoy")
 })
 metadata/_custom_type_script = "uid://u32mo4h08uhp"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i0miu"]
+texture = ExtResource("18_i0miu")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/top_right_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/top_left_side = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/terrains_peering_bit/bottom_left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/bottom_right_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/top_left_side = 0
+1:1/0/terrains_peering_bit/top_right_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_left_side = 0
+2:1/0/terrains_peering_bit/top_left_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/bottom_right_side = 0
+3:1/0/terrains_peering_bit/bottom_left_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/bottom_right_side = 0
+0:2/0/terrains_peering_bit/top_right_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/bottom_left_side = 0
+1:2/0/terrains_peering_bit/top_right_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/bottom_right_side = 0
+2:2/0/terrains_peering_bit/top_left_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/terrains_peering_bit/bottom_right_side = 0
+3:2/0/terrains_peering_bit/top_left_side = 0
+3:2/0/terrains_peering_bit/top_right_side = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/terrain = 0
+0:3/0/terrains_peering_bit/bottom_right_side = 0
+0:3/0/terrains_peering_bit/bottom_left_side = 0
+0:3/0/terrains_peering_bit/top_left_side = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 0
+1:3/0/terrains_peering_bit/bottom_right_side = 0
+1:3/0/terrains_peering_bit/bottom_left_side = 0
+1:3/0/terrains_peering_bit/top_right_side = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 0
+2:3/0/terrains_peering_bit/bottom_left_side = 0
+2:3/0/terrains_peering_bit/top_left_side = 0
+2:3/0/terrains_peering_bit/top_right_side = 0
+3:3/0 = 0
+3:3/0/terrain_set = 0
+3:3/0/terrain = 0
+3:3/0/terrains_peering_bit/bottom_right_side = 0
+3:3/0/terrains_peering_bit/bottom_left_side = 0
+3:3/0/terrains_peering_bit/top_left_side = 0
+3:3/0/terrains_peering_bit/top_right_side = 0
 
 [sub_resource type="TileSet" id="TileSet_lxrbl"]
 tile_shape = 1
 tile_layout = 5
 tile_size = Vector2i(64, 32)
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "zones"
+terrain_set_0/terrain_0/color = Color(0.15154782, 0.40739614, 0.5873702, 1)
+sources/1 = SubResource("TileSetAtlasSource_i0miu")
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6bfml"]
+texture = ExtResource("18_i0miu")
+texture_region_size = Vector2i(64, 32)
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/terrain = 0
+1:0/0/terrains_peering_bit/top_right_side = 0
+2:0/0 = 0
+2:0/0/terrain_set = 0
+2:0/0/terrain = 0
+2:0/0/terrains_peering_bit/top_left_side = 0
+3:0/0 = 0
+3:0/0/terrain_set = 0
+3:0/0/terrain = 0
+3:0/0/terrains_peering_bit/bottom_left_side = 0
+0:1/0 = 0
+0:1/0/terrain_set = 0
+0:1/0/terrain = 0
+0:1/0/terrains_peering_bit/bottom_right_side = 0
+1:1/0 = 0
+1:1/0/terrain_set = 0
+1:1/0/terrain = 0
+1:1/0/terrains_peering_bit/top_left_side = 0
+1:1/0/terrains_peering_bit/top_right_side = 0
+2:1/0 = 0
+2:1/0/terrain_set = 0
+2:1/0/terrain = 0
+2:1/0/terrains_peering_bit/bottom_left_side = 0
+2:1/0/terrains_peering_bit/top_left_side = 0
+3:1/0 = 0
+3:1/0/terrain_set = 0
+3:1/0/terrain = 0
+3:1/0/terrains_peering_bit/bottom_right_side = 0
+3:1/0/terrains_peering_bit/bottom_left_side = 0
+0:2/0 = 0
+0:2/0/terrain_set = 0
+0:2/0/terrain = 0
+0:2/0/terrains_peering_bit/bottom_right_side = 0
+0:2/0/terrains_peering_bit/top_right_side = 0
+1:2/0 = 0
+1:2/0/terrain_set = 0
+1:2/0/terrain = 0
+1:2/0/terrains_peering_bit/bottom_left_side = 0
+1:2/0/terrains_peering_bit/top_right_side = 0
+2:2/0 = 0
+2:2/0/terrain_set = 0
+2:2/0/terrain = 0
+2:2/0/terrains_peering_bit/bottom_right_side = 0
+2:2/0/terrains_peering_bit/top_left_side = 0
+3:2/0 = 0
+3:2/0/terrain_set = 0
+3:2/0/terrain = 0
+3:2/0/terrains_peering_bit/bottom_right_side = 0
+3:2/0/terrains_peering_bit/top_left_side = 0
+3:2/0/terrains_peering_bit/top_right_side = 0
+0:3/0 = 0
+0:3/0/terrain_set = 0
+0:3/0/terrain = 0
+0:3/0/terrains_peering_bit/bottom_right_side = 0
+0:3/0/terrains_peering_bit/bottom_left_side = 0
+0:3/0/terrains_peering_bit/top_left_side = 0
+1:3/0 = 0
+1:3/0/terrain_set = 0
+1:3/0/terrain = 0
+1:3/0/terrains_peering_bit/bottom_right_side = 0
+1:3/0/terrains_peering_bit/bottom_left_side = 0
+1:3/0/terrains_peering_bit/top_right_side = 0
+2:3/0 = 0
+2:3/0/terrain_set = 0
+2:3/0/terrain = 0
+2:3/0/terrains_peering_bit/bottom_left_side = 0
+2:3/0/terrains_peering_bit/top_left_side = 0
+2:3/0/terrains_peering_bit/top_right_side = 0
+3:3/0 = 0
+3:3/0/terrain_set = 0
+3:3/0/terrain = 0
+3:3/0/terrains_peering_bit/bottom_right_side = 0
+3:3/0/terrains_peering_bit/bottom_left_side = 0
+3:3/0/terrains_peering_bit/top_left_side = 0
+3:3/0/terrains_peering_bit/top_right_side = 0
+
+[sub_resource type="TileSet" id="TileSet_egjww"]
+tile_shape = 1
+tile_size = Vector2i(64, 32)
+terrain_set_0/mode = 2
+terrain_set_0/terrain_0/name = "zone"
+terrain_set_0/terrain_0/color = Color(0.26101863, 0.37275782, 0.6412707, 1)
+sources/0 = SubResource("TileSetAtlasSource_6bfml")
 
 [node name="test_scene" type="Node2D" unique_id=778120956 node_paths=PackedStringArray("battle_context")]
 script = ExtResource("1_ak5v8")
@@ -126,14 +352,14 @@ battle_context = NodePath("Context")
 [node name="Context" type="Node" parent="." unique_id=1886788445 node_paths=PackedStringArray("scene_pathes", "displayer", "scene_parameters")]
 script = ExtResource("1_50ct6")
 scene_pathes = NodePath("../Pathes")
-displayer = NodePath("../TileMapLayer/grid_displayer")
+displayer = NodePath("../main_map/grid_displayer")
 scene_parameters = NodePath("../Parameters")
 installers_path = Array[String](["uid://l8b0aaa0ml1i"])
 metadata/_custom_type_script = "uid://l4sx0duq733s"
 
 [node name="Pathes" type="Node" parent="." unique_id=559637497 node_paths=PackedStringArray("main_map", "characters_node")]
 script = ExtResource("2_hb2xm")
-main_map = NodePath("../TileMapLayer")
+main_map = NodePath("../main_map")
 characters_node = NodePath("../characters")
 metadata/_custom_type_script = "uid://dv6qcg5b38evj"
 
@@ -144,14 +370,17 @@ squad_enemy = SubResource("Resource_0g4ye")
 battle_field_parameters = SubResource("Resource_tnimv")
 field_drawer_parameters = SubResource("Resource_1l8nr")
 cells_drawer_parameters = SubResource("Resource_ex51q")
-grid_displayer = NodePath("../TileMapLayer/grid_displayer")
+grid_displayer = NodePath("../main_map/grid_displayer")
 metadata/_custom_type_script = "uid://cxtohpgxebqib"
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=977545984]
+[node name="main_map" type="TileMapLayer" parent="." unique_id=977545984]
 tile_set = SubResource("TileSet_lxrbl")
 
-[node name="grid_displayer" type="Node2D" parent="TileMapLayer" unique_id=400164686]
+[node name="grid_displayer" type="Node2D" parent="main_map" unique_id=400164686]
 script = ExtResource("1_3dogw")
+
+[node name="focus_zones_map" type="TileMapLayer" parent="main_map" unique_id=1587445370]
+tile_set = SubResource("TileSet_egjww")
 
 [node name="characters" type="Node2D" parent="." unique_id=1717323850]
 y_sort_enabled = true

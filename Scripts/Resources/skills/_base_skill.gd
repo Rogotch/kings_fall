@@ -15,12 +15,15 @@ extends Resource
 @export var targeting   : TargetingBaseSkill
 @export var mechanics   : Array[BaseSkillMechanic]
 
-func CanActivate(context : SkillContext) -> bool:
+func InRange(context : SkillContext) -> bool:
 	return skill_range.CanActivate(context)
 	pass
 
-func Activate(context : SkillContext) -> void:
+func SetFocusedCells(context : SkillContext) -> void:
 	targeting.ModifyContext(context)
+	pass
+
+func Activate(context : SkillContext) -> void:
 	for mechanic in mechanics:
 		mechanic.Activate(context)
 	pass

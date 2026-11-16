@@ -6,6 +6,7 @@ var battle_map              : TileMapLayer
 var cells_displayer         : CellsDrawer
 var battle_field_parameters : BattleFieldParameters
 var focused_cell            : Vector2i
+var focused_character       : BaseCharacter
 var input_enabled           : bool = true
 
 var current_input           : InputAction
@@ -38,9 +39,10 @@ func physics_tick(delta: float) -> void:
 			unfocus_cell()
 	pass
 
+#region Cells focus
 func focus_cell(cell : Vector2i) -> void:
 	if  current_input != null && current_input is InputAction.IAFocusCell:
-		(current_input as InputAction.IAFocusCell).FocusCell(focused_cell)
+		(current_input as InputAction.IAFocusCell).FocusCell(cell)
 	pass
 
 func unfocus_cell() -> void:
@@ -55,6 +57,22 @@ func FocusCell() -> InputAction.IAFocusCell:
 func SelectCell() -> InputAction.IASelectCell:
 	return change_action(InputAction.IASelectCell.new())
 	pass
+#endregion
+
+#region CHracter focus
+func FocusCharacter(character : BaseCharacter) -> void:
+	if focused_character != character:
+		UnfocusCharacter(focused_character)
+	focused_character = character
+	if  focused_character != null and focused_character.parameters.IsAlive():
+		focus_cell(focused_character.move_service.map_position)
+	pass
+
+func UnfocusCharacter(character : BaseCharacter) -> void:
+	if focused_character == character:
+		focused_character = null
+	pass
+#endregion
 
 func change_action(new_action : InputAction) -> InputAction:
 	if current_input != null && current_input != new_action:

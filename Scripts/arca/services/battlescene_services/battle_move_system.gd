@@ -8,7 +8,10 @@ var pathfinding   : AStarGrid2D
 var cells : Dictionary[Vector2i, BaseCharacter]
 
 static func get_dependencies() -> Array:
-	return [BattleScenePathes, BattleSceneParameters]
+	return [
+		BattleScenePathes,
+		BattleSceneParameters
+		]
 
 func _init(pathes: BattleScenePathes, new_params : BattleSceneParameters) -> void:
 	map           = pathes.main_map

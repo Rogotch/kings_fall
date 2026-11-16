@@ -34,7 +34,7 @@ func set_parameters(new_parameters : DrawerParameters) -> void:
 func set_up_cells_drawer(new_drawer : CellsDrawer) -> void:
 	cells_drawer = new_drawer
 	if  cells_drawer != null && field_cells_params != null:
-		cells_drawer.set_up(layer, drawer, field_cells_params.cells_parameters)
+		cells_drawer.set_up(layer, drawer, field_cells_params.cells_parameters, battlefield_parameters)
 	update_parameters()
 	pass
 

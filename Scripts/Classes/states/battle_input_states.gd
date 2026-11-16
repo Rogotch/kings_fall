@@ -134,6 +134,12 @@ class InputCharacterFocus        extends InputFocus:
 
 # Select Cell Single
 class InputSelectCellSingle      extends InputCharacterFocus:
+	var skills_manager  : SkillsManager:
+		set(value):
+			return
+		get:
+			return character.skills_manager
+			
 	var select_cell_action : InputAction.IASelectCell:
 		set(value):
 			return
@@ -157,12 +163,25 @@ class InputSelectCellSingle      extends InputCharacterFocus:
 		input_action.canceled     .disconnect(action_canceled)
 		input_action.cell_selected.disconnect(select_cell)
 		pass
+	
+	func can_use_skill(skill : WarpedCharacterSkill, on_cell : Vector2i) -> bool:
+		return skill != null && skill.CanUse(on_cell)
+		pass
+	
+	func can_move_to_cell(to_cell : Vector2i) -> bool:
+		return move_system.is_cell_free(to_cell) && move_system.can_move_to_point(character.move_service.map_position, to_cell)
+		pass
 	pass
 
 # Select Cell Single - Base (Move and attack)
 class InputSelectCellSingleBase  extends InputSelectCellSingle:
 	func focus_cell(cell : Vector2i)  -> void:
-		if move_system.is_cell_free(cell) && move_system.can_move_to_point(character.move_service.map_position, cell):
+		if   can_use_skill(skills_manager.base_skill, cell):
+			var context : SkillContext = skills_manager.base_skill.FocusCell(cell)
+			cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.ATTACK, Array(context.focused_cells, TYPE_VECTOR2I, "", null))
+		elif can_move_to_cell(cell):
+			if  skills_manager.base_skill != null:
+				skills_manager.base_skill.EndFocus()
 			cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE, Array([cell], TYPE_VECTOR2I, "", null))
 		pass
 	

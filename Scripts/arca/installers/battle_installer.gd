@@ -65,8 +65,6 @@ func install(container: ArcaContainer, ctx) -> void:
 	container.bind(BATTLE_INITIATIVE_SERVICE)    .as_single()
 	container.bind(ALL_CHARACTERS_CONTROLLER)    .as_single()
 	
-	container.bind(PC_INPUT_LISTENER)            .as_single()
-	
 	container.bind(STATE_MACHINE_BATTLE_INPUT)   .as_single()
 	container.bind(STATE_MACHINE_BATLLE_TURN)    .as_single()
 	container.bind(STATE_MACHINE_BATLLE)         .as_single()
@@ -108,6 +106,7 @@ func install(container: ArcaContainer, ctx) -> void:
 	container.bind(FACTORY_BATTLE_CHARACTERS_SM) .as_single(func(c: ArcaContainer): return FACTORY_BATTLE_CHARACTERS_SM  .new(c))
 	container.bind(FACTORY_DRAWERS)              .as_single(func(c: ArcaContainer): return FACTORY_DRAWERS               .new(c))
 	
+	container.bind(PC_INPUT_LISTENER)            .as_single()
 	container.bind(INPUT_LISTENER)               .as_single(func(c: ArcaContainer):
 		var    listener : InputListener
 		#if pc_keyboard_mouse pc_gamepad console

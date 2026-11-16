@@ -12,6 +12,9 @@ var cells_displayer        : CellsDrawer
 
 var cell_for_drawing       : Vector2i
 
+var layers_node            : Node2D
+var typed_layers           : Array[TileMapLayer]
+
 static func get_inject_dependencies() -> Array:
 	return [
 		FactoryDrawers, 
@@ -56,7 +59,39 @@ func tool_set_up() -> void:
 		field_displayer.set_up(tile_layer, self, field_parameters, battlefield_parameters)
 		field_displayer.set_up_cells_drawer(CellsDrawer.new())
 		cells_displayer = CellsDrawer.new()
-		cells_displayer.set_up(tile_layer, self, cells_parameters)
+		cells_displayer.set_up(tile_layer, self, cells_parameters, battlefield_parameters)
+	pass
+
+func get_layers_node() -> Node2D:
+	if layers_node == null:
+		if has_node("layers_node"):
+			layers_node = get_node("layers_node")
+		else:
+			layers_node = Node2D.new()
+			layers_node.name = "layers_node"
+			add_child(layers_node)
+	return  layers_node
+	pass
+
+func init_layers_nodes() -> void:
+	clear_layers()
+	load_layers()
+	pass
+
+func clear_layers() -> void:
+	typed_layers.clear()
+	for i in layers_node.get_child_count():
+		layers_node.get_child(i).queue_free()
+	pass
+
+func load_layers() -> void:
+	typed_layers.clear()
+	var child_count : int = layers_node.get_child_count()
+	for i in battlefield_parameters.draw_order.size():
+		var layer : TileMapLayer = TileMapLayer.new()
+		layer.tile_set = tile_layer.tile_set
+		layers_node.add_child(layer)
+		typed_layers.append(layer)
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -78,5 +113,4 @@ func _draw() -> void:
 				cells_displayer.draw()
 		else:
 			cells_displayer.draw()
-		
 	pass

@@ -88,8 +88,8 @@ func get_variant(type : CellsDrawer.CELL_TYPE) -> CellDisplayParameters:
 #
 #func get_variant(
 					#base_variant   : CellDisplayParameters,
-					#cells_variants : Dictionary[SingleCellDrawer.CELL_TYPE, CellDisplayParameters],
-					#type           : SingleCellDrawer.CELL_TYPE
+					#cells_variants : Dictionary[CellDrawerSingle.CELL_TYPE, CellDisplayParameters],
+					#type           : CellDrawerSingle.CELL_TYPE
 				#) -> CellDisplayParameters:
 	#if cells_variants.has(type):
 		#return cells_variants[type]

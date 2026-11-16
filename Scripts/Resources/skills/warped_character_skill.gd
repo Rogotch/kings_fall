@@ -23,8 +23,34 @@ func inject_dependencies(warping_skill : BaseSkill, character : BaseCharacter) -
 	set_up_skill_status()
 	pass
 
-func get_skill_context() -> SkillContext:
+func FocusCell(cell : Vector2i) -> SkillContext:
+	if  current_context == null:
+		current_context =  get_skill_context(cell)
+	current_context.selected_cell = cell
+	skill.SetFocusedCells(current_context)
+	return current_context
+	pass
+
+func EndFocus()   -> void:
+	current_context = null
+	pass
+
+func CanUse(on_cell : Vector2i) -> bool:
+	return IsActive() && InRange(on_cell)
+	pass
+
+func IsActive() -> bool:
+	return skill_status.IsActive()
+	pass
+
+func InRange(cell : Vector2i) -> bool:
+	var context : SkillContext = get_skill_context(cell)
+	return skill.InRange(context)
+	pass
+
+func get_skill_context(selected_cell : Vector2i) -> SkillContext:
 	var context : SkillContext = context_factory.Create(character_owner)
+	context.selected_cell = selected_cell
 	return context
 	pass
 

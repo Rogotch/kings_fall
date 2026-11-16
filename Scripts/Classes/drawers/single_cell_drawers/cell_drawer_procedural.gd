@@ -1,6 +1,6 @@
 @tool
-class_name ProceduralCellDrawer
-extends    SingleCellDrawer
+class_name CellDrawerProcedural
+extends    CellDrawerSingle
 
 enum DRAW_METHOD  {NONE, FULL, BORDER}
 
@@ -8,7 +8,7 @@ enum DRAW_METHOD  {NONE, FULL, BORDER}
 @export var draw_method      : CellDrawMethod
 
 func draw_cell_on_position(
-			drawer          : Node2D, 
+			drawer          : MapDisplayer, 
 			cell_size       : Vector2i,
 			cell_position   : Vector2,
 			cell_parameters : CellDisplayParameters

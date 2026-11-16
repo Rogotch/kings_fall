@@ -14,6 +14,7 @@ var move_service   : BattleCharacterMoveService
 var visual         : BaseCharacterVisual
 var parameters     : CharacterParameters
 var skills_manager : SkillsManager
+var input_listener : InputListener
 
 static func get_inject_dependencies() -> Array:
 	return [
@@ -22,6 +23,7 @@ static func get_inject_dependencies() -> Array:
 		FactoryBattleControllers,
 		FactoryCharacterParameters,
 		FactorySkillsManagers,
+		InputListener,
 		]
 	pass
 
@@ -31,9 +33,11 @@ func inject_dependencies(
 		factory_controllers     : FactoryBattleControllers,
 		factory_params          : FactoryCharacterParameters,
 		factory_skills_managers : FactorySkillsManagers,
-		player                  : bool
+		input_listener_service  : InputListener,
+		player                  : bool,
 		) -> void:
 	factory_visual = factory_new_visual
+	input_listener = input_listener_service
 	factory_movement       .Create(self)
 	factory_controllers    .Create(self, player)
 	factory_params         .Create(self)
@@ -53,11 +57,25 @@ func _process(delta: float) -> void:
 	pass
 
 func configure_character(on_position : Vector2i) -> void:
+	parameters.character_died.connect(disable_character)
+	skills_manager.SetBaseSkill(data.base_skill)
 	move_service.place_on_position(on_position)
 	factory_visual.load_visual_node(self)
 	controller.state_machine.Idle()
 	pass
 
-
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	pass # Replace with function body.
+
+func _on_mouse_entered() -> void:
+	input_listener.FocusCharacter(self)
+	pass # Replace with function body.
+
+func _on_mouse_exited() -> void:
+	input_listener.UnfocusCharacter(self)
+	pass # Replace with function body.
+
+func disable_character() -> void:
+	input_pickable = false
+	collision.disabled = true
+	pass
