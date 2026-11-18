@@ -1,5 +1,4 @@
 @tool
-@abstract
 class_name CellDisplayParameters
 extends DrawerParameters
 
@@ -19,16 +18,16 @@ func set_cell_drawer(new_drawer : CellDrawerSingle) -> void:
 	parameters_changed.emit()
 	pass
 
-func draw_cell(
-			drawer          : Node2D, 
-			tile_size       : Vector2i,
-			cell_position   : Vector2,
+func draw_cells_arr(
+			drawer    : MapDisplayer, 
+			cells_arr : Array[Vector2i],
+			type      : CellsDrawer.CELL_TYPE,
 			) -> void:
 	if cell_drawer == null: return
-	cell_drawer.draw_cell_on_position(
+	cell_drawer.draw_cells_arr(
 		drawer,
-		get_cell_size(tile_size),
-		cell_position,
 		self,
+		type,
+		cells_arr,
 	)
 	pass

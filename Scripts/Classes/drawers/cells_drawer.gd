@@ -24,7 +24,6 @@ static func get_inject_dependencies() -> Array:
 	return 	[
 				BattleScenePathes,
 				MapDisplayer,
-				BattleFieldParameters,
 			]
 
 func inject_dependencies(
@@ -33,19 +32,19 @@ func inject_dependencies(
 		battlefield_params : BattleFieldParameters,
 		params             : CellsDrawerParameters,
 		) -> void:
-	set_up(pathes_node.main_map, displayer, params, battlefield_params)
+	set_up(pathes_node.main_map, displayer, battlefield_params, params)
 	pass
 
 func set_up(
 		_layer             : TileMapLayer, 
 		_drawer            : Node2D, 
-		params             : CellsDrawerParameters, 
 		battlefield_params : BattleFieldParameters,
+		params             : CellsDrawerParameters, 
 	) -> void:
+	battlefield_parameters = battlefield_params
 	parameters             = params
 	layer                  = _layer
 	drawer                 = _drawer
-	battlefield_parameters = battlefield_params
 	update_parameters()
 	pass
 
@@ -59,10 +58,12 @@ func SetDrawingCells(type : CELL_TYPE, cells : Array[Vector2i]) -> void:
 
 func ClearDrawingCells() -> void:
 	drawing_cells.clear()
+	drawer.ClearTypeLayers()
 	pass
 
 func ClearDrawingCellsByType(type : CELL_TYPE) -> void:
 	drawing_cells.erase(type)
+	drawer.ClearTypeLayer(type)
 	pass
 
 func draw() -> void:
@@ -72,16 +73,10 @@ func draw() -> void:
 		draw_cells_arr(drawing_cells[type], type)
 	pass
 
-func draw_cells_arr(arr : Array[Vector2i], type : CELL_TYPE = CELL_TYPE.NONE) -> void:
-	for cell in arr:
-		draw_cell_on_position(cell, type)
-	pass
-
-func draw_cell_on_position(cell : Vector2i, type : CELL_TYPE = CELL_TYPE.NONE) -> void:
+func draw_cells_arr(cells : Array[Vector2i], type : CELL_TYPE = CELL_TYPE.NONE) -> void:
 	if !draw_flag || cells_drawer_parameters == null || cells_drawer_parameters.get_variant(type) == null:
 		return
 	var cell_parameters : CellDisplayParameters = cells_drawer_parameters.get_variant(type)
-	var cell_position   : Vector2 = cell_position_lamda.call(cell)
-	cell_parameters.draw_cell(drawer, tile_size_lamda.call(), cell_position)
+	cell_parameters.draw_cells_arr(drawer, cells, type)
 	pass
 	

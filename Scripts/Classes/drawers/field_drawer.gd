@@ -23,17 +23,17 @@ func set_battlefield_parameters(params : BattleFieldParameters) -> void:
 func inject_dependencies(
 		pathes_node        : BattleScenePathes,
 		displayer          : MapDisplayer,
-		params             : FieldDrawerParameters,
 		battlefield_params : BattleFieldParameters,
+		params             : FieldDrawerParameters,
 		) -> void:
-	set_up(pathes_node.main_map, displayer, params, battlefield_params)
+	set_up(pathes_node.main_map, displayer, battlefield_params, params)
 	pass
 
 func set_up(
-		_layer             : TileMapLayer, 
-		_drawer            : Node2D, 
-		params             : FieldDrawerParameters, 
-		battlefield_params : BattleFieldParameters
+		_layer             : TileMapLayer,
+		_drawer            : Node2D,
+		battlefield_params : BattleFieldParameters,
+		params             : FieldDrawerParameters,
 	) -> void:
 	layer                  = _layer
 	drawer                 = _drawer

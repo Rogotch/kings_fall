@@ -37,7 +37,7 @@ func calculate_lines(points_arr : Array, vertical : bool) -> void:
 			+ i * main_axis_vector
 			+ battlefield_parameters.field_start_cell)
 		
-		points_arr.append(get_line_points(start_cell_position, field_params.get_cell_size(tile_size_lamda.call()), end_cell_position))
+		points_arr.append(get_line_points(start_cell_position, field_params.get_cell_size(), end_cell_position))
 	pass
 
 func get_line_points(start_cell_position : Vector2, cell_size : Vector2i, end_cell_position : Vector2) -> Array[Vector2]:

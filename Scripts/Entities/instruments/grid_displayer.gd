@@ -12,7 +12,7 @@ var cells_displayer        : CellsDrawer
 
 var cell_for_drawing       : Vector2i
 
-var layers_node            : Node2D
+var layers_node            : Node2D : get = get_layers_node 
 var typed_layers           : Array[TileMapLayer]
 
 static func get_inject_dependencies() -> Array:
@@ -28,14 +28,35 @@ func inject_dependencies(
 		pathes     : BattleScenePathes,
 		parameters : BattleSceneParameters,
 		) -> void:
-	cells_displayer  = d_factory.create_cells_drawer(parameters.cells_drawer_parameters)
+	cells_displayer  = d_factory.create_cells_drawer(
+									parameters.cells_drawer_parameters,
+									parameters.battle_field_parameters,
+									)
 	field_displayer  = d_factory.create_field_drawer(
 									parameters.field_drawer_parameters, 
 									parameters.battle_field_parameters,
 									FactoryDrawers.FIELD_TYPE.CELLS)
 	tile_layer       = pathes.main_map
+	set_battle_field_parameters(parameters.battle_field_parameters)
+	set_field_parameters(parameters.field_drawer_parameters)
+	set_cells_parameters(parameters.cells_drawer_parameters)
+	init_layers_nodes()
 	pass
 
+func tool_set_up() -> void:
+	if  Engine.is_editor_hint() && get_parent() is TileMapLayer:
+		tile_layer = get_parent()
+		init_layers_nodes()
+		#field_displayer  = IsometricFieldDrawer.new()
+		#field_displayer.set_up(tile_layer, self, field_size, field_start_cell)
+		field_displayer  = FieldCellsDrawer.new()
+		field_displayer.set_up(tile_layer, self, battlefield_parameters, field_parameters)
+		field_displayer.set_up_cells_drawer(CellsDrawer.new())
+		cells_displayer = CellsDrawer.new()
+		cells_displayer.set_up(tile_layer, self, battlefield_parameters, cells_parameters)
+	pass
+
+#region Parameters
 func set_battle_field_parameters(params : BattleFieldParameters) -> void:
 	battlefield_parameters = params
 	if  field_displayer != null:
@@ -50,18 +71,16 @@ func set_cells_parameters(params : CellsDrawerParameters) -> void:
 	cells_parameters = params
 	pass
 
-func tool_set_up() -> void:
-	if  Engine.is_editor_hint() && get_parent() is TileMapLayer:
-		tile_layer = get_parent()
-		#field_displayer  = IsometricFieldDrawer.new()
-		#field_displayer.set_up(tile_layer, self, field_size, field_start_cell)
-		field_displayer  = FieldCellsDrawer.new()
-		field_displayer.set_up(tile_layer, self, field_parameters, battlefield_parameters)
-		field_displayer.set_up_cells_drawer(CellsDrawer.new())
-		cells_displayer = CellsDrawer.new()
-		cells_displayer.set_up(tile_layer, self, cells_parameters, battlefield_parameters)
+func update_parameters() -> void:
+	var counter : int = 0
+	for type in battlefield_parameters.draw_order:
+		var cell_parameters : CellDisplayParameters = cells_parameters.get_variant(type)
+		typed_layers[counter].self_modulate = cell_parameters.cell_color
+		counter += 1
 	pass
+#endregion
 
+#region Field layers
 func get_layers_node() -> Node2D:
 	if layers_node == null:
 		if has_node("layers_node"):
@@ -70,6 +89,8 @@ func get_layers_node() -> Node2D:
 			layers_node = Node2D.new()
 			layers_node.name = "layers_node"
 			add_child(layers_node)
+			if  Engine.is_editor_hint():
+				layers_node.owner = get_tree().edited_scene_root
 	return  layers_node
 	pass
 
@@ -89,10 +110,31 @@ func load_layers() -> void:
 	var child_count : int = layers_node.get_child_count()
 	for i in battlefield_parameters.draw_order.size():
 		var layer : TileMapLayer = TileMapLayer.new()
-		layer.tile_set = tile_layer.tile_set
 		layers_node.add_child(layer)
 		typed_layers.append(layer)
+		layer.tile_set = tile_layer.tile_set
+		if  Engine.is_editor_hint():
+			layer.owner = get_tree().edited_scene_root
 	pass
+
+func GetLayerByType(type : CellsDrawer.CELL_TYPE) -> TileMapLayer:
+	if !battlefield_parameters.draw_order.has(type):
+		return null
+	var type_position : int = battlefield_parameters.draw_order.find(type)
+	return typed_layers[type_position]
+	pass
+
+func ClearTypeLayer(type: CellsDrawer.CELL_TYPE) -> void:
+	var layer : TileMapLayer = GetLayerByType(type)
+	if  layer != null:
+		layer.clear()
+	pass
+
+func ClearTypeLayers() -> void:
+	for layer in typed_layers:
+		layer.clear()
+	pass
+#endregion
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -113,4 +155,8 @@ func _draw() -> void:
 				cells_displayer.draw()
 		else:
 			cells_displayer.draw()
+	pass
+
+func GetCellPosition(cell : Vector2i) -> Vector2:
+	return tile_layer.map_to_local(cell) - position
 	pass

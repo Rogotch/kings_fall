@@ -10,9 +10,12 @@ func _init(arca_container: ArcaContainer) -> void:
 	container = arca_container
 	pass
 
-func create_cells_drawer(params : DrawerParameters) -> CellsDrawer:
+func create_cells_drawer(
+		params             : CellsDrawerParameters,
+		battlefield_params : BattleFieldParameters
+	) -> CellsDrawer:
 	var drawer    : CellsDrawer = container.resolve(CellsDrawer) 
-	container.inject(drawer, [params])
+	container.inject(drawer, [battlefield_params, params])
 	return drawer
 	pass
 
@@ -37,7 +40,7 @@ func get_grid_field_drawer_by_type(
 		battlefield_params : BattleFieldParameters
 	) -> FieldGridDrawer:
 	var drawer    : FieldGridDrawer = container.resolve(FieldGridDrawer)
-	container.inject(drawer, [params, battlefield_params])
+	container.inject(drawer, [battlefield_params, params])
 	return drawer
 	pass
 
@@ -46,8 +49,8 @@ func get_cells_field_drawer_by_type(
 		battlefield_params : BattleFieldParameters
 	) -> FieldCellsDrawer:
 	var drawer    : FieldCellsDrawer = container.resolve(FieldCellsDrawer)
-	var subdrawer = create_cells_drawer(params.cells_parameters)
-	container.inject(drawer, [params, battlefield_params])
+	var subdrawer = create_cells_drawer(params.cells_parameters, battlefield_params)
+	container.inject(drawer, [battlefield_params, params])
 	drawer.set_up_cells_drawer(subdrawer)
 	return drawer
 	pass

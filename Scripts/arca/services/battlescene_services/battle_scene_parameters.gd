@@ -17,6 +17,7 @@ func _ready() -> void:
 		set_cells_parameters(cells_drawer_parameters)
 		set_battle_field_parameters(battle_field_parameters)
 		grid_displayer.tool_set_up()
+	update_parameters()
 	pass
 
 func set_battle_field_parameters(params : BattleFieldParameters) -> void:
@@ -35,4 +36,11 @@ func set_cells_parameters(params : CellsDrawerParameters) -> void:
 	cells_drawer_parameters = params
 	if grid_displayer != null:
 		grid_displayer.cells_parameters = cells_drawer_parameters
+	if !cells_drawer_parameters.parameters_changed.is_connected(update_parameters):
+		cells_drawer_parameters.parameters_changed.connect(update_parameters)
+	pass
+
+func update_parameters() -> void:
+	if grid_displayer != null:
+		grid_displayer.update_parameters()
 	pass

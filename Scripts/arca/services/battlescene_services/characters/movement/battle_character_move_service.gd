@@ -71,3 +71,7 @@ func move_end() -> void:
 func set_move_direction(direction : Vector2) -> void:
 	body.visual.SetDirection(direction)
 	pass
+
+func GetMoveArea() -> Array[Vector2i]:
+	return []
+	pass

@@ -30,6 +30,41 @@ func set_up_pathfinding() -> void:
 	pathfinding.update()
 	pass
 
+func get_area(start_cell : Vector2i, size : int, ignore_solid : bool) -> Array[Vector2i]:
+	var reachable_cells : Dictionary[Vector2i, int]
+	var frontier : Array[CellStep] = [CellStep.create_step(start_cell, 0)]
+	reachable_cells[start_cell] = 0
+	
+	var directions : Array[Vector2i] = [Vector2i.UP, Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT]
+	
+	while not frontier.is_empty():
+		var current : CellStep = frontier.pop_front()
+		for dir in directions:
+			var neighbor : Vector2i = current.cell + dir
+			if not  pathfinding.region.has_point(neighbor)\
+				|| (pathfinding.is_point_solid(neighbor) && !ignore_solid):
+				continue
+			var cost : int = current.step + 1
+			if  cost > size:
+				continue
+			if reachable_cells.has(neighbor) && reachable_cells[neighbor] <= cost:
+				continue
+			reachable_cells[neighbor] = cost
+			frontier.append(CellStep.create_step(start_cell, 0))
+	return Array(reachable_cells.keys(), TYPE_VECTOR2I, "", null)
+	pass
+
+class CellStep:
+	var cell : Vector2i
+	var step : int
+	
+	static func create_step(new_cell : Vector2i, new_step : int) -> CellStep:
+		var new_cell_step : CellStep = CellStep.new()
+		new_cell_step.cell = new_cell
+		new_cell_step.step = new_step
+		return new_cell_step
+		pass
+
 func get_map_by_position(position : Vector2i) -> Vector2i:
 	return map.local_to_map(position)
 	pass
