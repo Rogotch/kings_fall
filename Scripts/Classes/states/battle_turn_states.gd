@@ -22,6 +22,12 @@ var  round_label         : BattleRoundLabel:
 	get():
 		return battle_state_machine.round_label
 
+var  map_displayer       : MapDisplayer:
+	set(value):
+		return
+	get():
+		return battle_state_machine.map_displayer
+
 func _init(
 		battle_turns     : BattleTurnsSM
 	) -> void:
@@ -66,14 +72,37 @@ class Turn       extends CharacterTurn:
 	pass
 
 class PlayerTurn extends Turn:
+	var player_state_machine : CharacterStateMachine:
+		get:
+			return character.controller.state_machine
+		set(value):
+			return null
+		
 	func Enter() -> void:
 		super.Enter()
 		input_state_machine.SelectCellSingleBase(character)
+		player_state_machine.state_changed.connect(character_state_changed)
 		pass
 		
 	func Exit() -> void:
 		super.Exit()
 		input_state_machine.Focus()
+		player_state_machine.state_changed.disconnect(character_state_changed)
+		pass
+	
+	func character_state_changed(new_state : BaseCharacterState) -> void:
+		match new_state:
+			_ when new_state is BaseCharacterState.Idle:
+				map_displayer.ClearAllCellsTypes()
+				input_state_machine.SelectCellSingleBase(character)
+				input_state_machine.RefocusCell()
+			_ when new_state is BaseCharacterState.Attack:
+				input_state_machine.Focus()
+			_ when new_state is BaseCharacterState.Move:
+				input_state_machine.Focus()
+		pass
+	
+	func focus_move_area() -> void:
 		pass
 	pass
 

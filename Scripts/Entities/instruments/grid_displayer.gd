@@ -89,8 +89,8 @@ func get_layers_node() -> Node2D:
 			layers_node = Node2D.new()
 			layers_node.name = "layers_node"
 			add_child(layers_node)
-			if  Engine.is_editor_hint():
-				layers_node.owner = get_tree().edited_scene_root
+			#if  Engine.is_editor_hint():
+				#layers_node.owner = get_tree().edited_scene_root
 	return  layers_node
 	pass
 
@@ -107,14 +107,15 @@ func clear_layers() -> void:
 
 func load_layers() -> void:
 	typed_layers.clear()
-	var child_count : int = layers_node.get_child_count()
 	for i in battlefield_parameters.draw_order.size():
 		var layer : TileMapLayer = TileMapLayer.new()
 		layers_node.add_child(layer)
+		if !tree_exiting.is_connected(layers_node.queue_free):
+			tree_exiting.connect(layers_node.queue_free)
 		typed_layers.append(layer)
 		layer.tile_set = tile_layer.tile_set
-		if  Engine.is_editor_hint():
-			layer.owner = get_tree().edited_scene_root
+		#if  Engine.is_editor_hint():
+			#layer.owner = get_tree().edited_scene_root
 	pass
 
 func GetLayerByType(type : CellsDrawer.CELL_TYPE) -> TileMapLayer:
@@ -124,13 +125,15 @@ func GetLayerByType(type : CellsDrawer.CELL_TYPE) -> TileMapLayer:
 	return typed_layers[type_position]
 	pass
 
-func ClearTypeLayer(type: CellsDrawer.CELL_TYPE) -> void:
+func ClearTypeCells(type: CellsDrawer.CELL_TYPE) -> void:
 	var layer : TileMapLayer = GetLayerByType(type)
+	cells_displayer.ClearDrawingCellsByType(type)
 	if  layer != null:
 		layer.clear()
 	pass
 
-func ClearTypeLayers() -> void:
+func ClearAllCellsTypes() -> void:
+	cells_displayer.ClearDrawingCells()
 	for layer in typed_layers:
 		layer.clear()
 	pass

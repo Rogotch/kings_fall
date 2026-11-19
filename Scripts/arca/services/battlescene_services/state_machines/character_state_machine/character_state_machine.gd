@@ -1,10 +1,12 @@
 class_name CharacterStateMachine
 extends RefCounted
 
-var MoveSystem      : BattleMoveSystem
-var displayer       : MapDisplayer
-var character_owner : BaseCharacter
-var current_state   : BaseCharacterState
+signal state_changed(new_state : BaseCharacterState)
+
+var MoveSystem          : BattleMoveSystem
+var displayer           : MapDisplayer
+var character_owner     : BaseCharacter
+var current_state       : BaseCharacterState
 
 static func get_inject_dependencies() -> Array:
 	return [
@@ -17,17 +19,18 @@ func inject_dependencies(
 		map_displayer   : MapDisplayer,
 		characters_body : BaseCharacter,
 	) -> void:
-	MoveSystem = move_system
-	displayer  = map_displayer
-	character_owner = characters_body
+	MoveSystem          = move_system
+	displayer           = map_displayer
+	character_owner     = characters_body
 	character_owner.controller.state_machine = self
 	pass
 
 func set_state(new_state : BaseCharacterState) -> void:
 	if current_state != null:
-		current_state.exit()
+		current_state.Exit()
 	current_state = new_state
-	current_state.enter()
+	current_state.Enter()
+	state_changed.emit(current_state)
 	pass
 
 func select_cell(cell : Vector2i) -> void:

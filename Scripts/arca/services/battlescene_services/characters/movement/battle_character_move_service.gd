@@ -28,6 +28,10 @@ func inject_dependencies(character : BaseCharacter) -> void:
 	body.move_service = self
 	pass
 
+func get_aviable_move_cells() -> Array[Vector2i]:
+	return MoveSystem.get_area_cells(map_position, body.parameters.GetSpeed(), false)
+	pass
+
 func place_on_position(new_position : Vector2i) -> void:
 	MoveSystem.set_character_on_cell(body, new_position)
 	map_position = new_position

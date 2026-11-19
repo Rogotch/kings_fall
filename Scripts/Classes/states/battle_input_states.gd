@@ -5,6 +5,7 @@ extends RefCounted
 var input_service    : InputListener
 var move_system      : BattleMoveSystem
 var displayer        : MapDisplayer
+var input_sm         : BattleInputSM
 
 var input_action     : InputAction
 
@@ -21,10 +22,12 @@ var field_displayer : FieldDrawer:
 		return displayer.field_displayer
 
 func _init(
+		_input_sm      : BattleInputSM,
 		_input_service : InputListener,
 		_move_system   : BattleMoveSystem,
 		_displayer     : MapDisplayer
 	) -> void:
+	input_sm      = _input_sm
 	input_service = _input_service
 	move_system   = _move_system
 	displayer     = _displayer
@@ -105,6 +108,10 @@ class InputFocus                 extends BattleInputStates:
 		focus_cell_action.cell_focused  .disconnect(focus_cell)
 		focus_cell_action.cell_unfocused.disconnect(unfocus_cell)
 		pass
+	
+	func focus_cell(cell : Vector2i)  -> void:
+		cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.NONE, Array([cell], TYPE_VECTOR2I, "", null))
+		pass
 	pass
 
 # Focus
@@ -118,12 +125,13 @@ class InputCharacterFocus        extends InputFocus:
 			return character.controller.state_machine
 	
 	func _init(
+			_input_sm          : BattleInputSM,
 			_input_service     : InputListener,
 			_move_system       : BattleMoveSystem,
 			_displayer         : MapDisplayer,
 			selected_character : BaseCharacter
 		) -> void:
-		super._init(_input_service, _move_system, _displayer)
+		super._init(_input_sm, _input_service, _move_system, _displayer)
 		SetCharacter(selected_character)
 		pass
 	
@@ -175,6 +183,17 @@ class InputSelectCellSingle      extends InputCharacterFocus:
 
 # Select Cell Single - Base (Move and attack)
 class InputSelectCellSingleBase  extends InputSelectCellSingle:
+	var move_area : Array[Vector2i]
+	
+	func Enter()  -> void:
+		super.Enter()
+		move_area = character.move_service.get_aviable_move_cells()
+		#if  skills_manager.base_skill != null:
+			#var full_attack_area   : Array[Vector2i] = skills_manager.base_skill.EndFocus()
+			#var reachebles_targets : Array[Vector2i] = skills_manager.base_skill.EndFocus()
+		cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE_ZONE, move_area)
+		pass
+	
 	func focus_cell(cell : Vector2i)  -> void:
 		if   can_use_skill(skills_manager.base_skill, cell):
 			var context : SkillContext = skills_manager.base_skill.FocusCell(cell)

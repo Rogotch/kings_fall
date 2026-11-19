@@ -12,6 +12,7 @@ static func get_dependencies() -> Array:
 	return 	[
 				FactorySkillsContext,
 				FactorySkillsStatus,
+				BattleMoveSystem,
 			]
 
 static func get_inject_dependencies() -> Array:

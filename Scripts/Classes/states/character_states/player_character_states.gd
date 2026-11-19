@@ -29,15 +29,15 @@ class IdlePlayerInput        extends Idle:
 		displayer = map_displayer
 		pass
 	
-	func enter()  -> void:
-		super.enter()
+	func Enter()  -> void:
+		super.Enter()
 		input_service = character.controller.input_service
 		set_action()
 		connect_action()
 		pass
 	
-	func exit()   -> void:
-		super.exit()
+	func Exit()   -> void:
+		super.Exit()
 		disconnect_action()
 		pass
 	
@@ -72,8 +72,8 @@ class IdleSelectSingleCell   extends IdlePlayerInput:
 		get:
 			return input_action as InputAction.IASelectCell
 	
-	func exit()   -> void:
-		super.exit()
+	func Exit()   -> void:
+		super.Exit()
 		cells_displayer.ClearDrawingCells()
 		pass
 	
@@ -117,10 +117,10 @@ class IdleBaseSelect         extends IdleSelectSingleCell:
 	pass
 
 class IdleSkillSingleSelect  extends IdleSelectSingleCell:
-	func enter()  -> void:
-		super.enter()
+	func Enter()  -> void:
+		super.Enter()
 		pass
 	
-	func exit()   -> void:
+	func Exit()   -> void:
 		pass
 	pass

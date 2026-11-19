@@ -58,12 +58,10 @@ func SetDrawingCells(type : CELL_TYPE, cells : Array[Vector2i]) -> void:
 
 func ClearDrawingCells() -> void:
 	drawing_cells.clear()
-	drawer.ClearTypeLayers()
 	pass
 
 func ClearDrawingCellsByType(type : CELL_TYPE) -> void:
 	drawing_cells.erase(type)
-	drawer.ClearTypeLayer(type)
 	pass
 
 func draw() -> void:

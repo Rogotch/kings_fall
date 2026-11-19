@@ -40,6 +40,10 @@ func physics_tick(delta: float) -> void:
 	pass
 
 #region Cells focus
+func RefocusCell() -> void:
+	focus_cell(focused_cell)
+	pass
+
 func focus_cell(cell : Vector2i) -> void:
 	if  current_input != null && current_input is InputAction.IAFocusCell:
 		(current_input as InputAction.IAFocusCell).FocusCell(cell)
