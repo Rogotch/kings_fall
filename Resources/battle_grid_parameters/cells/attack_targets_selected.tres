@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CellDrawerProcedural" format=3 uid="uid://75cknnbpmgej"]
+
+[ext_resource type="Script" uid="uid://donhigb155mw8" path="res://Scripts/Classes/drawers/single_cell_drawers/cells_shape/isometric_cell.gd" id="1_wusqq"]
+[ext_resource type="Script" uid="uid://l7hetokfme25" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_draw_method/cell_full_draw.gd" id="2_301cq"]
+[ext_resource type="Script" uid="uid://cqxwgmie8rqv3" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_drawer_procedural.gd" id="3_gkkjy"]
+
+[sub_resource type="Resource" id="Resource_6lcgy"]
+script = ExtResource("1_wusqq")
+metadata/_custom_type_script = "uid://donhigb155mw8"
+
+[sub_resource type="Resource" id="Resource_733rx"]
+script = ExtResource("2_301cq")
+metadata/_custom_type_script = "uid://l7hetokfme25"
+
+[resource]
+resource_name = "Attack Targets Selected"
+script = ExtResource("3_gkkjy")
+cell_size = Vector2i(30, 15)
+cell_shape = SubResource("Resource_6lcgy")
+draw_method = SubResource("Resource_733rx")
+cell_color = Color(0.8627451, 0.27058825, 0.20784314, 1)
+metadata/_custom_type_script = "uid://cqxwgmie8rqv3"

@@ -19,6 +19,26 @@ func InRange(context : SkillContext) -> bool:
 	return skill_range.CanActivate(context)
 	pass
 
+func GetRangeCells(context : SkillContext) -> Array[Vector2i]:
+	return skill_range.GetRangeCells(context)
+	pass
+
+func GetPotentialTargets(context : SkillContext) -> Array[Vector2i]:
+	skill_range.ModifyContext(context)
+	SetFocusedCells(context)
+	return context.potential_targets
+	pass
+
+func GetFocusedCells(context : SkillContext) -> Array[Vector2i]:
+	SetFocusedCells(context)
+	return context.focused_cells
+	pass
+
+func GetAffectedCells(context : SkillContext) -> Array[Vector2i]:
+	SetFocusedCells(context)
+	return context.affected_cells
+	pass
+
 func SetFocusedCells(context : SkillContext) -> void:
 	targeting.ModifyContext(context)
 	pass

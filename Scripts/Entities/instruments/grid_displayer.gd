@@ -2,6 +2,7 @@
 extends Node2D
 class_name MapDisplayer
 
+
 var battlefield_parameters : BattleFieldParameters : set = set_battle_field_parameters
 var field_parameters       : FieldDrawerParameters : set = set_field_parameters
 var cells_parameters       : CellsDrawerParameters : set = set_cells_parameters
@@ -72,9 +73,11 @@ func set_cells_parameters(params : CellsDrawerParameters) -> void:
 	pass
 
 func update_parameters() -> void:
+	if battlefield_parameters.draw_order.size() != typed_layers.size():
+		init_layers_nodes()
 	var counter : int = 0
 	for type in battlefield_parameters.draw_order:
-		var cell_parameters : CellDisplayParameters = cells_parameters.get_variant(type)
+		var cell_parameters : CellDrawerSingle = cells_parameters.get_variant(type)
 		typed_layers[counter].self_modulate = cell_parameters.cell_color
 		counter += 1
 	pass

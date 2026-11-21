@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="CellDrawerProcedural" format=3 uid="uid://dc04qyvkvonvl"]
+
+[ext_resource type="Script" uid="uid://donhigb155mw8" path="res://Scripts/Classes/drawers/single_cell_drawers/cells_shape/isometric_cell.gd" id="1_7owk2"]
+[ext_resource type="Script" uid="uid://bavhq7vw1yinw" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_draw_method/cell_border_draw.gd" id="2_6frb6"]
+[ext_resource type="Script" uid="uid://cqxwgmie8rqv3" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_drawer_procedural.gd" id="3_syly3"]
+
+[sub_resource type="Resource" id="Resource_nb8fy"]
+script = ExtResource("1_7owk2")
+metadata/_custom_type_script = "uid://donhigb155mw8"
+
+[sub_resource type="Resource" id="Resource_w67mq"]
+script = ExtResource("2_6frb6")
+metadata/_custom_type_script = "uid://bavhq7vw1yinw"
+
+[resource]
+resource_name = "Field Cells"
+script = ExtResource("3_syly3")
+cell_size = Vector2i(32, 16)
+cell_shape = SubResource("Resource_nb8fy")
+draw_method = SubResource("Resource_w67mq")
+cell_color = Color(0.11679032, 0.6090385, 0.86860347, 1)
+metadata/_custom_type_script = "uid://cqxwgmie8rqv3"

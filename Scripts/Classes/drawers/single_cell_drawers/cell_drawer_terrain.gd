@@ -7,7 +7,6 @@ extends    CellDrawerOnTilemap
 
 func draw_cells_arr(
 			drawer          : MapDisplayer, 
-			cell_parameters : CellDisplayParameters,
 			type            : CellsDrawer.CELL_TYPE,
 			cells           : Array[Vector2i],
 		) -> void:

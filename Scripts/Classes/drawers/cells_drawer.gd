@@ -1,13 +1,22 @@
 class_name CellsDrawer
 extends Drawer
 
+## Тип клетки
 enum CELL_TYPE {
+		## Никакой
 		NONE,
+		## Клетка цели движения
 		MOVE,
+		## Зона доступного движения
 		MOVE_ZONE,
-		ATTACK,
+		## Зона фокуса атаки
 		ATTACK_FOCUS,
-		ATTACK_ZONE,
+		## Вся доступная зона для атаки
+		ATTACK_RANGE,
+		## Потенциальные клетки для атаки
+		ATTACK_POTENTIAL,
+		## Выбранные клетки для атаки
+		ATTACK_SELECTED,
 	}
 
 var battlefield_parameters : BattleFieldParameters
@@ -74,7 +83,7 @@ func draw() -> void:
 func draw_cells_arr(cells : Array[Vector2i], type : CELL_TYPE = CELL_TYPE.NONE) -> void:
 	if !draw_flag || cells_drawer_parameters == null || cells_drawer_parameters.get_variant(type) == null:
 		return
-	var cell_parameters : CellDisplayParameters = cells_drawer_parameters.get_variant(type)
-	cell_parameters.draw_cells_arr(drawer, cells, type)
+	var cell_parameters : CellDrawerSingle = cells_drawer_parameters.get_variant(type)
+	cell_parameters.draw_cells_arr(drawer, type, cells)
 	pass
 	

@@ -27,11 +27,15 @@ func _init(
 	move_system     = move_sys
 	pass
 
-@abstract func FocusCell(cell : Vector2i) -> SkillContext
-@abstract func EndFocus()                 -> void
-@abstract func CanUse(on_cell : Vector2i) -> bool
-@abstract func IsActive()                 -> bool
-@abstract func InRange(cell : Vector2i)   -> bool
+@abstract func FocusCell                 (cell : Vector2i) -> SkillContext
+@abstract func EndFocus                                 () -> void
+@abstract func CanUse                 (on_cell : Vector2i) -> bool
+@abstract func IsActive                                 () -> bool
+@abstract func InRange                   (cell : Vector2i) -> bool
+@abstract func GetRangeCells      (context : SkillContext) -> Array[Vector2i]
+@abstract func GetPotentialTargets(context : SkillContext) -> Array[Vector2i]
+@abstract func GetFocusedCells    (context : SkillContext) -> Array[Vector2i]
+@abstract func GetAffectedCells   (context : SkillContext) -> Array[Vector2i]
 
 @abstract func get_skill_context(selected_cell : Vector2i) -> SkillContext
 #func get_skill_context() -> SkillContext

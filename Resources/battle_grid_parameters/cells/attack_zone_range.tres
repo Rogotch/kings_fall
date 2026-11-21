@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CellDrawerTerrain" format=3 uid="uid://7bsgxi8ef0hn"]
+
+[ext_resource type="Script" uid="uid://b8ba7d6jwc27x" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_drawer_terrain.gd" id="1_aqh3u"]
+
+[resource]
+resource_name = "Attack Range Zone"
+script = ExtResource("1_aqh3u")
+cell_color = Color(0.8659251, 0.42335752, 0.26698887, 1)
+metadata/_custom_type_script = "uid://b8ba7d6jwc27x"

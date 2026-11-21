@@ -29,7 +29,7 @@ func inject_dependencies(character : BaseCharacter) -> void:
 	pass
 
 func get_aviable_move_cells() -> Array[Vector2i]:
-	return MoveSystem.get_area_cells(map_position, body.parameters.GetSpeed(), false)
+	return MoveSystem.GetAreaCells(map_position, body.parameters.GetSpeed(), -1, false)
 	pass
 
 func place_on_position(new_position : Vector2i) -> void:

@@ -183,35 +183,51 @@ class InputSelectCellSingle      extends InputCharacterFocus:
 
 # Select Cell Single - Base (Move and attack)
 class InputSelectCellSingleBase  extends InputSelectCellSingle:
-	var move_area : Array[Vector2i]
+	#var move_area : Array[Vector2i]
+	var base_skill_context : SkillContext
 	
 	func Enter()  -> void:
 		super.Enter()
-		move_area = character.move_service.get_aviable_move_cells()
-		#if  skills_manager.base_skill != null:
-			#var full_attack_area   : Array[Vector2i] = skills_manager.base_skill.EndFocus()
-			#var reachebles_targets : Array[Vector2i] = skills_manager.base_skill.EndFocus()
-		cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE_ZONE, move_area)
+		show_attack_targets()
+		show_move_area()
 		pass
 	
 	func focus_cell(cell : Vector2i)  -> void:
 		if   can_use_skill(skills_manager.base_skill, cell):
-			var context : SkillContext = skills_manager.base_skill.FocusCell(cell)
-			cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.ATTACK, Array(context.focused_cells, TYPE_VECTOR2I, "", null))
-		elif can_move_to_cell(cell):
+			base_skill_context = skills_manager.base_skill.FocusCell(cell)
+			#var context : SkillContext = skills_manager.base_skill.FocusCell(cell)
+			#cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.ATTACK_FOCUS,    base_skill_context.focused_cells)
+			cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.ATTACK_SELECTED, base_skill_context.affected_cells)
+		
+		if can_move_to_cell(cell):
 			if  skills_manager.base_skill != null:
 				skills_manager.base_skill.EndFocus()
 			cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE, Array([cell], TYPE_VECTOR2I, "", null))
 		pass
 	
+	func show_move_area() -> void:
+		var move_area : Array[Vector2i] = character.move_service.get_aviable_move_cells()
+		cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.MOVE_ZONE, move_area)
+		pass
+	
+	func show_attack_targets() -> void:
+		var attack_area : Array[Vector2i]
+		if  skills_manager.base_skill != null:
+			base_skill_context = skills_manager.base_skill.FocusCell(character.move_service.map_position)
+			attack_area = skills_manager.base_skill.GetPotentialTargets(base_skill_context)
+		cells_displayer.SetDrawingCells(CellsDrawer.CELL_TYPE.ATTACK_POTENTIAL, attack_area)
+		pass
+	
 	func unfocus_cell(cell : Vector2i) -> void:
-		cells_displayer.ClearDrawingCellsByType(CellsDrawer.CELL_TYPE.MOVE)
-		cells_displayer.ClearDrawingCellsByType(CellsDrawer.CELL_TYPE.ATTACK)
+		displayer.ClearTypeCells(CellsDrawer.CELL_TYPE.MOVE)
+		displayer.ClearTypeCells(CellsDrawer.CELL_TYPE.ATTACK_FOCUS)
+		displayer.ClearTypeCells(CellsDrawer.CELL_TYPE.ATTACK_SELECTED)
 		pass
 	
 	func select_cell(cell : Vector2i) -> void:
 		if move_system.is_cell_free(cell) && move_system.can_move_to_point(character.move_service.map_position, cell):
 			state_machine.Move(cell)
+		unfocus_cell(cell)
 		pass
 	pass
 

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CellDrawerTerrain" format=3 uid="uid://c7tu1pxe6phi5"]
+
+[ext_resource type="Script" uid="uid://b8ba7d6jwc27x" path="res://Scripts/Classes/drawers/single_cell_drawers/cell_drawer_terrain.gd" id="1_8x1hb"]
+
+[resource]
+resource_name = "Attack Targets Potential"
+script = ExtResource("1_8x1hb")
+cell_color = Color(0.69794816, 0.23792973, 0.19669688, 1)
+metadata/_custom_type_script = "uid://b8ba7d6jwc27x"

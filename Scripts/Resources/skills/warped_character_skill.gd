@@ -49,6 +49,22 @@ func InRange(cell : Vector2i) -> bool:
 	return skill.InRange(context)
 	pass
 
+func GetRangeCells(context : SkillContext) -> Array[Vector2i]:
+	return skill.GetRangeCells(context)
+	pass
+
+func GetPotentialTargets(context : SkillContext) -> Array[Vector2i]:
+	return skill.GetPotentialTargets(context)
+	pass
+
+func GetFocusedCells(context : SkillContext) -> Array[Vector2i]:
+	return skill.GetFocusedCells(context)
+	pass
+
+func GetAffectedCells(context : SkillContext) -> Array[Vector2i]:
+	return skill.GetAffectedCells(context)
+	pass
+
 func get_skill_context(selected_cell : Vector2i) -> SkillContext:
 	var context : SkillContext = context_factory.Create(character_owner)
 	context.selected_cell = selected_cell

@@ -3,13 +3,13 @@
 class_name CellsDrawerParameters
 extends DrawerParameters
 
-@export var base_variant   : CellDisplayParameters :
+@export var base_variant   : CellDrawerSingle :
 	set = set_base_variant
-@export var cells_variants : Dictionary[CellsDrawer.CELL_TYPE, CellDisplayParameters] :
+@export var cells_variants : Dictionary[CellsDrawer.CELL_TYPE, CellDrawerSingle] :
 	set = set_cells_variants
 
 func set_base_variant(
-	new_variant : CellDisplayParameters,
+	new_variant : CellDrawerSingle,
 	) -> void:
 	if  base_variant != null && base_variant != new_variant:
 		base_variant.parameters_changed.disconnect(parameters_changed.emit)
@@ -23,10 +23,10 @@ func set_base_variant(
 func set_cells_variants(
 		new_variants : Dictionary
 		) -> void:
-	var deleted_variants : Array[CellDisplayParameters]
+	var deleted_variants : Array[CellDrawerSingle]
 	
 	for key in cells_variants.keys():
-		var cell_params : CellDisplayParameters = cells_variants[key]
+		var cell_params : CellDrawerSingle = cells_variants[key]
 		if new_variants.values().has(cell_params):
 			continue
 		if !deleted_variants.has(cell_params):
@@ -44,7 +44,7 @@ func set_cells_variants(
 	parameters_changed.emit()
 	pass
 
-func get_variant(type : CellsDrawer.CELL_TYPE) -> CellDisplayParameters:
+func get_variant(type : CellsDrawer.CELL_TYPE) -> CellDrawerSingle:
 	if cells_variants.has(type):
 		return cells_variants[type]
 	return base_variant

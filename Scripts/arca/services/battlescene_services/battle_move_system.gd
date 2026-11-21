@@ -30,14 +30,16 @@ func set_up_pathfinding() -> void:
 	pathfinding.update()
 	pass
 
-func get_area_cells(start_cell : Vector2i, size : int, ignore_solid : bool) -> Array[Vector2i]:
-	return Array(get_area_cost_cells(start_cell, size, ignore_solid).keys(), TYPE_VECTOR2I, "", null)
+func GetAreaCells(start_cell : Vector2i, cost : int, min_cost : int, ignore_solid : bool) -> Array[Vector2i]:
+	return Array(get_area_cost_cells(start_cell, cost, min_cost, ignore_solid).keys(), TYPE_VECTOR2I, "", null)
 	pass
 
-func get_area_cost_cells(start_cell : Vector2i, size : int, ignore_solid : bool) -> Dictionary[Vector2i, int]:
+func get_area_cost_cells(start_cell : Vector2i, cost : int, min_cost : int , ignore_solid : bool) -> Dictionary[Vector2i, int]:
 	var reachable_cells : Dictionary[Vector2i, int]
 	var frontier : Array[CellStep] = [CellStep.create_step(start_cell, 0)]
-	reachable_cells[start_cell] = 0
+	var in_min_cost_cells : Array[Vector2i]
+	if min_cost < 0:
+		reachable_cells[start_cell] = 0
 	
 	var directions : Array[Vector2i] = [Vector2i.UP, Vector2i.LEFT, Vector2i.DOWN, Vector2i.RIGHT]
 	
@@ -48,13 +50,17 @@ func get_area_cost_cells(start_cell : Vector2i, size : int, ignore_solid : bool)
 			if not  pathfinding.region.has_point(neighbor)\
 				|| (pathfinding.is_point_solid(neighbor) && !ignore_solid):
 				continue
-			var cost : int = current.step + 1
-			if  cost > size:
+			var cell_cost : int = current.step + 1
+			if  cost < cell_cost:
 				continue
-			if reachable_cells.has(neighbor) && reachable_cells[neighbor] <= cost:
+			if reachable_cells.has(neighbor) && reachable_cells[neighbor] <= cell_cost:
 				continue
-			reachable_cells[neighbor] = cost
-			frontier.append(CellStep.create_step(neighbor, cost))
+			if  min_cost >= cell_cost && !in_min_cost_cells.has(neighbor):
+				in_min_cost_cells.append(neighbor)
+			reachable_cells[neighbor] = cell_cost
+			frontier.append(CellStep.create_step(neighbor, cell_cost))
+	for cell in in_min_cost_cells:
+		reachable_cells.erase(cell)
 	return reachable_cells
 	pass
 

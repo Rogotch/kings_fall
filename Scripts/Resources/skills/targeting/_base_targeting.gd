@@ -5,6 +5,7 @@ extends Resource
 func ModifyContext(context : SkillContext) -> void:
 	context.focused_cells = get_focused_cells(context)
 	context.affected_cells = get_filtered_affected_cells(context.focused_cells, context)
+	context.potential_targets = get_filtered_affected_cells(context.range_cells, context)
 	pass
 
 func CheckCell(cell : Vector2i, context : SkillContext) -> bool:

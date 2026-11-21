@@ -101,7 +101,7 @@ class IdleSelectSingleCell   extends IdlePlayerInput:
 	
 	func unfocus_cell(cell : Vector2i) -> void:
 		cells_displayer.ClearDrawingCellsByType(CellsDrawer.CELL_TYPE.MOVE)
-		cells_displayer.ClearDrawingCellsByType(CellsDrawer.CELL_TYPE.ATTACK)
+		cells_displayer.ClearDrawingCellsByType(CellsDrawer.CELL_TYPE.ATTACK_SELECTED)
 		pass
 	pass
 
