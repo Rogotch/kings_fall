@@ -8,7 +8,7 @@ func _init(arca_container: ArcaContainer) -> void:
 	pass
 
 func Create(character : BaseCharacter) -> BattleCharacterMoveService:
-	var movement : TweenMoveService = container.resolve(TweenMoveService)
+	var movement : BattleCharacterMoveService = container.resolve(BattleCharacterMoveService)
 	#var movement : BattleCharacterMoveService = container.resolve(BattleCharacterMoveService)
 	container.inject(movement, [character])
 	return movement

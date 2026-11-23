@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bu033hbbk5r08"]
+
+[ext_resource type="Script" uid="uid://qdnr43tpan5e" path="res://Scripts/arca/contextes/context_game_session.gd" id="1_j0u8w"]
+[ext_resource type="Script" uid="uid://dhehu5tysiqc5" path="res://Scripts/Scenes/Global/game_session.gd" id="1_ykth7"]
+
+[node name="game_session" type="Node" unique_id=1796783427 node_paths=PackedStringArray("session_context")]
+script = ExtResource("1_ykth7")
+session_context = NodePath("ContextGameSession")
+
+[node name="ContextGameSession" type="Node" parent="." unique_id=2016925519]
+script = ExtResource("1_j0u8w")
+installers_path = Array[String](["uid://c03c7e0y51e0l"])
+metadata/_custom_type_script = "uid://qdnr43tpan5e"

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bef7wcmrtxjw"]
+
+[ext_resource type="Script" uid="uid://dwv7y48f516b" path="res://Scripts/UI/entities/character_panel/skills_panel.gd" id="1_67imc"]
+[ext_resource type="PackedScene" uid="uid://cu6kg88ctk8oq" path="res://UI/entities/character_panel/avatar.tscn" id="2_3shrl"]
+[ext_resource type="PackedScene" uid="uid://b1i4po7kngi7y" path="res://UI/entities/character_panel/skills_container.tscn" id="3_iawb1"]
+
+[node name="skills_panel" type="HBoxContainer" unique_id=616910904]
+size_flags_horizontal = 3
+script = ExtResource("1_67imc")
+
+[node name="avatar" parent="." unique_id=1048137294 instance=ExtResource("2_3shrl")]
+layout_mode = 2
+
+[node name="skills_container" parent="." unique_id=1962982995 instance=ExtResource("3_iawb1")]
+layout_mode = 2

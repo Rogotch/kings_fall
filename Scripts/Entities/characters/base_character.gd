@@ -13,7 +13,7 @@ var controller     : BaseCharacterController
 var move_service   : BattleCharacterMoveService
 var visual         : BaseCharacterVisual
 var parameters     : CharacterParameters
-var skills_manager : SkillsManager
+var skills_manager : SkillsManagerCharacter
 var input_listener : InputListener
 
 static func get_inject_dependencies() -> Array:
@@ -41,7 +41,7 @@ func inject_dependencies(
 	factory_movement       .Create(self)
 	factory_controllers    .Create(self, player)
 	factory_params         .Create(self)
-	factory_skills_managers.Create(self)
+	factory_skills_managers.CreateForCharacter(self)
 	pass
 
 #static func get_dependencies() -> Array:

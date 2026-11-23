@@ -1,10 +1,16 @@
 [gd_scene format=3 uid="uid://cx262tev6qwf0"]
 
 [ext_resource type="Script" uid="uid://dtvfsssgxr7w" path="res://Scripts/UI/scenes/battle_interface.gd" id="1_sgj3g"]
+[ext_resource type="Texture2D" uid="uid://dnky18ng2o5yr" path="res://Sprites/External/Top-Down Asset Pack/idle/organized_idle.png" id="3_i6e6p"]
 [ext_resource type="Resource" uid="uid://drrxmcgw8d1hm" path="res://Resources/UI/round_num_showing_params/big_scale.tres" id="3_oop0j"]
+[ext_resource type="PackedScene" uid="uid://bef7wcmrtxjw" path="res://UI/entities/character_panel/skills_panel.tscn" id="3_xcbuv"]
 [ext_resource type="Script" uid="uid://4140xwvtrqqc" path="res://Scripts/UI/entities/round_change_rich.gd" id="4_oop0j"]
 [ext_resource type="Texture2D" uid="uid://gvnw8xs5b22v" path="res://Sprites/External/FreeLightTextures/160x160 textures (88).png" id="5_sgj3g"]
-[ext_resource type="Script" uid="uid://dn2uii4vtdure" path="res://Scripts/arca/contextes/battle_ui_context.gd" id="6_i6e6p"]
+[ext_resource type="Script" uid="uid://dn2uii4vtdure" path="res://Scripts/arca/contextes/context_battle_ui.gd" id="6_i6e6p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxrbl"]
+atlas = ExtResource("3_i6e6p")
+region = Rect2(512, 128, 64, 64)
 
 [sub_resource type="Curve" id="Curve_tsctd"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -64,6 +70,174 @@ theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
+
+[node name="battle_ui_box" type="VBoxContainer" parent="MarginContainer" unique_id=2141854405]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="control_panel" type="HBoxContainer" parent="MarginContainer/battle_ui_box" unique_id=1063987934]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="character_panel" parent="MarginContainer/battle_ui_box/control_panel" unique_id=616910904 instance=ExtResource("3_xcbuv")]
+layout_mode = 2
+
+[node name="player_panel" type="HBoxContainer" parent="MarginContainer/battle_ui_box/control_panel" unique_id=1720483507]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="skills" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel" unique_id=186537888]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 38
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="skills_box" type="HBoxContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills" unique_id=147497515]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="skill" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=413196804]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill" unique_id=441188823]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill/skill_border" unique_id=1958737608]
+layout_mode = 2
+
+[node name="skill2" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=1480027218]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill2" unique_id=880981267]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill2/skill_border" unique_id=1744949807]
+layout_mode = 2
+
+[node name="skill3" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=403470211]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill3" unique_id=637027634]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill3/skill_border" unique_id=42918043]
+layout_mode = 2
+
+[node name="skill4" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=1419592568]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill4" unique_id=1328019637]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill4/skill_border" unique_id=2010503339]
+layout_mode = 2
+
+[node name="skill5" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=459185916]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill5" unique_id=836403140]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill5/skill_border" unique_id=1301411765]
+layout_mode = 2
+
+[node name="skill6" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=1379490923]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill6" unique_id=1504387056]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill6/skill_border" unique_id=1860205314]
+layout_mode = 2
+
+[node name="skill7" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=624781005]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill7" unique_id=1965436933]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill7/skill_border" unique_id=569473673]
+layout_mode = 2
+
+[node name="skill8" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box" unique_id=332432042]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skill_border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill8" unique_id=1276883739]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/skills/skills_box/skill8/skill_border" unique_id=2138885493]
+layout_mode = 2
+
+[node name="avatar" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel" unique_id=1078649899]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="border" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/avatar" unique_id=502724123]
+layout_mode = 2
+
+[node name="border_texture" type="TextureRect" parent="MarginContainer/battle_ui_box/control_panel/player_panel/avatar/border" unique_id=1955868893]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer/battle_ui_box/control_panel/player_panel/avatar/border" unique_id=1124637581]
+layout_mode = 2
+
+[node name="avatar_img" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel/avatar" unique_id=2000480139]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="avatar_texture" type="TextureRect" parent="MarginContainer/battle_ui_box/control_panel/player_panel/avatar/avatar_img" unique_id=643856368]
+layout_mode = 2
+texture = SubResource("AtlasTexture_lxrbl")
+stretch_mode = 5
 
 [node name="round_label" type="RichTextLabel" parent="MarginContainer" unique_id=1452805443]
 texture_filter = 2

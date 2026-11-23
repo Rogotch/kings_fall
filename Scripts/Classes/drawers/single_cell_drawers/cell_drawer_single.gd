@@ -1,5 +1,6 @@
 @abstract
 @tool
+@icon("uid://krf2ebd3wiqi")
 class_name CellDrawerSingle
 extends Resource
 

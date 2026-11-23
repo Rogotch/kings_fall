@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cu6kg88ctk8oq"]
+
+[ext_resource type="Script" uid="uid://bc5ryvgc20bur" path="res://Scripts/UI/entities/character_panel/avatar.gd" id="1_6ck6y"]
+[ext_resource type="Texture2D" uid="uid://dnky18ng2o5yr" path="res://Sprites/External/Top-Down Asset Pack/idle/organized_idle.png" id="2_82d4u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxrbl"]
+atlas = ExtResource("2_82d4u")
+region = Rect2(512, 128, 64, 64)
+
+[node name="avatar" type="MarginContainer" unique_id=1048137294]
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_6ck6y")
+
+[node name="border" type="MarginContainer" parent="." unique_id=2077996437]
+layout_mode = 2
+
+[node name="border_texture" type="TextureRect" parent="border" unique_id=451314041]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="border" unique_id=2091335286]
+layout_mode = 2
+
+[node name="avatar_img" type="MarginContainer" parent="." unique_id=158695435]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="center_point" type="Control" parent="avatar_img" unique_id=270232099]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="avatar_texture" type="TextureRect" parent="avatar_img" unique_id=2113076231]
+layout_mode = 2
+texture = SubResource("AtlasTexture_lxrbl")
+stretch_mode = 5

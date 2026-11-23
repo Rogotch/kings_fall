@@ -36,6 +36,13 @@ func FilterAffectedCells(filter_method : Callable) -> void:
 	affected_cells = affected_cells.filter(filter_method)
 	pass
 
+func SetAffectedCharacters() -> void:
+	affected_characters.clear()
+	for cell in affected_cells:
+		if has_character(cell):
+			affected_characters.append(get_character(cell))
+	pass
+
 func has_character(on_cell : Vector2i) -> bool:
 	return !move_system.is_cell_free(on_cell)
 	pass

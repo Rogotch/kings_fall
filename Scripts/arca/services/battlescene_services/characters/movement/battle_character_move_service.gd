@@ -13,17 +13,11 @@ var map_position : Vector2i
 var body         : BaseCharacter
 var speed        : float = 40
 
-static func get_dependencies() -> Array:
+static func get_inject_dependencies() -> Array:
 	return [BattleMoveSystem]
 
-func _init(move_system: BattleMoveSystem) -> void:
+func inject_dependencies(move_system: BattleMoveSystem, character : BaseCharacter) -> void:
 	MoveSystem        = move_system
-	pass
-
-static func get_inject_dependencies() -> Array:
-	return []
-
-func inject_dependencies(character : BaseCharacter) -> void:
 	body              = character
 	body.move_service = self
 	pass
@@ -76,6 +70,14 @@ func set_move_direction(direction : Vector2) -> void:
 	body.visual.SetDirection(direction)
 	pass
 
+func GetDirection(to_cell : Vector2i) -> Vector2:
+	return MoveSystem.GetDirection(map_position, to_cell)
+	pass
+
 func GetMoveArea() -> Array[Vector2i]:
 	return []
+	pass
+
+func Died() -> void:
+	MoveSystem.CharacterDied(map_position)
 	pass

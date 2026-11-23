@@ -4,25 +4,34 @@ extends RefCounted
 
 var state_machine  : CharacterStateMachine
 var character      : BaseCharacter
-var visual         : BaseCharacterVisual   : 
+var visual         : BaseCharacterVisual          : 
 	get: 
 		return null if character == null else character.visual
-var parameters     : CharacterParameters   : 
+var parameters     : CharacterParameters          : 
 	get: 
 		return null if character == null else character.parameters
+var move_service   : BattleCharacterMoveService   : 
+	get: 
+		return null if character == null else character.move_service
 
 func _init(_state_machine : CharacterStateMachine, owner_character : BaseCharacter) -> void:
 	state_machine = _state_machine
 	character = owner_character
 	pass
 
-func Enter() -> void:
+
+func Enter()  -> void:
+	visual.anim_finished.connect(anim_ended)
 	pass
 
-func Exit() -> void:
+func Exit()   -> void:
+	visual.anim_finished.disconnect(anim_ended)
 	pass
 
 func update() -> void: pass
+
+func anim_ended(state : BaseCharacterVisual.ANIMATION_STATE) -> void:
+	pass
 
 class Idle   extends BaseCharacterState:
 	func _init(_state_machine : CharacterStateMachine, owner_character : BaseCharacter) -> void:
@@ -30,10 +39,12 @@ class Idle   extends BaseCharacterState:
 		pass
 	
 	func Enter()  -> void:
+		super.Enter()
 		visual.SetState(BaseCharacterVisual.ANIMATION_STATE.IDLE)
 		pass
 	
 	func Exit()   -> void:
+		super.Exit()
 		pass
 	
 	func update() -> void:	pass
@@ -42,31 +53,46 @@ class Idle   extends BaseCharacterState:
 
 class Attack                 extends BaseCharacterState:
 	var target : Vector2i
+	var skill  : WarpedSkill
 	
 	func _init(
 			_state_machine  : CharacterStateMachine,
 			owner_character : BaseCharacter,
-			new_target      : Vector2i) -> void:
+			new_target      : Vector2i,
+			selected_skill  : WarpedSkill,
+			) -> void:
 		super._init(_state_machine, owner_character)
+		skill  = selected_skill
 		target = new_target
 		pass
 	
 	func Enter()  -> void:
-		visual.SetState(BaseCharacterVisual.ANIMATION_STATE.ATTACK)
-		state_machine.Idle()
+		super.Enter()
+		visual.SetDirection(move_service.GetDirection(target))
+		visual.SetState(skill.skill.skill_use_animation)
+		#visual.SetState(BaseCharacterVisual.ANIMATION_STATE.HURT)
+		visual.attack_hitted.connect(attack_hitted)
 		pass
 	
-	func Exit()   -> void:	pass
+	func Exit()   -> void:
+		super.Exit()
+		visual.attack_hitted.disconnect(attack_hitted)
+		pass
 	
 	func update() -> void:	pass
+	
+	func attack_hitted() -> void:
+		skill.Activate(target)
+		pass
+	
+	func anim_ended(state : BaseCharacterVisual.ANIMATION_STATE) -> void:
+		state_machine.Idle()
+		pass
 	pass
 
 class Move                   extends BaseCharacterState:
 	var target : Vector2i
 	var run_flag : bool
-	var move_service     : BattleCharacterMoveService   : 
-		get: 
-			return null if character == null else character.controller.move_service
 	
 	func _init(
 			_state_machine  : CharacterStateMachine,
@@ -79,6 +105,7 @@ class Move                   extends BaseCharacterState:
 		pass
 	
 	func Enter()  -> void:
+		super.Enter()
 		visual.SetState(
 			BaseCharacterVisual.ANIMATION_STATE.RUN
 			if run_flag else 
@@ -88,6 +115,7 @@ class Move                   extends BaseCharacterState:
 		pass
 	
 	func Exit()   -> void:
+		super.Exit()
 		if  move_service.move_ended.is_connected(state_machine.Idle):
 			move_service.move_ended.disconnect(  state_machine.Idle)
 		pass
@@ -119,16 +147,22 @@ class Hurt    extends BaseCharacterState:
 		pass
 	
 	func Enter()  -> void:
+		super.Enter()
 		visual.SetState(BaseCharacterVisual.ANIMATION_STATE.HURT)
 		parameters.Hurt(damage)
 		# TODO Добавить реакцию?
+		pass
+	
+	func Exit()   -> void:
+		super.Exit()
+		pass
+	
+	func anim_ended(state : BaseCharacterVisual.ANIMATION_STATE) -> void:
 		if parameters.IsAlive():
 			state_machine.Idle()
 		else:
 			state_machine.Death()
 		pass
-	
-	func Exit()   -> void:	pass
 	
 	func update() -> void:	pass
 	pass
@@ -142,10 +176,18 @@ class Death  extends BaseCharacterState:
 		pass
 	
 	func Enter()  -> void:
+		super.Enter()
+		move_service.Died()
 		visual.SetState(BaseCharacterVisual.ANIMATION_STATE.DEATH)
 		pass
 	
-	func Exit()   -> void:	pass
+	func Exit()   -> void :
+		super.Exit()
+		pass
 	
 	func update() -> void:	pass
+	
+	func anim_ended(state : BaseCharacterVisual.ANIMATION_STATE) -> void:
+		visual.Died()
+		pass
 	pass

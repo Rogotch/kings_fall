@@ -43,8 +43,8 @@ func Idle() -> void:
 	set_state(state)
 	pass
 
-func Attack(to_cell : Vector2i) -> void:
-	var state : BaseCharacterState.Attack = BaseCharacterState.Attack.new(self, character_owner, to_cell)
+func Attack(skill : WarpedSkill, to_cell : Vector2i) -> void:
+	var state : BaseCharacterState.Attack = BaseCharacterState.Attack.new(self, character_owner, to_cell, skill)
 	set_state(state)
 	pass
 

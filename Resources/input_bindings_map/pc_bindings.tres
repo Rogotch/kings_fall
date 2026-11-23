@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="InputBindingsMap" format=3 uid="uid://dphu8lyupm7g"]
+
+[ext_resource type="Script" uid="uid://b30sd5m61qcwc" path="res://Scripts/Classes/input/input_bindings_map.gd" id="1_kfowg"]
+[ext_resource type="Script" uid="uid://e13dtvqgfbrq" path="res://Scripts/Classes/input/binding_action.gd" id="1_segcn"]
+
+[sub_resource type="Resource" id="Resource_segcn"]
+resource_name = "battle_select_cell"
+script = ExtResource("1_segcn")
+action_name = "battle_select_cell"
+action_localizatiopn_key = "BATTLE_SELECT_CELL_INPUT_KEY"
+metadata/_custom_type_script = "uid://e13dtvqgfbrq"
+
+[sub_resource type="Resource" id="Resource_frl3r"]
+resource_name = "battle_cancel"
+script = ExtResource("1_segcn")
+action_name = "battle_cancel"
+action_localizatiopn_key = "BATTLE_CANCEL_INPUT_KEY"
+metadata/_custom_type_script = "uid://e13dtvqgfbrq"
+
+[resource]
+script = ExtResource("1_kfowg")
+actions = Array[ExtResource("1_segcn")]([SubResource("Resource_segcn"), SubResource("Resource_frl3r")])
+metadata/_custom_type_script = "uid://b30sd5m61qcwc"

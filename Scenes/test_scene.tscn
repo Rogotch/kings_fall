@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bpq23qr58akpv"]
 
 [ext_resource type="Script" uid="uid://biy6ke73a0nav" path="res://Scripts/Entities/instruments/grid_displayer.gd" id="1_3dogw"]
-[ext_resource type="Script" uid="uid://l4sx0duq733s" path="res://Scripts/arca/contextes/battle_context.gd" id="1_50ct6"]
-[ext_resource type="Script" uid="uid://r6858dxustxw" path="res://Scripts/Scenes/test_scene.gd" id="1_ak5v8"]
+[ext_resource type="Script" uid="uid://l4sx0duq733s" path="res://Scripts/arca/contextes/context_battle.gd" id="1_50ct6"]
+[ext_resource type="Script" uid="uid://r6858dxustxw" path="res://Scripts/Scenes/battle_scene.gd" id="1_ak5v8"]
 [ext_resource type="Resource" uid="uid://bd3pmtayc82u5" path="res://Resources/characters/test_character.tres" id="2_ak5v8"]
 [ext_resource type="Script" uid="uid://dv6qcg5b38evj" path="res://Scripts/arca/services/battlescene_services/battle_scene_pathes.gd" id="2_hb2xm"]
 [ext_resource type="Script" uid="uid://cxtohpgxebqib" path="res://Scripts/arca/services/battlescene_services/battle_scene_parameters.gd" id="5_x033f"]
@@ -510,7 +510,7 @@ script = ExtResource("1_50ct6")
 scene_pathes = NodePath("../Pathes")
 displayer = NodePath("../main_map/grid_displayer")
 scene_parameters = NodePath("../Parameters")
-installers_path = Array[String](["uid://l8b0aaa0ml1i"])
+installers_path = Array[String](["uid://l8b0aaa0ml1i", "uid://dnip0wxkyg38n", "uid://bn2ykdswolt7f"])
 metadata/_custom_type_script = "uid://l4sx0duq733s"
 
 [node name="Pathes" type="Node" parent="." unique_id=559637497 node_paths=PackedStringArray("main_map", "characters_node")]

@@ -225,7 +225,9 @@ class InputSelectCellSingleBase  extends InputSelectCellSingle:
 		pass
 	
 	func select_cell(cell : Vector2i) -> void:
-		if move_system.is_cell_free(cell) && move_system.can_move_to_point(character.move_service.map_position, cell):
+		if can_use_skill(skills_manager.base_skill, cell):
+			state_machine.Attack(skills_manager.base_skill, cell)
+		if can_move_to_cell(cell):
 			state_machine.Move(cell)
 		unfocus_cell(cell)
 		pass

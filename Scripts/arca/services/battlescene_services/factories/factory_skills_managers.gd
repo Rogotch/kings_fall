@@ -7,8 +7,8 @@ func _init(arca_container: ArcaContainer) -> void:
 	container = arca_container
 	pass
 
-func Create(character : BaseCharacter) -> SkillsManager:
-	var manager : SkillsManager = container.resolve(SkillsManager)
+func CreateForCharacter(character : BaseCharacter) -> SkillsManagerCharacter:
+	var manager : SkillsManagerCharacter = container.resolve(SkillsManagerCharacter)
 	container.inject(manager, [character])
 	character.skills_manager = manager
 	return manager

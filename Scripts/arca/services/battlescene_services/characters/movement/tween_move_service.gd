@@ -3,11 +3,8 @@ extends BattleCharacterMoveService
 
 var tween : Tween
 
-static func get_dependencies() -> Array:
-	return [BattleMoveSystem]
-
 static func get_inject_dependencies() -> Array:
-	return []
+	return [BattleMoveSystem]
 
 func get_time_to_move(from_cell : Vector2i, to_cell : Vector2i, speed_override : float = speed) -> float:
 	var start_point  : Vector2 = MoveSystem.get_position_by_map(from_cell)

@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://3c8fnqg5al8n"]
+
+[ext_resource type="Script" uid="uid://b7ie5l85v1128" path="res://Scripts/UI/entities/character_panel/skill_button.gd" id="1_tv4s7"]
+[ext_resource type="Texture2D" uid="uid://dlnwxm4ha3dw2" path="res://Sprites/External/at_icons/comet.svg" id="2_xbo86"]
+
+[node name="skill_button" type="MarginContainer" unique_id=1257103498]
+custom_minimum_size = Vector2(44, 44)
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+script = ExtResource("1_tv4s7")
+
+[node name="skill_border" type="MarginContainer" parent="." unique_id=1869581341]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="skill_border" unique_id=1739260505]
+layout_mode = 2
+
+[node name="skill_icon" type="MarginContainer" parent="." unique_id=1396126052]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="icon" type="TextureRect" parent="skill_icon" unique_id=26547950]
+layout_mode = 2
+texture = ExtResource("2_xbo86")
+
+[node name="skill_input" type="Button" parent="." unique_id=1732056770]
+layout_mode = 2
+toggle_mode = true
+flat = true
+
+[connection signal="mouse_entered" from="skill_input" to="." method="_on_skill_input_mouse_entered"]
+[connection signal="mouse_exited" from="skill_input" to="." method="_on_skill_input_mouse_exited"]
+[connection signal="toggled" from="skill_input" to="." method="_on_skill_input_toggled"]

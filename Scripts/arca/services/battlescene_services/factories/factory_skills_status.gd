@@ -1,4 +1,4 @@
-class_name FactoryWarpedSkills
+class_name FactorySkillsStatus
 extends RefCounted
 
 var container : ArcaContainer
@@ -7,9 +7,9 @@ func _init(arca_container: ArcaContainer) -> void:
 	container = arca_container
 	pass
 
-func Create(original_skill : BaseSkill, character : BaseCharacter) -> WarpedCharacterSkill:
-	var skill : WarpedCharacterSkill = container.resolve(WarpedCharacterSkill)
-	container.inject(skill, [original_skill, character])
-	return skill
+func Create(warped_skill : WarpedSkill) -> SkillStatus:
+	var context : SkillStatus = container.resolve(SkillStatus)
+	container.inject(context, [warped_skill])
+	return context
 	pass
 	

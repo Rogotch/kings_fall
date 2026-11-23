@@ -29,16 +29,6 @@ func _init(
 	cells_displayer         = map_displayer.cells_displayer
 	pass
 
-func physics_tick(delta: float) -> void:
-	var  cell : Vector2i = battle_map.local_to_map(battle_map.get_local_mouse_position())
-	if   cell != focused_cell && cells_displayer != null:
-		focused_cell = cell
-		if battle_field_parameters.field_has_point(cell):
-			focus_cell(cell)
-		else:
-			unfocus_cell()
-	pass
-
 #region Cells focus
 func RefocusCell() -> void:
 	focus_cell(focused_cell)

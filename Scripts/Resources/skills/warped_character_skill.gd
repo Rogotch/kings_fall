@@ -24,6 +24,11 @@ func inject_dependencies(warping_skill : BaseSkill, character : BaseCharacter) -
 	set_up_skill_status()
 	pass
 
+func Activate(on_cell : Vector2i) -> void:
+	var context : SkillContext = FocusCell(on_cell)
+	skill.Activate(context)
+	pass
+
 func FocusCell(cell : Vector2i) -> SkillContext:
 	if  current_context == null:
 		current_context =  get_skill_context(cell)

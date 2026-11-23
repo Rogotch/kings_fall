@@ -27,6 +27,7 @@ func _init(
 	move_system     = move_sys
 	pass
 
+@abstract func Activate               (on_cell : Vector2i) -> void
 @abstract func FocusCell                 (cell : Vector2i) -> SkillContext
 @abstract func EndFocus                                 () -> void
 @abstract func CanUse                 (on_cell : Vector2i) -> bool

@@ -9,11 +9,17 @@ extends Resource
 	# TODO target_type - модификатор. Указываем, по какому принципу отбираются клетки - только пустые, только персонажи, только враги, только союзники
 # TODO mechanics - когда получили все клетки, по которым должна пройти активация, активируем механику неа неё
 
-@export var skill_name  : String
-@export var cooldown    : int
-@export var skill_range : SkillRangeBase
-@export var targeting   : TargetingBaseSkill
-@export var mechanics   : Array[BaseSkillMechanic]
+@export var skill_name          : String
+@export var cooldown            : int
+@export var skill_use_animation : BaseCharacterVisual.ANIMATION_STATE
+@export var skill_range         : SkillRangeBase
+@export var targeting           : TargetingBaseSkill
+@export var mechanics           : Array[BaseSkillMechanic]
+
+func Activate(context : SkillContext) -> void:
+	for mechanic in mechanics:
+		mechanic.Activate(context)
+	pass
 
 func InRange(context : SkillContext) -> bool:
 	return skill_range.CanActivate(context)
@@ -43,10 +49,6 @@ func SetFocusedCells(context : SkillContext) -> void:
 	targeting.ModifyContext(context)
 	pass
 
-func Activate(context : SkillContext) -> void:
-	for mechanic in mechanics:
-		mechanic.Activate(context)
-	pass
 
 #func create_context() -> SkillContext:
 	#var context : SkillContext = SkillContext.new()

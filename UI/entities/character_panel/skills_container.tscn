@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://b1i4po7kngi7y"]
+
+[ext_resource type="Script" uid="uid://mp35dowjody1" path="res://Scripts/UI/entities/character_panel/skills_container.gd" id="1_e6mwr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lxrbl"]
+bg_color = Color(0.25565878, 0.2556588, 0.2556587, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.36282945, 0.36282954, 0.36282924, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[node name="skills_container" type="MarginContainer" unique_id=1962982995]
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_e6mwr")
+
+[node name="skills_background" type="MarginContainer" parent="." unique_id=448016011]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="skills_background" unique_id=1968536501]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lxrbl")
+
+[node name="skills" type="MarginContainer" parent="." unique_id=872023131]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="skills_box" type="HBoxContainer" parent="skills" unique_id=1745871275]
+layout_mode = 2
+size_flags_horizontal = 3

@@ -5,7 +5,8 @@ var map           : TileMapLayer
 var parameters    : BattleSceneParameters
 var pathfinding   : AStarGrid2D
 
-var cells : Dictionary[Vector2i, BaseCharacter]
+var cells   : Dictionary[Vector2i, BaseCharacter]
+var corpses : Dictionary[Vector2i, Array]
 
 static func get_dependencies() -> Array:
 	return [
@@ -32,6 +33,12 @@ func set_up_pathfinding() -> void:
 
 func GetAreaCells(start_cell : Vector2i, cost : int, min_cost : int, ignore_solid : bool) -> Array[Vector2i]:
 	return Array(get_area_cost_cells(start_cell, cost, min_cost, ignore_solid).keys(), TYPE_VECTOR2I, "", null)
+	pass
+
+func GetDirection(from_cell : Vector2i, to_cell : Vector2i) -> Vector2:
+	var start_point  : Vector2 = get_position_by_map(from_cell)
+	var target_point : Vector2 = get_position_by_map(to_cell)
+	return start_point.direction_to(target_point)
 	pass
 
 func get_area_cost_cells(start_cell : Vector2i, cost : int, min_cost : int , ignore_solid : bool) -> Dictionary[Vector2i, int]:
@@ -131,6 +138,14 @@ func get_path_by_speed(from_cell : Vector2i, to_cell : Vector2i, speed : int) ->
 		return path
 	else:
 		return path.slice(0, speed + 1)
+	pass
+
+func CharacterDied(on_cell : Vector2i) -> void:
+	if !corpses.has(on_cell):
+		corpses[on_cell] = []
+	corpses[on_cell].append(cells[on_cell])
+	cells.erase(on_cell)
+	pathfinding.set_point_solid(on_cell, false)
 	pass
 
 #func change_character_cell(cell_from : Vector2i, cell_to : Vector2i) -> void:

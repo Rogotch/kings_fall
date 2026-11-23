@@ -1,0 +1,10 @@
+{
+  "current": "board_b3c5",
+  "boards": [
+    {
+      "id": "board_b3c5",
+      "name": "Разработка",
+      "path": "res://godoban_boards/board_b3c5.json"
+    }
+  ]
+}

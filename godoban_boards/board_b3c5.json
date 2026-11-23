@@ -1,0 +1,20 @@
+{
+  "name": "Разработка",
+  "next_id": 2,
+  "tags": [],
+  "epics": [],
+  "tasks": [
+    {
+      "id": "task_1",
+      "title": "Сделать панель персонажа",
+      "description": "",
+      "status": "backlog",
+      "priority": "medium",
+      "epic_id": null,
+      "due_date": null,
+      "tags": [],
+      "created_at": 1795365933,
+      "updated_at": 1795365933
+    }
+  ]
+}
