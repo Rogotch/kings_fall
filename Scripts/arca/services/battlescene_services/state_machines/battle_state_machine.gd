@@ -17,12 +17,12 @@ static func get_dependencies() -> Array:
 		]
 
 func _init(
-			input_listener            : BattleTurnsSM,
+			turns_sm                  : BattleTurnsSM,
 			initiative_service        : InitiativeService,
 			all_characters_controller : AllCharactersController,
 			events_system      : BattleEvents,
 	) -> void:
-	battle_turns          = input_listener
+	battle_turns          = turns_sm 
 	initiative            = initiative_service
 	characters_controller = all_characters_controller
 	events                = events_system

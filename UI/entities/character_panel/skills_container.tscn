@@ -15,6 +15,7 @@ corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
 [node name="skills_container" type="MarginContainer" unique_id=1962982995 node_paths=PackedStringArray("skills_box")]
+mouse_filter = 0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 8

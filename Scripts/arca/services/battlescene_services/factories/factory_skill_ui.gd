@@ -14,8 +14,8 @@ func _init(arca_container: ArcaContainer) -> void:
 	#pass
 	
 func CreateButton() -> SkillButtonBattle:
-	var context : SkillButtonBattle = container.resolve(SkillButtonBattle)
+	var skill : SkillButtonBattle = container.resolve(SkillButtonBattle)
 	#container.inject(context, [warped_skill])
-	return context
+	return skill
 	pass
 	

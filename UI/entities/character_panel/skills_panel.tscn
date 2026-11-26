@@ -11,7 +11,12 @@ avatar = NodePath("avatar")
 skills_container = NodePath("skills_container")
 
 [node name="avatar" parent="." unique_id=1048137294 instance=ExtResource("2_3shrl")]
+custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
 
 [node name="skills_container" parent="." unique_id=1962982995 instance=ExtResource("3_iawb1")]
 layout_mode = 2
+
+[connection signal="skill_input_toggled" from="skills_container" to="." method="_on_skills_container_skill_input_toggled"]
+[connection signal="skill_mouse_entered" from="skills_container" to="." method="_on_skills_container_skill_mouse_entered"]
+[connection signal="skill_mouse_exited" from="skills_container" to="." method="_on_skills_container_skill_mouse_exited"]

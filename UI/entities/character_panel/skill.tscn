@@ -2,8 +2,19 @@
 
 [ext_resource type="Script" uid="uid://b7ie5l85v1128" path="res://Scripts/UI/entities/character_panel/skill_button.gd" id="1_tv4s7"]
 [ext_resource type="Shader" uid="uid://cp654hpkm67dy" path="res://Shaders/vertical_progress.gdshader" id="2_t6co4"]
-[ext_resource type="Texture2D" uid="uid://dlnwxm4ha3dw2" path="res://Sprites/External/at_icons/comet.svg" id="2_xbo86"]
-[ext_resource type="Texture2D" uid="uid://d2dtx56bc65lv" path="res://Sprites/External/Game-Icon-Pack/time.png" id="3_xbo86"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbo86"]
+resource_local_to_scene = true
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xfcg0"]
 shader = ExtResource("2_t6co4")
@@ -14,7 +25,7 @@ shader_parameter/lightness = 0.400000019
 shader_parameter/terminator_color = Color(1, 1, 1, 1)
 shader_parameter/terminator_size_px = 64.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6co4"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tv4s7"]
 content_margin_left = 0.0
 content_margin_top = 0.0
 content_margin_right = 0.0
@@ -26,37 +37,30 @@ corner_radius_bottom_right = 3
 [sub_resource type="LabelSettings" id="LabelSettings_owlir"]
 font_size = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbo86"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tv4s7"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.1, 0.1, 0.1, 0.6)
-corner_radius_top_left = 3
-corner_radius_bottom_right = 3
-
-[node name="skill_button" type="MarginContainer" unique_id=1257103498]
+[node name="skill_button" type="MarginContainer" unique_id=1257103498 node_paths=PackedStringArray("skill_border", "skill_input", "icon", "button_num", "top_ui", "background")]
 custom_minimum_size = Vector2(44, 44)
 theme_override_constants/margin_left = 4
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 script = ExtResource("1_tv4s7")
+skill_border = NodePath("skill_border")
+skill_input = NodePath("skill_input")
+icon = NodePath("skill_icon/icon")
+button_num = NodePath("top_ui/box/left/label_container/button_num")
+top_ui = NodePath("top_ui")
+background = NodePath("skill_border/Panel")
 
 [node name="skill_border" type="MarginContainer" parent="." unique_id=1869581341]
 layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="Panel" type="Panel" parent="skill_border" unique_id=1739260505]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xbo86")
 
 [node name="skill_icon" type="MarginContainer" parent="." unique_id=1396126052]
 layout_mode = 2
@@ -68,78 +72,29 @@ theme_override_constants/margin_bottom = 2
 [node name="icon" type="TextureRect" parent="skill_icon" unique_id=26547950]
 material = SubResource("ShaderMaterial_xfcg0")
 layout_mode = 2
-texture = ExtResource("2_xbo86")
 
 [node name="top_ui" type="MarginContainer" parent="." unique_id=2004116191]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_top = 22
 
-[node name="HBoxContainer" type="HBoxContainer" parent="top_ui" unique_id=1384432074]
+[node name="box" type="HBoxContainer" parent="top_ui" unique_id=1384432074]
 layout_mode = 2
 
-[node name="right" type="MarginContainer" parent="top_ui/HBoxContainer" unique_id=311800098]
-visible = false
-custom_minimum_size = Vector2(14.43, 8)
-layout_mode = 2
-
-[node name="background" type="Panel" parent="top_ui/HBoxContainer/right" unique_id=1039641299]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_t6co4")
-
-[node name="label_container" type="MarginContainer" parent="top_ui/HBoxContainer/right" unique_id=767972031]
-layout_mode = 2
-theme_override_constants/margin_top = -3
-theme_override_constants/margin_bottom = -4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="top_ui/HBoxContainer/right/label_container" unique_id=146927930]
-layout_mode = 2
-
-[node name="text" type="Label" parent="top_ui/HBoxContainer/right/label_container/HBoxContainer" unique_id=1903169720]
-layout_mode = 2
-size_flags_vertical = 1
-text = "1"
-label_settings = SubResource("LabelSettings_owlir")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="center" type="MarginContainer" parent="top_ui/HBoxContainer" unique_id=1885321154]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Panel" type="Panel" parent="top_ui/HBoxContainer/center" unique_id=530559099]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xbo86")
-
-[node name="left" type="MarginContainer" parent="top_ui/HBoxContainer" unique_id=1702446494]
+[node name="left" type="MarginContainer" parent="top_ui/box" unique_id=1702446494]
 custom_minimum_size = Vector2(16, 8)
 layout_mode = 2
 size_flags_horizontal = 10
 
-[node name="background" type="Panel" parent="top_ui/HBoxContainer/left" unique_id=1833435349]
+[node name="background" type="Panel" parent="top_ui/box/left" unique_id=1833435349]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tv4s7")
 
-[node name="icon_box" type="MarginContainer" parent="top_ui/HBoxContainer/left" unique_id=1725245401]
-visible = false
-layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_right = 8
-
-[node name="time_icon" type="TextureRect" parent="top_ui/HBoxContainer/left/icon_box" unique_id=1457025327]
-layout_mode = 2
-size_flags_horizontal = 3
-texture = ExtResource("3_xbo86")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="label_container" type="MarginContainer" parent="top_ui/HBoxContainer/left" unique_id=904449788]
+[node name="label_container" type="MarginContainer" parent="top_ui/box/left" unique_id=904449788]
 layout_mode = 2
 theme_override_constants/margin_top = -3
 theme_override_constants/margin_bottom = -4
 
-[node name="text" type="Label" parent="top_ui/HBoxContainer/left/label_container" unique_id=980064621]
+[node name="button_num" type="Label" parent="top_ui/box/left/label_container" unique_id=980064621]
 layout_mode = 2
 size_flags_vertical = 1
 text = "1"

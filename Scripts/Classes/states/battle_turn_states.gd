@@ -82,12 +82,14 @@ class PlayerTurn extends Turn:
 		super.Enter()
 		input_state_machine.SelectCellSingleBase(character)
 		player_state_machine.state_changed.connect(character_state_changed)
+		events.player_turn_started.emit()
 		pass
 		
 	func Exit() -> void:
 		super.Exit()
 		input_state_machine.Focus()
 		player_state_machine.state_changed.disconnect(character_state_changed)
+		events.player_turn_ended.emit()
 		pass
 	
 	func character_state_changed(new_state : BaseCharacterState) -> void:

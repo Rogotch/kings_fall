@@ -78,13 +78,16 @@ mouse_filter = 2
 [node name="control_panel" type="HBoxContainer" parent="MarginContainer/battle_ui_box" unique_id=1063987934]
 layout_mode = 2
 size_flags_vertical = 10
+mouse_filter = 2
 
 [node name="character_panel" parent="MarginContainer/battle_ui_box/control_panel" unique_id=616910904 instance=ExtResource("3_xcbuv")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="player_panel" type="HBoxContainer" parent="MarginContainer/battle_ui_box/control_panel" unique_id=1720483507]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="skills" type="MarginContainer" parent="MarginContainer/battle_ui_box/control_panel/player_panel" unique_id=186537888]
 layout_mode = 2

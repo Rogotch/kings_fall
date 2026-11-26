@@ -43,6 +43,7 @@ func Exit() -> void:
 # TODO Start Battle
 class StartBattle   extends BattleState:
 	func Enter() -> void:
+		battle_turns.input_sm.LockInput()
 		characters_controller.spawn_squads_by_params()
 		initiative.BaseSetUpCharactrers(characters_controller.characters_all)
 		initiative.UpdateInitiative()

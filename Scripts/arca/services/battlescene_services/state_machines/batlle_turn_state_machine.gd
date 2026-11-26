@@ -61,3 +61,9 @@ func NewRound() -> void:
 	var new_turn_state : BattleTurnState.NewRound  = BattleTurnState.NewRound.new(self)
 	change_state(new_turn_state)
 	pass
+
+func GetCurrentCharacter() -> BaseCharacter:
+	if current_state is not BattleTurnState.CharacterTurn:
+		return null
+	return current_state.character
+	pass

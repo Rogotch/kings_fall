@@ -58,7 +58,7 @@ func _process(delta: float) -> void:
 
 func configure_character(on_position : Vector2i) -> void:
 	parameters.character_died.connect(disable_character)
-	skills_manager.SetBaseSkill(data.base_skill)
+	skills_manager.SetUpByCharacterData(data)
 	move_service.place_on_position(on_position)
 	factory_visual.load_visual_node(self)
 	controller.state_machine.Idle()

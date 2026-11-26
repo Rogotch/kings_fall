@@ -7,12 +7,14 @@
 atlas = ExtResource("2_82d4u")
 region = Rect2(512, 128, 64, 64)
 
-[node name="avatar" type="MarginContainer" unique_id=1048137294]
+[node name="avatar" type="MarginContainer" unique_id=1048137294 node_paths=PackedStringArray("border_texture", "avatar_texture")]
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 script = ExtResource("1_6ck6y")
+border_texture = NodePath("border/border_texture")
+avatar_texture = NodePath("avatar_img/avatar_texture")
 
 [node name="border" type="MarginContainer" parent="." unique_id=2077996437]
 layout_mode = 2

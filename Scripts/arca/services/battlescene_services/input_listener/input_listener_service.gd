@@ -29,6 +29,9 @@ func _init(
 	cells_displayer         = map_displayer.cells_displayer
 	pass
 
+func recive_input(event : InputEvent) -> void:
+	pass
+
 #region Cells focus
 func RefocusCell() -> void:
 	focus_cell(focused_cell)

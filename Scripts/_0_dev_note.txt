@@ -29,3 +29,24 @@ func inject_dependencies(
 	dependency = _dependency
 	other      = _other
 	pass
+
+func tick(delta: float) -> void:
+	pass # _process
+
+func physics_tick(delta: float) -> void:
+	pass # _physics_process
+
+func input(event: InputEvent) -> void:
+	pass # _input
+
+func unhandled_input(event: InputEvent) -> void:
+	pass # _unhandled_input
+
+func shortcut_input(event: InputEvent) -> void:
+	pass # _shortcut_input
+
+func unhandled_key_input(event: InputEvent) -> void:
+	pass # _unhandled_key_input
+
+func dispose() -> void:
+	pass # при уничтожении владеющего контейнера

@@ -8,7 +8,10 @@ static func get_dependencies() -> Array:
 				MapDisplayer,
 			]
 
-func input(event: InputEvent) -> void:
+#func recive_input(event: InputEvent) -> void:
+func unhandled_input(event: InputEvent) -> void:
+	if !battle_field_parameters.field_has_point(focused_cell):
+		return
 	if event.is_action("battle_select_cell"):
 		select_cell()
 	if event.is_action("battle_cancel_action"):

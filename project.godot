@@ -27,12 +27,17 @@ ArcaProjectContextNode="*uid://c82hnghu0yubg"
 
 gdscript/warnings/unused_variable=0
 gdscript/warnings/unused_parameter=0
+gdscript/warnings/unused_signal=0
 gdscript/warnings/unreachable_code=0
 
 [display]
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor]
+
+script/templates_search_path="res://Scripts/script_templates"
 
 [editor_plugins]
 

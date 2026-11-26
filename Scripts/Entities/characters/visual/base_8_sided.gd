@@ -40,7 +40,6 @@ func get_state_by_anim_name(anim_name : String) -> ANIMATION_STATE:
 
 func SetState(new_state : ANIMATION_STATE) -> void:
 	playback.travel(STATES_ANIM_NAMES[new_state])
-	#print_debug("anim travel %s " % STATES_ANIM_NAMES[new_state])
 	#set_spritelist(new_state)
 	pass
 
@@ -62,6 +61,5 @@ func Died() -> void:
 	pass
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
-	#print_debug("anim finished %s " % anim_name)
 	anim_finished.emit(get_state_by_anim_name(anim_name))
 	pass # Replace with function body.

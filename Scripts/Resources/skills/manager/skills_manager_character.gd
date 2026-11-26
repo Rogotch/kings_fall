@@ -17,6 +17,12 @@ func inject_dependencies(owner_character : BaseCharacter) -> void:
 	character = owner_character
 	pass
 
+func SetUpByCharacterData(data : CharacterData) -> void:
+	SetBaseSkill(data.base_skill)
+	for skill in data.aviable_skills:
+		AddSkill(skill)
+	pass
+
 func SetBaseSkill(skill : BaseSkill) -> void:
 	if skill == null:
 		return

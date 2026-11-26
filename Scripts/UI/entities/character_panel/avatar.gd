@@ -2,8 +2,8 @@
 class_name CharacterAvatar
 extends MarginContainer
 
-@onready var border_texture: TextureRect = $border/border_texture
-@onready var avatar_texture: TextureRect = $avatar_img/avatar_texture
+@export var border_texture: TextureRect
+@export var avatar_texture: TextureRect
 
 static func get_inject_dependencies() -> Array:
 	return [
@@ -17,4 +17,8 @@ func inject_dependencies(
 	) -> void:
 	#skill_ui_factory = factory
 	#ui_configs       = configs
+	pass
+
+func SetAvatar(texture : Texture2D) -> void:
+	avatar_texture.texture = texture
 	pass

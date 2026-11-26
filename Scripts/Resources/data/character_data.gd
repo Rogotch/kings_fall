@@ -8,5 +8,10 @@ extends Resource
 @export var max_health     : int
 @export var speed          : int
 @export var start_position : Vector2i
+@export var avatar_texture : Texture2D
+
+@export_file_path("*.tscn")
+var avatar_entity : String
 
 @export var base_skill     : BaseSkill
+@export var aviable_skills : Array[BaseSkill]

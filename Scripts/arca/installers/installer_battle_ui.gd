@@ -7,7 +7,6 @@ func install(container: ArcaContainer, ctx) -> void:
 	container.inject(battle_ui.round_label)
 	
 	for panel in battle_ui.character_panels:
-		prints(panel, panel.skills_container)
 		container.inject(panel)
 		container.inject(panel.skills_container)
 	pass

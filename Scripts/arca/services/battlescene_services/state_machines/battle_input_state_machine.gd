@@ -23,7 +23,6 @@ func _init(
 	input_service = _input_service
 	move_system   = _move_system
 	displayer     = _displayer
-	LockInput()
 	pass
 
 func change_current_input(new_input_state : BattleInputStates) -> void:

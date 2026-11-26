@@ -5,11 +5,11 @@ const SERVICE_BATTLE                := preload("uid://ck1wa0af6cmcu")
 const SERVICE_BATTLE_INITIATIVE     := preload("uid://bb5ndvirp27sv")
 const SERVICE_MOVE                  := preload("uid://dmuqidyrvwv7q")
 const ALL_CHARACTERS_CONTROLLER     := preload("uid://cjhlw8ty5mp2b")
-const SKILLS_PROVIDER_BATTLE        := preload("uid://d2i88u7xr5fgd")
+const DATA_PROVIDER_BATTLE          := preload("uid://d2i88u7xr5fgd")
 
 # Input
-const                INPUT_LISTENER := preload("uid://lgrvmfd3n7p8")
-const             INPUT_LISTENER_PC := preload("uid://d3tp5j8bif48f")
+const INPUT_LISTENER                := preload("uid://lgrvmfd3n7p8")
+const INPUT_LISTENER_PC             := preload("uid://d3tp5j8bif48f")
 
 # State Machines
 const STATE_MACHINE_BATLLE_TURN     := preload("uid://c228xvjtjevc")
@@ -28,11 +28,11 @@ const FACTORY_DRAWERS               := preload("uid://bavpfv3y5jmf6")
 const BATTLE_INTERFACE              := preload("uid://cx262tev6qwf0")
 
 func install(container: ArcaContainer, ctx) -> void:
-	var battle = ctx as ContextBattle
+	var battle : ContextBattle    = ctx as ContextBattle
+	var bridge : DataBridgeBattle = container.resolve(DataBridgeBattle)
 	container.bind(BattleScenePathes)            .from_instance(battle.scene_pathes)
 	container.bind(MapDisplayer)                 .from_instance(battle.displayer)
 	container.bind(BattleSceneParameters)        .from_instance(battle.scene_parameters)
-	container.bind(SkillsProvider)               .from_instance(SKILLS_PROVIDER_BATTLE.new())
 	
 	container.bind(SERVICE_BATTLE)               .as_single()
 	container.bind(SERVICE_BATTLE_INITIATIVE)    .as_single()
@@ -59,4 +59,7 @@ func install(container: ArcaContainer, ctx) -> void:
 		return listener)
 	
 	container.inject(battle.displayer)
+	container.inject(bridge)
+	
+	#container.bind(DataProvider)               .from_instance(DATA_PROVIDER_BATTLE.new(container))
 	pass

@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="BaseSkill" format=3 uid="uid://dux6o0i5iyo75"]
 
+[ext_resource type="Texture2D" uid="uid://dlnwxm4ha3dw2" path="res://Sprites/External/at_icons/comet.svg" id="1_ls6hx"]
 [ext_resource type="Script" uid="uid://byfq1peo832la" path="res://Scripts/Resources/skills/mechanics/_base_mechanic.gd" id="1_pdang"]
 [ext_resource type="Script" uid="uid://of26tspsi3f3" path="res://Scripts/Resources/skills/_base_skill.gd" id="2_iux44"]
 [ext_resource type="Script" uid="uid://c2sj3noml4raw" path="res://Scripts/Resources/skills/mechanics/damage_mechanics.gd" id="2_ls6hx"]
@@ -32,6 +33,9 @@ metadata/_custom_type_script = "uid://hrybwmexixjm"
 
 [resource]
 script = ExtResource("2_iux44")
+name_key = "test_skill_name_key"
+description_key = "test_skill_description_key"
+icon = ExtResource("1_ls6hx")
 char_animation_key = 1
 skill_range = SubResource("Resource_iux44")
 targeting = SubResource("Resource_frlyp")
