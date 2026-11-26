@@ -1,10 +1,8 @@
 extends Node2D
 
 @export var battle_context: ContextBattle 
-const BATTLE_INTERFACE = preload("uid://cx262tev6qwf0")
 
 func _ready() -> void:
-	init_interface()
 	var battle_controller : BattleSM = battle_context.container.resolve(BattleSM)
 	battle_controller.StartBattle()
 	#spawner.spawn(test_character, Vector2i(1, 2), false)
@@ -15,9 +13,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
-
-func init_interface() -> void:
-	var interface : BattleInterface = BATTLE_INTERFACE.instantiate()
-	battle_context.add_child(interface)
 	pass

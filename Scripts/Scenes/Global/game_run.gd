@@ -1,15 +1,17 @@
 @icon("uid://dj4jpafcjup8j")
 extends Node
 
-const BATTLE_SCENE := preload("uid://bpq23qr58akpv")
+# Scenes
+const BATTLE_SCENE    := preload("uid://bpq23qr58akpv")
+const INTERFACE_HUB   := preload("uid://bqieswrcfkjf7")
 
 @export var run_context : ContextGameRun
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	InitUIScene()
 	InitBattleScene()
 	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -17,5 +19,10 @@ func _process(delta: float) -> void:
 
 func InitBattleScene() -> void:
 	var new_scene := BATTLE_SCENE.instantiate()
+	run_context.add_child(new_scene)
+	pass
+
+func InitUIScene() -> void:
+	var new_scene := INTERFACE_HUB.instantiate()
 	run_context.add_child(new_scene)
 	pass

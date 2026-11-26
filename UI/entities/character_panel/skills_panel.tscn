@@ -4,9 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://cu6kg88ctk8oq" path="res://UI/entities/character_panel/avatar.tscn" id="2_3shrl"]
 [ext_resource type="PackedScene" uid="uid://b1i4po7kngi7y" path="res://UI/entities/character_panel/skills_container.tscn" id="3_iawb1"]
 
-[node name="skills_panel" type="HBoxContainer" unique_id=616910904]
+[node name="skills_panel" type="HBoxContainer" unique_id=616910904 node_paths=PackedStringArray("avatar", "skills_container")]
 size_flags_horizontal = 3
 script = ExtResource("1_67imc")
+avatar = NodePath("avatar")
+skills_container = NodePath("skills_container")
 
 [node name="avatar" parent="." unique_id=1048137294 instance=ExtResource("2_3shrl")]
 layout_mode = 2

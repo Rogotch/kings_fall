@@ -5,6 +5,7 @@ const SERVICE_BATTLE                := preload("uid://ck1wa0af6cmcu")
 const SERVICE_BATTLE_INITIATIVE     := preload("uid://bb5ndvirp27sv")
 const SERVICE_MOVE                  := preload("uid://dmuqidyrvwv7q")
 const ALL_CHARACTERS_CONTROLLER     := preload("uid://cjhlw8ty5mp2b")
+const SKILLS_PROVIDER_BATTLE        := preload("uid://d2i88u7xr5fgd")
 
 # Input
 const                INPUT_LISTENER := preload("uid://lgrvmfd3n7p8")
@@ -31,6 +32,7 @@ func install(container: ArcaContainer, ctx) -> void:
 	container.bind(BattleScenePathes)            .from_instance(battle.scene_pathes)
 	container.bind(MapDisplayer)                 .from_instance(battle.displayer)
 	container.bind(BattleSceneParameters)        .from_instance(battle.scene_parameters)
+	container.bind(SkillsProvider)               .from_instance(SKILLS_PROVIDER_BATTLE.new())
 	
 	container.bind(SERVICE_BATTLE)               .as_single()
 	container.bind(SERVICE_BATTLE_INITIATIVE)    .as_single()

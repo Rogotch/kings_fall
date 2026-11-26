@@ -22,6 +22,12 @@ var characters_controller : AllCharactersController:
 	get():
 		return battle_controller.characters_controller
 
+var  events               : BattleEvents:
+	set(value):
+		return
+	get():
+		return battle_controller.events
+
 func _init(
 		battle_sm : BattleSM
 	) -> void:
@@ -42,6 +48,10 @@ class StartBattle   extends BattleState:
 		initiative.UpdateInitiative()
 		battle_controller.Battle()
 		pass
+	
+	func Exit() -> void:
+		events.battle_started.emit()
+		pass
 	pass
 
 # TODO Battle
@@ -53,8 +63,14 @@ class Battle        extends BattleState:
 
 # TODO Victory
 class Victory       extends BattleState:
+	func Enter() -> void:
+		events.battle_winned.emit()
+		pass
 	pass
 
 # TODO Lose
 class Lose          extends BattleState:
+	func Enter() -> void:
+		events.battle_losed.emit()
+		pass
 	pass

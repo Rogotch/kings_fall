@@ -16,11 +16,11 @@ var  initiative          : InitiativeService:
 	get():
 		return battle_state_machine.initiative
 
-var  round_label         : BattleRoundLabel:
+var  events              : BattleEvents:
 	set(value):
 		return
 	get():
-		return battle_state_machine.round_label
+		return battle_state_machine.events
 
 var  map_displayer       : MapDisplayer:
 	set(value):
@@ -130,7 +130,7 @@ class NewRound  extends BattleTurnState:
 	func Enter() -> void:
 		super.Enter()
 		initiative.NewRound()
-		round_label.RunChangeRound(initiative.current_num_round)
+		events.round_changed.emit(initiative.current_num_round)
 		run_next_turn()
 		pass
 	pass

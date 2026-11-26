@@ -32,8 +32,7 @@ metadata/_custom_type_script = "uid://hrybwmexixjm"
 
 [resource]
 script = ExtResource("2_iux44")
-skill_name = "test_skill"
-skill_use_animation = 1
+char_animation_key = 1
 skill_range = SubResource("Resource_iux44")
 targeting = SubResource("Resource_frlyp")
 mechanics = Array[ExtResource("1_pdang")]([SubResource("Resource_udqac")])

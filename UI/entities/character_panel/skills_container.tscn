@@ -14,12 +14,13 @@ corner_radius_top_right = 6
 corner_radius_bottom_right = 6
 corner_radius_bottom_left = 6
 
-[node name="skills_container" type="MarginContainer" unique_id=1962982995]
+[node name="skills_container" type="MarginContainer" unique_id=1962982995 node_paths=PackedStringArray("skills_box")]
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 script = ExtResource("1_e6mwr")
+skills_box = NodePath("skills/skills_box")
 
 [node name="skills_background" type="MarginContainer" parent="." unique_id=448016011]
 layout_mode = 2

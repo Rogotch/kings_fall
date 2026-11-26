@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="RunConfigsUI" format=3 uid="uid://p7o63jiip6ul"]
+
+[ext_resource type="Script" uid="uid://dwdx5j4e8ndp1" path="res://Scripts/Classes/configns/run_configs/run_configs_ui.gd" id="1_ulbnv"]
+
+[resource]
+script = ExtResource("1_ulbnv")
+battle_skills_buttons_in_panel = 4
+metadata/_custom_type_script = "uid://dwdx5j4e8ndp1"

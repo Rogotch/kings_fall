@@ -1,0 +1,31 @@
+const DEPENDENCY := preload("someuid")
+
+container.bind(DEPENDENCY).as_single()
+container.bind(Dependency).as_single()
+container.bind(BattleRoundLabel).from_instance(context_node.dependency_node)
+
+(container as ArcaContainer).inject(target, [other])
+
+static func get_dependencies() -> Array:
+	return 	[
+		Dependency,
+			]
+
+func _init(
+		_dependency : Dependency,
+	) -> void:
+	dependency = _dependency
+	pass
+
+static func get_inject_dependencies() -> Array:
+	return [
+		Dependency,
+		]
+
+func inject_dependencies(
+		_dependency : Dependency,
+		_other      : some_class
+	) -> void:
+	dependency = _dependency
+	other      = _other
+	pass

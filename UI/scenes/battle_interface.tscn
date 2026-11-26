@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dnky18ng2o5yr" path="res://Sprites/External/Top-Down Asset Pack/idle/organized_idle.png" id="3_i6e6p"]
 [ext_resource type="Resource" uid="uid://drrxmcgw8d1hm" path="res://Resources/UI/round_num_showing_params/big_scale.tres" id="3_oop0j"]
 [ext_resource type="PackedScene" uid="uid://bef7wcmrtxjw" path="res://UI/entities/character_panel/skills_panel.tscn" id="3_xcbuv"]
-[ext_resource type="Script" uid="uid://4140xwvtrqqc" path="res://Scripts/UI/entities/round_change_rich.gd" id="4_oop0j"]
+[ext_resource type="Script" uid="uid://4140xwvtrqqc" path="res://Scripts/UI/entities/round_change_box.gd" id="4_oop0j"]
 [ext_resource type="Texture2D" uid="uid://gvnw8xs5b22v" path="res://Sprites/External/FreeLightTextures/160x160 textures (88).png" id="5_sgj3g"]
 [ext_resource type="Script" uid="uid://dn2uii4vtdure" path="res://Scripts/arca/contextes/context_battle_ui.gd" id="6_i6e6p"]
 
@@ -52,10 +52,10 @@ alpha_curve = SubResource("CurveTexture_tsctd")
 [node name="battle_interface" type="CanvasLayer" unique_id=1625149563]
 script = ExtResource("1_sgj3g")
 
-[node name="BattleUIContext" type="Node" parent="." unique_id=2082990206 node_paths=PackedStringArray("round_label")]
+[node name="BattleUIContext" type="Node" parent="." unique_id=2082990206 node_paths=PackedStringArray("round_label", "character_panels")]
 script = ExtResource("6_i6e6p")
-round_label = NodePath("../MarginContainer/round_label")
-scope_mode = 0
+round_label = NodePath("../MarginContainer/round_labels")
+character_panels = [NodePath("../MarginContainer/battle_ui_box/control_panel/character_panel")]
 installers_path = Array[String](["uid://bptumv67ob8gj"])
 metadata/_custom_type_script = "uid://dn2uii4vtdure"
 
@@ -239,12 +239,27 @@ layout_mode = 2
 texture = SubResource("AtlasTexture_lxrbl")
 stretch_mode = 5
 
-[node name="round_label" type="RichTextLabel" parent="MarginContainer" unique_id=1452805443]
+[node name="round_labels" type="MarginContainer" parent="MarginContainer" unique_id=1183556572 node_paths=PackedStringArray("label", "label_num")]
 texture_filter = 2
-clip_contents = false
+propagate_maximum_size = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+offset_transform_enabled = true
+mouse_filter = 2
+script = ExtResource("4_oop0j")
+change_num_res = ExtResource("3_oop0j")
+special_color = Color(0.98565537, 0.33642283, 0.33230275, 1)
+label = NodePath("labels/round_label")
+label_num = NodePath("labels/nums")
+
+[node name="labels" type="HBoxContainer" parent="MarginContainer/round_labels" unique_id=406742213]
+layout_mode = 2
+
+[node name="round_label" type="RichTextLabel" parent="MarginContainer/round_labels/labels" unique_id=1452805443]
+texture_filter = 2
+clip_contents = false
+layout_mode = 2
 offset_transform_enabled = true
 focus_mode = 0
 mouse_filter = 2
@@ -255,14 +270,26 @@ text = "СХВАТКА!"
 fit_content = true
 autowrap_mode = 0
 horizontal_alignment = 1
-script = ExtResource("4_oop0j")
-change_num_res = ExtResource("3_oop0j")
-special_color = Color(0.98565537, 0.33642283, 0.33230275, 1)
 
-[node name="particles" type="Node2D" parent="MarginContainer/round_label" unique_id=1518279126]
+[node name="nums" type="RichTextLabel" parent="MarginContainer/round_labels/labels" unique_id=1272646867]
+texture_filter = 2
+clip_contents = false
+layout_mode = 2
+offset_transform_enabled = true
+focus_mode = 0
+mouse_filter = 2
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "0 "
+fit_content = true
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="particles" type="Node2D" parent="MarginContainer/round_labels" unique_id=1518279126]
 position = Vector2(76.5, 22.5)
 
-[node name="sparks" type="GPUParticles2D" parent="MarginContainer/round_label/particles" unique_id=2090588987]
+[node name="sparks" type="GPUParticles2D" parent="MarginContainer/round_labels/particles" unique_id=2090588987]
 position = Vector2(-0.5, 22.5)
 emitting = false
 texture = ExtResource("5_sgj3g")
@@ -271,7 +298,7 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_lxrbl")
 
-[node name="background_light" type="GPUParticles2D" parent="MarginContainer/round_label/particles" unique_id=510342783]
+[node name="background_light" type="GPUParticles2D" parent="MarginContainer/round_labels/particles" unique_id=510342783]
 z_index = -1
 position = Vector2(-0.5, 22.5)
 emitting = false

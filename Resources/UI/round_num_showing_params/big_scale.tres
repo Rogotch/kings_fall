@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="ChangeRoundResource" format=3 uid="uid://drrxmcgw8d1hm"]
 
-[ext_resource type="Script" uid="uid://bmwrgu6fb22i8" path="res://Scripts/UI/entities/round_change_resource.gd" id="1_fphud"]
+[ext_resource type="Script" uid="uid://bmwrgu6fb22i8" path="res://Scripts/UI/entities/tween_effects/round_change_resource.gd" id="1_fphud"]
 
 [resource]
 script = ExtResource("1_fphud")

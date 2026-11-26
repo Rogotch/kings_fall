@@ -3,7 +3,7 @@ extends RefCounted
 
 var input_sm      : BattleInputSM
 var initiative    : InitiativeService
-var round_label   : BattleRoundLabel
+var events        : BattleEvents
 var map_displayer : MapDisplayer
 
 var current_state : BattleTurnState
@@ -12,19 +12,19 @@ static func get_dependencies() -> Array:
 	return [
 		BattleInputSM,
 		InitiativeService,
-		BattleRoundLabel,
+		BattleEvents,
 		MapDisplayer,
 		]
 
 func _init(
 		input_listener     : BattleInputSM,
 		initiative_service : InitiativeService,
-		_round_label       : BattleRoundLabel,
+		events_system      : BattleEvents,
 		_map_displayer     : MapDisplayer,
 	) -> void:
 	input_sm      = input_listener
 	initiative    = initiative_service
-	round_label   = _round_label
+	events        = events_system
 	map_displayer = _map_displayer
 	pass
 

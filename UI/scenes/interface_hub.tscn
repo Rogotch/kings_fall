@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bqieswrcfkjf7"]
+
+[ext_resource type="Script" uid="uid://cnt6s7d4343ul" path="res://Scripts/arca/contextes/context_ui.gd" id="1_ecpac"]
+[ext_resource type="Script" uid="uid://dbdlskrq1g8ob" path="res://Scripts/UI/scenes/interface_hub.gd" id="1_soxsw"]
+
+[node name="InterfaceHub" type="Node" unique_id=794583004 node_paths=PackedStringArray("context_ui")]
+script = ExtResource("1_soxsw")
+context_ui = NodePath("ContextUI")
+
+[node name="ContextUI" type="Node" parent="." unique_id=1119170021]
+script = ExtResource("1_ecpac")
+installers_path = Array[String](["uid://b0djthiaw74go"])
+metadata/_custom_type_script = "uid://cnt6s7d4343ul"

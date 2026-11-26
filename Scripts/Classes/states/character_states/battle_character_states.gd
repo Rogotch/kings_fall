@@ -69,7 +69,7 @@ class Attack                 extends BaseCharacterState:
 	func Enter()  -> void:
 		super.Enter()
 		visual.SetDirection(move_service.GetDirection(target))
-		visual.SetState(skill.skill.skill_use_animation)
+		visual.SetState(skill.skill.char_animation_key)
 		#visual.SetState(BaseCharacterVisual.ANIMATION_STATE.HURT)
 		visual.attack_hitted.connect(attack_hitted)
 		pass

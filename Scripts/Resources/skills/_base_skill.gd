@@ -9,12 +9,16 @@ extends Resource
 	# TODO target_type - модификатор. Указываем, по какому принципу отбираются клетки - только пустые, только персонажи, только враги, только союзники
 # TODO mechanics - когда получили все клетки, по которым должна пройти активация, активируем механику неа неё
 
-@export var skill_name          : String
-@export var cooldown            : int
-@export var skill_use_animation : BaseCharacterVisual.ANIMATION_STATE
-@export var skill_range         : SkillRangeBase
-@export var targeting           : TargetingBaseSkill
-@export var mechanics           : Array[BaseSkillMechanic]
+#@export var tag                : String
+
+@export var name_key           : String
+@export var description_key    : String
+@export var icon               : Texture2D
+@export var cooldown           : int
+@export var char_animation_key : BaseCharacterVisual.ANIMATION_STATE
+@export var skill_range        : SkillRangeBase
+@export var targeting          : TargetingBaseSkill
+@export var mechanics          : Array[BaseSkillMechanic]
 
 func Activate(context : SkillContext) -> void:
 	for mechanic in mechanics:
